@@ -1,0 +1,105 @@
+<template>
+<style>
+/*__BASE__*/
+#root { background: #08080f; }
+.head { position: absolute; left: 96px; top: 86px; width: 900px; }
+.head .kicker { margin-bottom: 16px; }
+.head h2 { font-size: 96px; line-height: 1.05; }
+.head h2 span { color: #6ff0d3; }
+.head .sub { margin-top: 16px; font-family: "BN Sans"; font-size: 24px; color: #9c9bb2; }
+
+.receipt { position: absolute; left: 96px; top: 328px; width: 738px; padding: 34px 38px 30px; background: #f6f5fb; color: #14141f; border-radius: 6px; box-shadow: 0 40px 90px rgba(0,0,0,0.5); transform: rotate(-1.2deg); }
+.receipt::after { content: ""; position: absolute; left: 0; right: 0; bottom: -12px; height: 12px; background: linear-gradient(135deg, #f6f5fb 33.33%, transparent 33.33%) 0 0/12px 12px, linear-gradient(225deg, #f6f5fb 33.33%, transparent 33.33%) 0 0/12px 12px; }
+.receipt .rhead { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px dashed #d3d1e0; padding-bottom: 18px; }
+.receipt .rhead .n { font-family: Outfit; font-weight: 800; font-size: 30px; letter-spacing: -0.03em; }
+.receipt .rhead .n em { font-style: normal; color: #5b4bff; }
+.receipt .rhead .m { text-align: right; font-family: JBM; font-size: 10px; letter-spacing: 0.12em; color: #8b8aa2; line-height: 1.7; }
+.receipt .rows { margin-top: 18px; }
+.receipt .row { display: flex; align-items: baseline; gap: 10px; padding: 9px 0; font-family: JBM; font-size: 15px; color: #3a3950; }
+.receipt .row .d { flex: 1; border-bottom: 1px dotted #c9c7d8; transform: translateY(-4px); }
+.receipt .row .v { font-weight: 600; color: #14141f; }
+.receipt .row .v.free { color: #0f9e82; }
+.receipt .total { margin-top: 14px; border-top: 2px dashed #d3d1e0; padding-top: 16px; display: flex; align-items: flex-end; justify-content: space-between; }
+.receipt .total .l { font-family: "BN Sans"; font-weight: 700; font-size: 20px; color: #5c5b74; }
+.receipt .total .big { font-family: Outfit; font-weight: 800; font-size: 96px; letter-spacing: -0.06em; line-height: 0.9; color: #0f9e82; }
+.receipt .total .big small { font-size: 40px; }
+.receipt .fine { margin-top: 16px; font-family: JBM; font-size: 9.5px; letter-spacing: 0.08em; color: #a2a1b6; line-height: 1.7; }
+.stamp { position: absolute; left: 470px; top: 496px; z-index: 4; border: 4px solid #ff6b5a; color: #ff6b5a; font-family: Outfit; font-weight: 800; font-size: 30px; letter-spacing: 0.1em; padding: 10px 18px; border-radius: 8px; transform: rotate(-9deg); opacity: 0; }
+
+.pillars { position: absolute; left: 940px; right: 96px; top: 330px; }
+.pillar { display: flex; align-items: center; gap: 26px; padding: 26px 0; border-top: 1px solid rgba(255,255,255,0.11); }
+.pillar:last-child { border-bottom: 1px solid rgba(255,255,255,0.11); }
+.pillar .n { width: 168px; flex: 0 0 auto; font-family: Outfit; font-weight: 800; font-size: 74px; letter-spacing: -0.05em; line-height: 1; color: #6ff0d3; }
+.pillar .n small { display: block; font-family: JBM; font-size: 10px; letter-spacing: 0.16em; color: #5f5e78; margin-top: 7px; }
+.pillar .t { font-family: "BN Sans"; font-weight: 700; font-size: 28px; color: #f1f0fa; }
+.pillar .e { font-family: "BN Sans"; font-size: 16px; color: #82819b; margin-top: 5px; line-height: 1.5; }
+.pillar.hot .n { color: #b7adff; }
+.footer { position: absolute; left: 96px; right: 96px; bottom: 84px; display: flex; justify-content: space-between; font-family: JBM; font-size: 11px; letter-spacing: 0.12em; color: #6d6c88; }
+.footer b { color: #b9b8cc; font-weight: 500; }
+</style>
+<div id="root" data-composition-id="free" data-width="1920" data-height="1080">
+  <div class="stage dark">
+    <div class="grid"></div>
+    <div class="glow g-mint" style="width:900px;height:900px;left:-340px;bottom:-380px"></div>
+    <div class="glow g-violet" style="width:800px;height:800px;right:-340px;top:-360px"></div>
+    <div class="swipe" id="swipe"></div>
+
+    <div class="head">
+      <div class="kicker" id="kicker"><span class="dot"></span>THE PRICE LIST</div>
+      <h2 class="h2" id="head">সবকিছু ফ্রি।<br><span>সত্যিই ফ্রি।</span></h2>
+      <div class="sub" id="sub">একই ফ্রি API — TTS, STT, ভয়েস, মডেল, সব।</div>
+    </div>
+
+    <div class="receipt" id="receipt">
+      <div class="rhead">
+        <div class="n">speak<em>ee</em></div>
+        <div class="m">PRICE LIST · 2026<br>speakee.tnxbd.top</div>
+      </div>
+      <div class="rows">
+        <div class="row" id="p1"><span>Text → Speech</span><span class="d"></span><span class="v free">৳০</span></div>
+        <div class="row" id="p2"><span>Speech → Text</span><span class="d"></span><span class="v free">৳০</span></div>
+        <div class="row" id="p3"><span>874 voices · 42 languages</span><span class="d"></span><span class="v free">৳০</span></div>
+        <div class="row" id="p4"><span>JSON API access</span><span class="d"></span><span class="v free">৳০</span></div>
+        <div class="row" id="p5"><span>SRT / WebVTT subtitles</span><span class="d"></span><span class="v free">৳০</span></div>
+        <div class="row" id="p6"><span>API key · signup</span><span class="d"></span><span class="v free">নেই</span></div>
+      </div>
+      <div class="total"><span class="l">TOTAL DUE</span><span class="big"><small>৳</small><span id="total">০</span></span></div>
+      <div class="fine">No subscription. No credit card. No hidden limits.<br>Powered by Cartesia Sonic — served free by Speakee.</div>
+      <div class="stamp" id="stamp">FREE FOREVER</div>
+    </div>
+
+    <div class="pillars" id="pillars">
+      <div class="pillar" id="pl1"><div class="n">০<small>MB DOWNLOAD</small></div><div><div class="t">কোনো লোকাল মডেল নেই</div><div class="e">TTS আর STT — দুটোই সার্ভারে। ল্যাপটপ ঠান্ডা, ডিস্ক খালি।</div></div></div>
+      <div class="pillar hot" id="pl2"><div class="n">০<small>PIP INSTALL</small></div><div><div class="t">কোনো প্যাকেজ নেই</div><div class="e">শুধু পাইথন স্ট্যান্ডার্ড লাইব্রেরি — urllib, json, wave, subprocess।</div></div></div>
+      <div class="pillar" id="pl3"><div class="n">০<small>API KEY</small></div><div><div class="t">কোনো সাইনআপ নেই</div><div class="e">এন্ডপয়েন্ট খুলুন, JSON পাঠান, MP3 নিন — ব্যস।</div></div></div>
+    </div>
+
+    <div class="footer" id="footer"><span><b>TTS + STT + SUBTITLES</b> — একই ফ্রি API</span><span>একই সার্ভার · একই গতি · একই দাম: শূন্য</span></div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = /*__TIMING__*/;
+
+tl.fromTo("#swipe", { yPercent: 0 }, { yPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#kicker", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.35 }, 0.15);
+tl.fromTo("#head", { opacity: 0, y: 26, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "expo.out" }, 0.28);
+tl.fromTo("#sub", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.58);
+tl.fromTo("#receipt", { opacity: 0, y: 40, rotate: -3 }, { opacity: 1, y: 0, rotate: -1.2, duration: 0.6, ease: "expo.out" }, 0.4);
+tl.fromTo(".receipt .row", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.3, stagger: 0.09 }, 0.75);
+tl.fromTo(".receipt .total", { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }, 1.45);
+tl.fromTo(".receipt .fine", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 1.65);
+tl.fromTo("#stamp", { opacity: 0, scale: 1.5, rotate: -9 }, { opacity: 1, scale: 1, rotate: -9, duration: 0.38, ease: "back.out(2.4)" }, 2.2);
+
+tl.fromTo("#pl1", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, 2.6);
+tl.fromTo("#pl2", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, 3.7);
+tl.fromTo("#pl3", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, 4.8);
+tl.fromTo("#footer", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 5.4);
+
+// count the big zero for a beat
+tl.fromTo("#total", { scale: 0.9 }, { scale: 1.08, duration: 0.28, yoyo: true, repeat: 1, ease: "sine.inOut" }, 2.3);
+tl.fromTo("#stamp", { boxShadow: "0 0 0 rgba(255,107,90,0)" }, { boxShadow: "0 0 40px rgba(255,107,90,0.25)", duration: 0.6, yoyo: true, repeat: 1 }, 2.4);
+
+window.__timelines["free"] = tl;
+</script>
+</template>

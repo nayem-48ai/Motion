@@ -1,0 +1,152 @@
+<template>
+<style>
+/*__BASE__*/
+#root { background: #08080f; }
+.head { position: absolute; left: 96px; top: 92px; right: 96px; display: flex; align-items: flex-end; justify-content: space-between; }
+.head .l .slug { margin-bottom: 20px; }
+.head h2 { font-size: 86px; line-height: 1.12; }
+.head h2 span { color: #16c7a3; }
+.head .r { text-align: right; font-family: "BN Sans"; font-size: 22px; line-height: 1.55; color: #9c9bb2; width: 440px; padding-bottom: 8px; }
+.head .r b { color: #f1f0fa; font-weight: 700; }
+
+.cards { position: absolute; left: 96px; right: 96px; top: 400px; display: flex; gap: 20px; }
+.mcard { position: relative; flex: 1; height: 520px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.11); background: rgba(255,255,255,0.035); padding: 28px 26px; overflow: hidden; }
+.mcard .top { display: flex; align-items: center; justify-content: space-between; }
+.mcard .idx { font-family: JBM; font-size: 15px; color: #6d6c88; letter-spacing: 0.1em; }
+.mcard .badge { font-family: Outfit; font-weight: 800; font-size: 11px; letter-spacing: 0.16em; padding: 6px 10px; border-radius: 5px; }
+.mcard .nm { margin-top: 26px; font-family: Outfit; font-weight: 800; font-size: 45px; letter-spacing: -0.04em; line-height: 1; color: #fff; }
+.mcard .sub { margin-top: 8px; font-family: Outfit; font-weight: 600; font-size: 14px; letter-spacing: 0.16em; color: #8b8aa2; }
+.mcard .desc { margin-top: 20px; font-family: "BN Sans"; font-size: 20px; line-height: 1.6; color: #b9b8cc; height: 66px; }
+.mcard .rule { height: 1px; background: rgba(255,255,255,0.1); margin: 18px 0 4px; }
+.mcard .spec { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.mcard .spec .k { font-family: "BN Sans"; font-size: 16px; color: #8b8aa2; }
+.mcard .spec .v { font-family: Outfit; font-weight: 700; font-size: 16px; color: #e8e7f2; }
+.mcard .spec .v.bn { font-family: "BN Sans"; font-size: 16px; }
+.mcard .viz { position: absolute; left: 26px; right: 26px; bottom: 24px; height: 56px; display: flex; align-items: flex-end; gap: 4px; opacity: 0.75; }
+.mcard .viz i { flex: 1; border-radius: 3px; background: #5b4bff; }
+.mcard .status { position: absolute; right: 26px; bottom: 90px; display: flex; align-items: center; gap: 7px; font-family: JBM; font-size: 11px; letter-spacing: 0.1em; color: #6d6c88; }
+.mcard .status .d { width: 7px; height: 7px; border-radius: 50%; background: #16c7a3; }
+.mcard.warm { border-color: rgba(22,199,163,0.5); background: linear-gradient(160deg, rgba(22,199,163,0.12), rgba(22,199,163,0.02)); box-shadow: 0 28px 70px rgba(0,0,0,0.4); }
+.mcard.warm .nm { color: #6ff0d3; }
+.mcard.warm .viz i { background: #16c7a3; }
+#m36 .badge { background: rgba(255,107,90,0.16); color: #ff8a7c; border: 1px solid rgba(255,107,90,0.35); }
+#m36 .viz i { background: #ff6b5a; }
+#m35 .badge { background: rgba(22,199,163,0.16); color: #6ff0d3; border: 1px solid rgba(22,199,163,0.4); }
+#mpre .badge { background: rgba(139,123,255,0.16); color: #b7adff; border: 1px solid rgba(139,123,255,0.4); }
+#mpre .viz i { background: #8b7bff; }
+#m3 .badge { background: rgba(255,255,255,0.07); color: #b9b8cc; border: 1px solid rgba(255,255,255,0.16); }
+#m3 .viz i { background: #6d6c88; }
+
+.foot { position: absolute; left: 96px; right: 96px; bottom: 104px; display: flex; align-items: center; justify-content: space-between; }
+.foot .l { display: flex; align-items: center; gap: 14px; font-family: "BN Sans"; font-size: 20px; color: #9c9bb2; }
+.foot .l .dot { width: 9px; height: 9px; border-radius: 50%; background: #16c7a3; }
+.foot .r { font-family: JBM; font-size: 13px; letter-spacing: 0.16em; color: #5f5e78; }
+</style>
+<div id="root" data-composition-id="models" data-width="1920" data-height="1080">
+  <div class="stage dark">
+    <div class="grid"></div>
+    <div class="glow g-mint" style="width:900px;height:900px;left:-340px;top:-340px"></div>
+    <div class="glow g-violet" style="width:900px;height:900px;right:-300px;bottom:-420px"></div>
+    <div class="swipe" id="swipe"></div>
+
+    <div class="head">
+      <div class="l">
+        <div class="slug" id="slug"><span class="num">04</span> মডেল লাইনআপ</div>
+        <h2 class="h2" id="head">চারটি মডেল।<br><span>একটাই ডিফল্ট।</span></h2>
+      </div>
+      <div class="r" id="r">সবকিছু চলছে <b>Sonic 3.5</b>-এ —<br>এক্সপ্রেসিভ, লো-লেটেন্সি, বহুভাষিক।</div>
+    </div>
+
+    <div class="cards" id="cards">
+      <div class="mcard" id="m36">
+        <div class="top"><span class="idx">01</span><span class="badge">NEWEST</span></div>
+        <div class="nm">sonic-3.6</div>
+        <div class="sub">LATEST GENERATION</div>
+        <div class="desc">নতুন জেনারেশন — আরও সমৃদ্ধ কণ্ঠ, আরও প্রাণবন্ত ডেলিভারি।</div>
+        <div class="rule"></div>
+        <div class="spec"><span class="k">রিলিজ</span><span class="v">নতুন</span></div>
+        <div class="spec"><span class="k">এক্সপ্রেসিভিটি</span><span class="v">সর্বোচ্চ</span></div>
+        <div class="spec"><span class="k">ভাষা</span><span class="v">৪২</span></div>
+        <div class="status"><span class="d"></span>AVAILABLE</div>
+        <div class="viz" data-viz></div>
+      </div>
+
+      <div class="mcard warm" id="m35">
+        <div class="top"><span class="idx">02</span><span class="badge">DEFAULT</span></div>
+        <div class="nm">sonic-3.5</div>
+        <div class="sub">THE WORKHORSE</div>
+        <div class="desc">ডিফল্ট মডেল — সেরা ইমোশন, স্পিড আর ভলিউম কন্ট্রোল।</div>
+        <div class="rule"></div>
+        <div class="spec"><span class="k">ইমোশন</span><span class="v">৫৮</span></div>
+        <div class="spec"><span class="k">স্পিড</span><span class="v">০.৬ – ১.৫×</span></div>
+        <div class="spec"><span class="k">ভলিউম</span><span class="v">০.৫ – ২.০×</span></div>
+        <div class="status" style="color:#6ff0d3"><span class="d"></span>DEFAULT</div>
+        <div class="viz" data-viz></div>
+      </div>
+
+      <div class="mcard" id="mpre">
+        <div class="top"><span class="idx">03</span><span class="badge">PREVIEW</span></div>
+        <div class="nm">sonic-preview</div>
+        <div class="sub">EXPERIMENTAL</div>
+        <div class="desc">পরীক্ষামূলক মডেল — নতুন কণ্ঠ ও ফিচারের প্রথম ঝলক।</div>
+        <div class="rule"></div>
+        <div class="spec"><span class="k">স্ট্যাটাস</span><span class="v">প্রিভিউ</span></div>
+        <div class="spec"><span class="k">উদ্দেশ্য</span><span class="v">টেস্টিং</span></div>
+        <div class="spec"><span class="k">ভাষা</span><span class="v">৪২</span></div>
+        <div class="status"><span class="d"></span>AVAILABLE</div>
+        <div class="viz" data-viz></div>
+      </div>
+
+      <div class="mcard" id="m3">
+        <div class="top"><span class="idx">04</span><span class="badge">CLASSIC</span></div>
+        <div class="nm">sonic-3</div>
+        <div class="sub">PROVEN &amp; STABLE</div>
+        <div class="desc">প্রমাণিত ও স্টেবল — যেখানে স্থিরতা সবচেয়ে জরুরি।</div>
+        <div class="rule"></div>
+        <div class="spec"><span class="k">স্ট্যাবিলিটি</span><span class="v">উচ্চ</span></div>
+        <div class="spec"><span class="k">কণ্ঠ</span><span class="v">ক্লাসিক</span></div>
+        <div class="spec"><span class="k">ভাষা</span><span class="v">৪২</span></div>
+        <div class="status"><span class="d"></span>AVAILABLE</div>
+        <div class="viz" data-viz></div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <div class="l"><span class="dot"></span>একই স্টুডিও · একই ভয়েস লাইব্রেরি · একই JSON API — শুধু মডেল বদলান।</div>
+      <div class="r">GET /API/MODELS</div>
+    </div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = /*__TIMING__*/;
+
+document.querySelectorAll("[data-viz]").forEach((v, k) => {
+  for (let i = 0; i < 34; i++) {
+    const b = document.createElement("i");
+    b.style.height = (10 + Math.abs(Math.sin(i * 1.41 + k * 2) * Math.cos(i * 0.37)) * 44) + "px";
+    v.appendChild(b);
+  }
+});
+
+tl.fromTo("#swipe", { yPercent: 0 }, { yPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#slug", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.38 }, 0.18);
+tl.fromTo("#head", { opacity: 0, y: 30, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.6, ease: "expo.out" }, 0.3);
+tl.fromTo("#r", { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.5 }, 0.55);
+
+tl.fromTo(".mcard", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.55, stagger: 0.08, ease: "expo.out" }, 0.6);
+tl.fromTo("#m35", { scale: 0.98 }, { scale: 1.03, duration: 0.6, ease: "expo.out" }, 1.05);
+tl.fromTo(".mcard .viz i", { scaleY: 0.15 }, { scaleY: 1, duration: 0.4, stagger: 0.006, ease: "power2.out" }, 0.95);
+
+tl.to("#m36", { borderColor: "rgba(255,107,90,0.55)", boxShadow: "0 24px 70px rgba(255,107,90,0.14)", duration: 0.55, ease: "power2.out" }, T.b["model-2"] + 0.15);
+tl.fromTo("#m36 .spec", { backgroundColor: "rgba(255,107,90,0)" }, { backgroundColor: "rgba(255,107,90,0.08)", duration: 0.45, stagger: 0.18 }, T.b["model-2"] + 0.35);
+tl.to("#mpre", { borderColor: "rgba(139,123,255,0.5)", boxShadow: "0 24px 70px rgba(139,123,255,0.13)", duration: 0.55, ease: "power2.out" }, T.b["model-2"] + 1.55);
+tl.to("#m3", { borderColor: "rgba(255,255,255,0.26)", duration: 0.55, ease: "power2.out" }, T.b["model-2"] + 2.75);
+
+tl.fromTo("#m35", { boxShadow: "0 0 0 rgba(22,199,163,0)" }, { boxShadow: "0 0 80px rgba(22,199,163,0.3)", duration: 0.8, yoyo: true, repeat: 2, ease: "sine.inOut" }, T.b["model-3"] - 0.1);
+tl.to("#m35", { scale: 1.05, duration: 0.5, ease: "power2.out" }, T.b["model-3"] - 0.1);
+tl.fromTo("#m35 .spec", { backgroundColor: "rgba(22,199,163,0)" }, { backgroundColor: "rgba(22,199,163,0.07)", duration: 0.5, stagger: 0.22 }, T.b["model-3"] + 0.3);
+
+window.__timelines["models"] = tl;
+</script>
+</template>

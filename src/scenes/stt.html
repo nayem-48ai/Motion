@@ -1,0 +1,182 @@
+<template>
+<style>
+/*__BASE__*/
+#root { background: var(--paper); }
+.head { position: absolute; left: 96px; top: 74px; right: 96px; display: flex; align-items: flex-end; justify-content: space-between; }
+.head .l .slug { margin-bottom: 18px; }
+.head h2 { font-size: 80px; line-height: 1.1; }
+.head h2 span { color: #5b4bff; }
+.head .r { display: flex; gap: 9px; padding-bottom: 8px; }
+.head .r .c { font-family: JBM; font-size: 11px; letter-spacing: 0.12em; color: #3a3950; border: 1px solid #dedce9; background: #fff; border-radius: 100px; padding: 9px 13px; }
+.head .r .c b { color: #5b4bff; }
+
+.trans { position: absolute; left: 96px; top: 268px; width: 1110px; height: 646px; border-radius: 24px; background: #fff; border: 1px solid #e4e2ee; box-shadow: 0 22px 60px rgba(25,25,60,0.09); overflow: hidden; }
+.trans .top { height: 64px; border-bottom: 1px solid #eeedf5; display: flex; align-items: center; gap: 14px; padding: 0 26px; }
+.trans .top .lab { font-family: Outfit; font-weight: 800; font-size: 12px; letter-spacing: 0.2em; color: #8b8aa2; }
+.trans .top .f { font-family: JBM; font-size: 12px; color: #3a3950; background: #f3f2f9; border: 1px solid #e6e4f0; border-radius: 7px; padding: 6px 10px; }
+.trans .top .s { margin-left: auto; font-family: JBM; font-size: 10px; letter-spacing: 0.12em; color: #0f9e82; display: flex; align-items: center; gap: 7px; }
+.trans .top .s .d { width: 7px; height: 7px; border-radius: 50%; background: #16c7a3; }
+
+.player { margin: 26px 28px 0; border-radius: 14px; background: #faf9fd; border: 1px solid #eeedf5; padding: 16px 20px; display: flex; align-items: center; gap: 18px; position: relative; }
+.player .btn { width: 52px; height: 52px; border-radius: 50%; background: #5b4bff; display: grid; place-items: center; flex: 0 0 auto; }
+.player .wave { flex: 1; height: 54px; display: flex; align-items: center; gap: 3px; color: #c9c7d8; position: relative; }
+.player .wave i { flex: 1; border-radius: 3px; background: currentColor; }
+.player .t { font-family: JBM; font-size: 12px; color: #5c5b74; flex: 0 0 auto; }
+.player .head { position: absolute; top: 12px; bottom: 12px; left: 88px; width: 2px; background: #ff6b5a; opacity: 0; }
+.player .head .dot { position: absolute; top: -4px; left: -4px; width: 10px; height: 10px; border-radius: 50%; background: #ff6b5a; }
+
+.words { margin: 34px 30px 0; font-family: Outfit; font-weight: 700; font-size: 62px; line-height: 1.45; letter-spacing: -0.025em; color: #1b1b2a; }
+.words .w { position: relative; z-index: 0; display: inline-block; margin-right: 14px; transition: none; }
+.words .w.on { color: #4a3df0; }
+.words .p { color: #a2a1b6; }
+
+.timing { position: absolute; left: 30px; right: 30px; bottom: 26px; }
+.timing .lab { font-family: Outfit; font-weight: 800; font-size: 10px; letter-spacing: 0.2em; color: #a2a1b6; margin-bottom: 10px; }
+.timing .row { display: flex; gap: 7px; }
+.timing .t { flex: 1; border-radius: 8px; border: 1px solid #e6e4f0; background: #faf9fd; padding: 8px 9px; }
+.timing .t b { display: block; font-family: Outfit; font-weight: 700; font-size: 14px; color: #3a3950; }
+.timing .t span { font-family: JBM; font-size: 10px; color: #8b8aa2; }
+.timing .t.on { border-color: #c9c4ff; background: #f0edff; }
+.timing .t.on b { color: #4a3df0; }
+
+.outputs { position: absolute; right: 96px; top: 268px; width: 574px; height: 646px; }
+.ocard { border-radius: 16px; background: #0d0d18; border: 1px solid rgba(255,255,255,0.1); padding: 16px 18px; margin-bottom: 12px; color: #fff; position: relative; overflow: hidden; }
+.ocard .h { display: flex; align-items: center; justify-content: space-between; }
+.ocard .h .n { font-family: Outfit; font-weight: 800; font-size: 12px; letter-spacing: 0.16em; color: #8b8aa2; }
+.ocard .h .b { font-family: JBM; font-size: 9px; letter-spacing: 0.1em; color: #6ff0d3; border: 1px solid rgba(22,199,163,0.35); border-radius: 5px; padding: 4px 7px; }
+.ocard pre { margin: 10px 0 0; font-family: JBM; font-size: 10.5px; line-height: 1.7; color: #b9b8cc; white-space: pre-wrap; }
+.ocard pre .k { color: #8b7bff; }
+.ocard pre .s { color: #ffc24b; }
+.ocard pre .t { color: #6ff0d3; }
+.ocard:nth-child(2) { background: #101020; }
+.ocard .copy { position: absolute; right: 16px; bottom: 12px; font-family: JBM; font-size: 9px; letter-spacing: 0.1em; color: #5f5e78; }
+.foot { position: absolute; left: 96px; right: 96px; bottom: 84px; display: flex; justify-content: space-between; font-family: JBM; font-size: 11px; letter-spacing: 0.1em; color: #8b8aa2; }
+.foot b { color: #3a3950; }
+</style>
+<div id="root" data-composition-id="stt" data-width="1920" data-height="1080">
+  <div class="stage light">
+    <div class="grid on-light"></div>
+    <div class="glow g-violet" style="width:800px;height:800px;left:-380px;bottom:-380px;opacity:.18"></div>
+    <div class="swipe" id="swipe"></div>
+
+    <div class="head">
+      <div class="l">
+        <div class="slug" id="slug"><span class="num">13</span> স্পিচ টু টেক্সট</div>
+        <h2 class="h2" id="head">কথা থেকে লেখা। <span>শব্দে শব্দে।</span></h2>
+      </div>
+      <div class="r"><span class="c"><b>35</b> LANGUAGES</span><span class="c">AUTO-DETECT</span><span class="c">WORD TIMINGS</span></div>
+    </div>
+
+    <div class="trans" id="trans">
+      <div class="top"><span class="lab">TRANSCRIPT</span><span class="f">ailsa.mp3</span><span class="f">EN · AUTO</span><span class="s"><span class="d"></span>TRANSCRIBED</span></div>
+
+      <div class="player">
+        <span class="btn" id="play"><svg width="16" height="18" viewBox="0 0 15 17"><path d="M1 1l13 7.5L1 16V1z" fill="#fff"/></svg></span>
+        <div class="wave" data-wave></div>
+        <span class="t" id="time">0:00 / 0:03</span>
+        <div class="head" id="head"><span class="dot"></span></div>
+      </div>
+
+      <div class="words" id="words">
+        <span class="w" data-w="this">This</span>
+        <span class="w" data-w="is">is</span>
+        <span class="w" data-w="speakee">Speakee,</span><br>
+        <span class="w" data-w="turning">turning</span>
+        <span class="w" data-w="speech">speech</span>
+        <span class="w" data-w="into">into</span>
+        <span class="w" data-w="text">text.</span>
+      </div>
+
+      <div class="timing">
+        <div class="lab">WORD-LEVEL TIMESTAMPS</div>
+        <div class="row" id="timing">
+          <div class="t" data-t="this"><b>This</b><span>0.00s</span></div>
+          <div class="t" data-t="is"><b>is</b><span>0.38s</span></div>
+          <div class="t" data-t="speakee"><b>Speakee</b><span>0.62s</span></div>
+          <div class="t" data-t="turning"><b>turning</b><span>1.40s</span></div>
+          <div class="t" data-t="speech"><b>speech</b><span>1.76s</span></div>
+          <div class="t" data-t="into"><b>into</b><span>2.32s</span></div>
+          <div class="t" data-t="text"><b>text.</b><span>2.78s</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="outputs" id="outputs">
+      <div class="ocard" id="o-srt">
+        <div class="h"><span class="n">TRANSCRIPT.SRT</span><span class="b">1 CUE</span></div>
+        <pre><span class="t">1</span>
+<span class="t">00:00:00,000 --> 00:00:03,260</span>
+This is Speakey, turning speech into text.</pre>
+        <span class="copy">COPY</span>
+      </div>
+
+      <div class="ocard" id="o-vtt">
+        <div class="h"><span class="n">TRANSCRIPT.VTT</span><span class="b">WEBVTT</span></div>
+        <pre>WEBVTT
+
+<span class="t">00:00.000 --> 00:03.260</span>
+This is Speakey, turning speech into text.</pre>
+        <span class="copy">COPY</span>
+      </div>
+
+      <div class="ocard" id="o-json">
+        <div class="h"><span class="n">TRANSCRIPT.JSON</span><span class="b">WORD TIMINGS</span></div>
+        <pre>{
+  <span class="k">"text"</span>: <span class="s">"This is Speakey, turning speech into text."</span>,
+  <span class="k">"words"</span>: [
+    { <span class="k">"word"</span>: <span class="s">"This"</span>,    <span class="k">"start"</span>: <span class="t">0.00</span> },
+    { <span class="k">"word"</span>: <span class="s">"is"</span>,      <span class="k">"start"</span>: <span class="t">0.38</span> },
+    { <span class="k">"word"</span>: <span class="s">"Speakee"</span>, <span class="k">"start"</span>: <span class="t">0.62</span> }
+  ]
+}</pre>
+      </div>
+    </div>
+
+    <div class="foot" id="foot"><span><b>TRANSCRIPTION + SUBTITLES</b> — একই API, একই স্ক্রিপ্ট</span><span>MP3 · WAV · OGG · WEBM · M4A</span></div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = /*__TIMING__*/;
+
+document.querySelectorAll("[data-wave]").forEach(w => {
+  for (let i = 0; i < 78; i++) {
+    const b = document.createElement("i");
+    b.style.height = (8 + Math.abs(Math.sin(i * 1.22) * Math.cos(i * 0.42)) * 40) + "px";
+    w.appendChild(b);
+  }
+});
+
+tl.fromTo("#swipe", { xPercent: 0 }, { xPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#slug", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.38 }, 0.18);
+tl.fromTo("#head", { opacity: 0, y: 26, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "expo.out" }, 0.3);
+tl.fromTo(".head .c", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.07 }, 0.55);
+tl.fromTo("#trans", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.55, ease: "expo.out" }, 0.4);
+tl.fromTo("#outputs", { opacity: 0, x: 34 }, { opacity: 1, x: 0, duration: 0.55, ease: "expo.out" }, 0.5);
+tl.fromTo(".player .wave i", { scaleY: 0.15 }, { scaleY: 1, duration: 0.4, stagger: 0.004, ease: "power2.out" }, 0.8);
+tl.fromTo(".words .w", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.32, stagger: 0.05, ease: "power2.out" }, 0.85);
+tl.fromTo(".timing .t", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.28, stagger: 0.04 }, 1.05);
+tl.fromTo(".ocard", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 }, 0.9);
+tl.fromTo("#foot", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 1.4);
+
+// karaoke during the real clip
+const c = T.b["stt-clip"];
+const words = [["this", 0.0], ["is", 0.38], ["speakee", 0.62], ["turning", 1.40], ["speech", 1.76], ["into", 2.32], ["text", 2.78]];
+tl.to("#head", { opacity: 1, duration: 0.15 }, c);
+tl.to("#head", { x: 824, duration: 3.26, ease: "none" }, c);
+tl.to(".player .wave", { color: "#ff6b5a", duration: 0.3 }, c);
+tl.to("#play", { scale: 1.08, duration: 0.18, yoyo: true, repeat: 1 }, c);
+
+words.forEach(([w, t]) => {
+  tl.to(`[data-w="${w}"]`, { color: "#4a3df0", duration: 0.12 }, c + t);
+  tl.set(`[data-w="${w}"]`, { className: "w on" }, c + t);
+  tl.to(`[data-t="${w}"]`, { borderColor: "#c9c4ff", backgroundColor: "#f0edff", duration: 0.15 }, c + t);
+});
+tl.to("#time", { color: "#ff6b5a", duration: 0.3 }, c);
+tl.set("#time", { textContent: "0:03 / 0:03" }, c + 3.2);
+tl.to(".player .head", { opacity: 0, duration: 0.3 }, c + 3.3);
+tl.set("#trans .top .s", { innerHTML: '<span class="d"></span>WORD TIMINGS READY' }, c + 3.3);
+
+window.__timelines["stt"] = tl;
+</script>
+</template>

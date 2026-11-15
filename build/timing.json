@@ -1,0 +1,1122 @@
+{
+  "total": 299.374,
+  "scenes": [
+    {
+      "id": "open",
+      "start": 0.0,
+      "end": 8.066,
+      "duration": 8.066,
+      "items": [
+        {
+          "id": "open-1",
+          "kind": "vo",
+          "start": 2.0,
+          "end": 5.866,
+          "duration": 3.866,
+          "file": "assets/audio/open-1.mp3"
+        }
+      ]
+    },
+    {
+      "id": "what",
+      "start": 8.346,
+      "end": 22.575,
+      "duration": 14.229,
+      "items": [
+        {
+          "id": "what-1",
+          "kind": "vo",
+          "start": 8.846,
+          "end": 16.474,
+          "duration": 7.628,
+          "file": "assets/audio/what-1.mp3"
+        },
+        {
+          "id": "what-2",
+          "kind": "vo",
+          "start": 16.844,
+          "end": 21.755,
+          "duration": 4.911,
+          "file": "assets/audio/what-2.mp3"
+        }
+      ]
+    },
+    {
+      "id": "agenda",
+      "start": 22.855,
+      "end": 31.652,
+      "duration": 8.797,
+      "items": [
+        {
+          "id": "agenda-1",
+          "kind": "vo",
+          "start": 23.475,
+          "end": 30.632,
+          "duration": 7.157,
+          "file": "assets/audio/agenda-1.mp3"
+        }
+      ]
+    },
+    {
+      "id": "library",
+      "start": 31.932,
+      "end": 40.505,
+      "duration": 8.573,
+      "items": [
+        {
+          "id": "lib-1",
+          "kind": "vo",
+          "start": 32.602,
+          "end": 34.561,
+          "duration": 1.959,
+          "file": "assets/audio/lib-1.mp3"
+        },
+        {
+          "id": "lib-2",
+          "kind": "vo",
+          "start": 34.931,
+          "end": 39.685,
+          "duration": 4.754,
+          "file": "assets/audio/lib-2.mp3"
+        }
+      ]
+    },
+    {
+      "id": "lang",
+      "start": 40.785,
+      "end": 59.207,
+      "duration": 18.422,
+      "items": [
+        {
+          "id": "lang-1",
+          "kind": "vo",
+          "start": 41.405,
+          "end": 51.436,
+          "duration": 10.031,
+          "file": "assets/audio/lang-1.mp3"
+        },
+        {
+          "id": "lang-2",
+          "kind": "vo",
+          "start": 51.756,
+          "end": 58.287,
+          "duration": 6.531,
+          "file": "assets/audio/lang-2.mp3"
+        }
+      ]
+    },
+    {
+      "id": "bn",
+      "start": 59.487,
+      "end": 80.4,
+      "duration": 20.913,
+      "items": [
+        {
+          "id": "bn-1",
+          "kind": "vo",
+          "start": 60.307,
+          "end": 63.154,
+          "duration": 2.847,
+          "file": "assets/audio/bn-1.mp3"
+        },
+        {
+          "id": "demo-pooja",
+          "kind": "demo",
+          "start": 63.454,
+          "end": 67.66,
+          "duration": 4.206,
+          "file": "assets/audio/demo-pooja.mp3"
+        },
+        {
+          "id": "bn-2",
+          "kind": "vo",
+          "start": 68.11,
+          "end": 69.912,
+          "duration": 1.802,
+          "file": "assets/audio/bn-2.mp3"
+        },
+        {
+          "id": "demo-rubel",
+          "kind": "demo",
+          "start": 70.212,
+          "end": 73.373,
+          "duration": 3.161,
+          "file": "assets/audio/demo-rubel.mp3"
+        },
+        {
+          "id": "bn-3",
+          "kind": "vo",
+          "start": 73.823,
+          "end": 76.514,
+          "duration": 2.691,
+          "file": "assets/audio/bn-3.mp3"
+        },
+        {
+          "id": "demo-news",
+          "kind": "demo",
+          "start": 76.814,
+          "end": 79.4,
+          "duration": 2.586,
+          "file": "assets/audio/demo-news.mp3"
+        }
+      ]
+    },
+    {
+      "id": "en",
+      "start": 80.68,
+      "end": 100.911,
+      "duration": 20.231,
+      "items": [
+        {
+          "id": "en-1",
+          "kind": "vo",
+          "start": 81.3,
+          "end": 83.729,
+          "duration": 2.429,
+          "file": "assets/audio/en-1.mp3"
+        },
+        {
+          "id": "en-2a",
+          "kind": "vo",
+          "start": 84.049,
+          "end": 85.773,
+          "duration": 1.724,
+          "file": "assets/audio/en-2a.mp3"
+        },
+        {
+          "id": "demo-ailsa",
+          "kind": "demo",
+          "start": 86.093,
+          "end": 88.94,
+          "duration": 2.847,
+          "file": "assets/audio/demo-ailsa.mp3"
+        },
+        {
+          "id": "en-2b",
+          "kind": "vo",
+          "start": 89.39,
+          "end": 91.741,
+          "duration": 2.351,
+          "file": "assets/audio/en-2b.mp3"
+        },
+        {
+          "id": "demo-aarav",
+          "kind": "demo",
+          "start": 92.061,
+          "end": 94.177,
+          "duration": 2.116,
+          "file": "assets/audio/demo-aarav.mp3"
+        },
+        {
+          "id": "en-2c",
+          "kind": "vo",
+          "start": 94.627,
+          "end": 96.665,
+          "duration": 2.038,
+          "file": "assets/audio/en-2c.mp3"
+        },
+        {
+          "id": "demo-adrian",
+          "kind": "demo",
+          "start": 96.985,
+          "end": 99.911,
+          "duration": 2.926,
+          "file": "assets/audio/demo-adrian.mp3"
+        }
+      ]
+    },
+    {
+      "id": "models",
+      "start": 101.191,
+      "end": 119.673,
+      "duration": 18.482,
+      "items": [
+        {
+          "id": "model-1",
+          "kind": "vo",
+          "start": 101.861,
+          "end": 109.41,
+          "duration": 7.549,
+          "file": "assets/audio/model-1.mp3"
+        },
+        {
+          "id": "model-2",
+          "kind": "vo",
+          "start": 109.73,
+          "end": 114.484,
+          "duration": 4.754,
+          "file": "assets/audio/model-2.mp3"
+        },
+        {
+          "id": "model-3",
+          "kind": "vo",
+          "start": 114.804,
+          "end": 118.853,
+          "duration": 4.049,
+          "file": "assets/audio/model-3.mp3"
+        }
+      ]
+    },
+    {
+      "id": "modeldemo",
+      "start": 119.953,
+      "end": 134.428,
+      "duration": 14.475,
+      "items": [
+        {
+          "id": "model-4",
+          "kind": "vo",
+          "start": 120.623,
+          "end": 123.627,
+          "duration": 3.004,
+          "file": "assets/audio/model-4.mp3"
+        },
+        {
+          "id": "model-demo-36",
+          "kind": "demo",
+          "start": 123.977,
+          "end": 126.406,
+          "duration": 2.429,
+          "file": "assets/audio/model-demo-36.mp3"
+        },
+        {
+          "id": "model-demo-35",
+          "kind": "demo",
+          "start": 126.806,
+          "end": 129.079,
+          "duration": 2.273,
+          "file": "assets/audio/model-demo-35.mp3"
+        },
+        {
+          "id": "model-demo-3",
+          "kind": "demo",
+          "start": 129.479,
+          "end": 133.528,
+          "duration": 4.049,
+          "file": "assets/audio/model-demo-3.mp3"
+        }
+      ]
+    },
+    {
+      "id": "studio",
+      "start": 134.708,
+      "end": 142.778,
+      "duration": 8.07,
+      "items": [
+        {
+          "id": "studio-1",
+          "kind": "vo",
+          "start": 135.428,
+          "end": 138.902,
+          "duration": 3.474,
+          "file": "assets/audio/studio-1.mp3"
+        },
+        {
+          "id": "studio-2",
+          "kind": "vo",
+          "start": 139.272,
+          "end": 141.858,
+          "duration": 2.586,
+          "file": "assets/audio/studio-2.mp3"
+        }
+      ]
+    },
+    {
+      "id": "controls",
+      "start": 143.058,
+      "end": 162.581,
+      "duration": 19.523,
+      "items": [
+        {
+          "id": "ctrl-1",
+          "kind": "vo",
+          "start": 143.728,
+          "end": 147.699,
+          "duration": 3.971,
+          "file": "assets/audio/ctrl-1.mp3"
+        },
+        {
+          "id": "ctrl-2",
+          "kind": "vo",
+          "start": 148.069,
+          "end": 151.151,
+          "duration": 3.082,
+          "file": "assets/audio/ctrl-2.mp3"
+        },
+        {
+          "id": "ctrl-3",
+          "kind": "vo",
+          "start": 151.521,
+          "end": 154.212,
+          "duration": 2.691,
+          "file": "assets/audio/ctrl-3.mp3"
+        },
+        {
+          "id": "ctrl-4",
+          "kind": "vo",
+          "start": 154.582,
+          "end": 161.661,
+          "duration": 7.079,
+          "file": "assets/audio/ctrl-4.mp3"
+        }
+      ]
+    },
+    {
+      "id": "emotions",
+      "start": 162.861,
+      "end": 178.617,
+      "duration": 15.756,
+      "items": [
+        {
+          "id": "emo-1",
+          "kind": "vo",
+          "start": 163.531,
+          "end": 165.96,
+          "duration": 2.429,
+          "file": "assets/audio/emo-1.mp3"
+        },
+        {
+          "id": "emo-happy",
+          "kind": "demo",
+          "start": 166.26,
+          "end": 169.734,
+          "duration": 3.474,
+          "file": "assets/audio/emo-happy.mp3"
+        },
+        {
+          "id": "emo-sad",
+          "kind": "demo",
+          "start": 170.134,
+          "end": 173.843,
+          "duration": 3.709,
+          "file": "assets/audio/emo-sad.mp3"
+        },
+        {
+          "id": "emo-angry",
+          "kind": "demo",
+          "start": 174.243,
+          "end": 177.717,
+          "duration": 3.474,
+          "file": "assets/audio/emo-angry.mp3"
+        }
+      ]
+    },
+    {
+      "id": "script",
+      "start": 178.897,
+      "end": 186.369,
+      "duration": 7.472,
+      "items": [
+        {
+          "id": "script-1",
+          "kind": "vo",
+          "start": 179.567,
+          "end": 182.075,
+          "duration": 2.508,
+          "file": "assets/audio/script-1.mp3"
+        },
+        {
+          "id": "script-2",
+          "kind": "vo",
+          "start": 182.445,
+          "end": 185.449,
+          "duration": 3.004,
+          "file": "assets/audio/script-2.mp3"
+        }
+      ]
+    },
+    {
+      "id": "generate",
+      "start": 186.649,
+      "end": 195.031,
+      "duration": 8.382,
+      "items": [
+        {
+          "id": "gen-1",
+          "kind": "vo",
+          "start": 187.319,
+          "end": 191.917,
+          "duration": 4.598,
+          "file": "assets/audio/gen-1.mp3"
+        },
+        {
+          "id": "gen-2",
+          "kind": "vo",
+          "start": 192.287,
+          "end": 194.011,
+          "duration": 1.724,
+          "file": "assets/audio/gen-2.mp3"
+        }
+      ]
+    },
+    {
+      "id": "recent",
+      "start": 195.311,
+      "end": 206.37,
+      "duration": 11.059,
+      "items": [
+        {
+          "id": "hist-1",
+          "kind": "vo",
+          "start": 195.981,
+          "end": 198.985,
+          "duration": 3.004,
+          "file": "assets/audio/hist-1.mp3"
+        },
+        {
+          "id": "hist-2",
+          "kind": "vo",
+          "start": 199.305,
+          "end": 202.544,
+          "duration": 3.239,
+          "file": "assets/audio/hist-2.mp3"
+        },
+        {
+          "id": "hist-3",
+          "kind": "vo",
+          "start": 202.864,
+          "end": 205.45,
+          "duration": 2.586,
+          "file": "assets/audio/hist-3.mp3"
+        }
+      ]
+    },
+    {
+      "id": "api",
+      "start": 206.65,
+      "end": 220.576,
+      "duration": 13.926,
+      "items": [
+        {
+          "id": "api-1",
+          "kind": "vo",
+          "start": 207.37,
+          "end": 210.139,
+          "duration": 2.769,
+          "file": "assets/audio/api-1.mp3"
+        },
+        {
+          "id": "api-2",
+          "kind": "vo",
+          "start": 210.459,
+          "end": 215.37,
+          "duration": 4.911,
+          "file": "assets/audio/api-2.mp3"
+        },
+        {
+          "id": "api-3",
+          "kind": "vo",
+          "start": 215.69,
+          "end": 219.556,
+          "duration": 3.866,
+          "file": "assets/audio/api-3.mp3"
+        }
+      ]
+    },
+    {
+      "id": "tas",
+      "start": 220.856,
+      "end": 229.16,
+      "duration": 8.304,
+      "items": [
+        {
+          "id": "tas-1",
+          "kind": "vo",
+          "start": 221.576,
+          "end": 224.267,
+          "duration": 2.691,
+          "file": "assets/audio/tas-1.mp3"
+        },
+        {
+          "id": "tas-2",
+          "kind": "vo",
+          "start": 224.587,
+          "end": 228.14,
+          "duration": 3.553,
+          "file": "assets/audio/tas-2.mp3"
+        }
+      ]
+    },
+    {
+      "id": "tasts",
+      "start": 229.44,
+      "end": 242.32,
+      "duration": 12.88,
+      "items": [
+        {
+          "id": "tas-tts-1",
+          "kind": "vo",
+          "start": 230.11,
+          "end": 232.801,
+          "duration": 2.691,
+          "file": "assets/audio/tas-tts-1.mp3"
+        },
+        {
+          "id": "tas-tts-2",
+          "kind": "vo",
+          "start": 233.121,
+          "end": 235.968,
+          "duration": 2.847,
+          "file": "assets/audio/tas-tts-2.mp3"
+        },
+        {
+          "id": "demo-dialog",
+          "kind": "demo",
+          "start": 236.368,
+          "end": 241.42,
+          "duration": 5.052,
+          "file": "assets/audio/demo-dialog.mp3"
+        }
+      ]
+    },
+    {
+      "id": "stt",
+      "start": 242.6,
+      "end": 254.185,
+      "duration": 11.585,
+      "items": [
+        {
+          "id": "tas-stt-1",
+          "kind": "vo",
+          "start": 243.27,
+          "end": 249.226,
+          "duration": 5.956,
+          "file": "assets/audio/tas-stt-1.mp3"
+        },
+        {
+          "id": "stt-clip",
+          "kind": "demo",
+          "start": 249.576,
+          "end": 253.285,
+          "duration": 3.709,
+          "file": "assets/audio/stt-clip.mp3"
+        }
+      ]
+    },
+    {
+      "id": "free",
+      "start": 254.465,
+      "end": 263.883,
+      "duration": 9.418,
+      "items": [
+        {
+          "id": "free-1",
+          "kind": "vo",
+          "start": 255.135,
+          "end": 262.763,
+          "duration": 7.628,
+          "file": "assets/audio/free-1.mp3"
+        }
+      ]
+    },
+    {
+      "id": "install",
+      "start": 264.163,
+      "end": 276.123,
+      "duration": 11.96,
+      "items": [
+        {
+          "id": "install-1",
+          "kind": "vo",
+          "start": 264.833,
+          "end": 269.822,
+          "duration": 4.989,
+          "file": "assets/audio/install-1.mp3"
+        },
+        {
+          "id": "install-2",
+          "kind": "vo",
+          "start": 270.192,
+          "end": 275.103,
+          "duration": 4.911,
+          "file": "assets/audio/install-2.mp3"
+        }
+      ]
+    },
+    {
+      "id": "use",
+      "start": 276.403,
+      "end": 285.333,
+      "duration": 8.93,
+      "items": [
+        {
+          "id": "use-1",
+          "kind": "vo",
+          "start": 277.073,
+          "end": 280.547,
+          "duration": 3.474,
+          "file": "assets/audio/use-1.mp3"
+        },
+        {
+          "id": "use-2",
+          "kind": "vo",
+          "start": 280.917,
+          "end": 284.313,
+          "duration": 3.396,
+          "file": "assets/audio/use-2.mp3"
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "start": 285.613,
+      "end": 299.374,
+      "duration": 13.761,
+      "items": [
+        {
+          "id": "outro-1",
+          "kind": "vo",
+          "start": 286.933,
+          "end": 291.06,
+          "duration": 4.127,
+          "file": "assets/audio/outro-1.mp3"
+        },
+        {
+          "id": "outro-2",
+          "kind": "vo",
+          "start": 291.48,
+          "end": 294.954,
+          "duration": 3.474,
+          "file": "assets/audio/outro-2.mp3"
+        }
+      ]
+    }
+  ],
+  "audio": {
+    "open-1": {
+      "file": "assets/audio/open-1.mp3",
+      "duration": 3.866,
+      "id": "open-1",
+      "vo": "স্পিকিতে স্বাগতম — আপনার স্টুডিও-মানের এআই ভয়েস জেনারেটর।"
+    },
+    "what-1": {
+      "file": "assets/audio/what-1.mp3",
+      "duration": 7.628,
+      "id": "what-1",
+      "vo": "স্পিকি ডট টিএনএক্সবিডি ডট টপ — কার্টেশিয়ার সোনিক মডেলের ওপর তৈরি, একটি ফ্রি, বহুভাষিক টেক্সট-টু-স্পিচ প্ল্যাটফর্ম।"
+    },
+    "what-2": {
+      "file": "assets/audio/what-2.mp3",
+      "duration": 4.911,
+      "id": "what-2",
+      "vo": "কোনো সাইনআপ নেই, কোনো এপিআই কি নেই — শুধু সেকেন্ডের মধ্যে পেশাদার অডিও।"
+    },
+    "agenda-1": {
+      "file": "assets/audio/agenda-1.mp3",
+      "duration": 7.157,
+      "id": "agenda-1",
+      "vo": "আসুন, স্পিকির প্রতিটি ফিচার দেখে নেওয়া যাক — ভয়েস লাইব্রেরি থেকে ডেভেলপার এপিআই, আর টিএএস স্কিল পর্যন্ত।"
+    },
+    "lib-1": {
+      "file": "assets/audio/lib-1.mp3",
+      "duration": 1.959,
+      "id": "lib-1",
+      "vo": "প্রথমে, ভয়েস লাইব্রেরি।"
+    },
+    "lib-2": {
+      "file": "assets/audio/lib-2.mp3",
+      "duration": 4.754,
+      "id": "lib-2",
+      "vo": "বিয়াল্লিশটি ভাষা, আর আটশোরও বেশি কিউরেটেড ভয়েস — সব এক জায়গায়।"
+    },
+    "lang-1": {
+      "file": "assets/audio/lang-1.mp3",
+      "duration": 10.031,
+      "id": "lang-1",
+      "vo": "বাংলা, ইংরেজি, হিন্দি, স্প্যানিশ, ফ্রেঞ্চ, জার্মান, আরবি, জাপানি, কোরিয়ান, চাইনিজ — আরও অনেক ভাষা।"
+    },
+    "lang-2": {
+      "file": "assets/audio/lang-2.mp3",
+      "duration": 6.531,
+      "id": "lang-2",
+      "vo": "প্রতিটি ভাষায় রয়েছে পুরুষ ও মহিলা ভয়েস — নিউজ রিডার থেকে স্টোরিটেলার, অ্যাসিস্ট্যান্ট থেকে সিটি গাইড।"
+    },
+    "bn-1": {
+      "file": "assets/audio/bn-1.mp3",
+      "duration": 2.847,
+      "id": "bn-1",
+      "vo": "বাংলায় আছেন পূজা — এভারিডে অ্যাসিস্ট্যান্ট।"
+    },
+    "bn-2": {
+      "file": "assets/audio/bn-2.mp3",
+      "duration": 1.802,
+      "id": "bn-2",
+      "vo": "রুবেল — সিটি গাইড।"
+    },
+    "bn-3": {
+      "file": "assets/audio/bn-3.mp3",
+      "duration": 2.691,
+      "id": "bn-3",
+      "vo": "আর নিউজ রিডার — যিনি এই ভিডিওটি বলছেন।"
+    },
+    "en-1": {
+      "file": "assets/audio/en-1.mp3",
+      "duration": 2.429,
+      "id": "en-1",
+      "vo": "ইংরেজিতে রয়েছে প্রায় চারশো ভয়েস।"
+    },
+    "en-2a": {
+      "file": "assets/audio/en-2a.mp3",
+      "duration": 1.724,
+      "id": "en-2a",
+      "vo": "Ailsa — ওয়ার্ম গাইড।"
+    },
+    "en-2b": {
+      "file": "assets/audio/en-2b.mp3",
+      "duration": 2.351,
+      "id": "en-2b",
+      "vo": "Aarav — ওল্ড টাইম স্টোরিটেলার।"
+    },
+    "en-2c": {
+      "file": "assets/audio/en-2c.mp3",
+      "duration": 2.038,
+      "id": "en-2c",
+      "vo": "আর Adrian — এক্সপ্লোরার।"
+    },
+    "model-1": {
+      "file": "assets/audio/model-1.mp3",
+      "duration": 7.549,
+      "id": "model-1",
+      "vo": "এরপর, মডেলসমূহ। Sonic 3.5 হলো ডিফল্ট — এক্সপ্রেসিভ, লো-লেটেন্সি, বহুভাষিক।"
+    },
+    "model-2": {
+      "file": "assets/audio/model-2.mp3",
+      "duration": 4.754,
+      "id": "model-2",
+      "vo": "সাথে আছে নতুন Sonic 3.6, Sonic Preview, এবং Sonic 3।"
+    },
+    "model-3": {
+      "file": "assets/audio/model-3.mp3",
+      "duration": 4.049,
+      "id": "model-3",
+      "vo": "Sonic 3.5-এ সেরা ইমোশন, স্পিড আর ভলিউম কন্ট্রোল।"
+    },
+    "model-4": {
+      "file": "assets/audio/model-4.mp3",
+      "duration": 3.004,
+      "id": "model-4",
+      "vo": "একই বাক্য, তিনটি মডেল — পার্থক্য শুনুন।"
+    },
+    "studio-1": {
+      "file": "assets/audio/studio-1.mp3",
+      "duration": 3.474,
+      "id": "studio-1",
+      "vo": "স্টুডিও ইন্টারফেস অত্যন্ত ক্লিন, আবার শক্তিশালী।"
+    },
+    "studio-2": {
+      "file": "assets/audio/studio-2.mp3",
+      "duration": 2.586,
+      "id": "studio-2",
+      "vo": "ভাষা আর ভয়েস বেছে নিন — ব্যস।"
+    },
+    "ctrl-1": {
+      "file": "assets/audio/ctrl-1.mp3",
+      "duration": 3.971,
+      "id": "ctrl-1",
+      "vo": "স্পিড ঠিক করুন শূন্য দশমিক ছয় থেকে এক দশমিক পাঁচ গুণ।"
+    },
+    "ctrl-2": {
+      "file": "assets/audio/ctrl-2.mp3",
+      "duration": 3.082,
+      "id": "ctrl-2",
+      "vo": "ভলিউম, শূন্য দশমিক পাঁচ থেকে দুই গুণ।"
+    },
+    "ctrl-3": {
+      "file": "assets/audio/ctrl-3.mp3",
+      "duration": 2.691,
+      "id": "ctrl-3",
+      "vo": "আর ইমোশন — মোট আঠান্নটি অনুভূতি।"
+    },
+    "ctrl-4": {
+      "file": "assets/audio/ctrl-4.mp3",
+      "duration": 7.079,
+      "id": "ctrl-4",
+      "vo": "Neutral, Calm, Angry, Content, Sad, Scared, Affectionate — আরও অনেক কিছু।"
+    },
+    "emo-1": {
+      "file": "assets/audio/emo-1.mp3",
+      "duration": 2.429,
+      "id": "emo-1",
+      "vo": "একই ভয়েস, তিনটি অনুভূতি।"
+    },
+    "script-1": {
+      "file": "assets/audio/script-1.mp3",
+      "duration": 2.508,
+      "id": "script-1",
+      "vo": "আপনার স্ক্রিপ্ট লিখুন, বা পেস্ট করুন।"
+    },
+    "script-2": {
+      "file": "assets/audio/script-2.mp3",
+      "duration": 3.004,
+      "id": "script-2",
+      "vo": "বড় প্যারাগ্রাফ? স্মার্ট চাঙ্কিং নিজেই সামলে নেয়।"
+    },
+    "gen-1": {
+      "file": "assets/audio/gen-1.mp3",
+      "duration": 4.598,
+      "id": "gen-1",
+      "vo": "Generate Speech ক্লিক করুন — স্টুডিও-মানের MP3, ইনস্ট্যান্ট ডাউনলোড।"
+    },
+    "gen-2": {
+      "file": "assets/audio/gen-2.mp3",
+      "duration": 1.724,
+      "id": "gen-2",
+      "vo": "WAV ফরম্যাটও সাপোর্টেড।"
+    },
+    "hist-1": {
+      "file": "assets/audio/hist-1.mp3",
+      "duration": 3.004,
+      "id": "hist-1",
+      "vo": "সাম্প্রতিক জেনারেশনগুলো লোকালি সেভ থাকে।"
+    },
+    "hist-2": {
+      "file": "assets/audio/hist-2.mp3",
+      "duration": 3.239,
+      "id": "hist-2",
+      "vo": "সিলেক্ট করুন, মার্জ করুন, প্লেব্যাক স্পিড বদলান —"
+    },
+    "hist-3": {
+      "file": "assets/audio/hist-3.mp3",
+      "duration": 2.586,
+      "id": "hist-3",
+      "vo": "আর কম্বাইনড অডিও একসাথে ডাউনলোড করুন।"
+    },
+    "api-1": {
+      "file": "assets/audio/api-1.mp3",
+      "duration": 2.769,
+      "id": "api-1",
+      "vo": "ডেভেলপারদের জন্য সহজ JSON এপিআই।"
+    },
+    "api-2": {
+      "file": "assets/audio/api-2.mp3",
+      "duration": 4.911,
+      "id": "api-2",
+      "vo": "পোস্ট করুন এপিআই টিটিএস-এ — ভাষা, মডেল, ভয়েস আইডি আর টেক্সট।"
+    },
+    "api-3": {
+      "file": "assets/audio/api-3.mp3",
+      "duration": 3.866,
+      "id": "api-3",
+      "vo": "সরাসরি MP3 রেসপন্স। কোনো এপিআই কি নেই।"
+    },
+    "tas-1": {
+      "file": "assets/audio/tas-1.mp3",
+      "duration": 2.691,
+      "id": "tas-1",
+      "vo": "স্পিকি টিএএস — টেক্সট অ্যান্ড স্পিচ স্কিল।"
+    },
+    "tas-2": {
+      "file": "assets/audio/tas-2.mp3",
+      "duration": 3.553,
+      "id": "tas-2",
+      "vo": "এটি দ্বিমুখী — লেখা থেকে কথা, আর কথা থেকে লেখা।"
+    },
+    "tas-tts-1": {
+      "file": "assets/audio/tas-tts-1.mp3",
+      "duration": 2.691,
+      "id": "tas-tts-1",
+      "vo": "টেক্সট-টু-স্পিচে পাবেন মাল্টি-স্পিকার ডায়ালগ,"
+    },
+    "tas-tts-2": {
+      "file": "assets/audio/tas-tts-2.mp3",
+      "duration": 2.847,
+      "id": "tas-tts-2",
+      "vo": "সাবটাইটেল, আর লাউডনেস নরমালাইজেশন।"
+    },
+    "tas-stt-1": {
+      "file": "assets/audio/tas-stt-1.mp3",
+      "duration": 5.956,
+      "id": "tas-stt-1",
+      "vo": "স্পিচ-টু-টেক্সটে — ট্রান্সক্রিপশন, SRT, WebVTT, আর ওয়ার্ড টাইমস্ট্যাম্প।"
+    },
+    "free-1": {
+      "file": "assets/audio/free-1.mp3",
+      "duration": 7.628,
+      "id": "free-1",
+      "vo": "সবকিছুই একই ফ্রি এপিআইতে। কোনো লোকাল মডেল নেই, কোনো পিপ ইনস্টল নেই — শুধু পাইথন স্ট্যান্ডার্ড লাইব্রেরি।"
+    },
+    "install-1": {
+      "file": "assets/audio/install-1.mp3",
+      "duration": 4.989,
+      "id": "install-1",
+      "vo": "এক কমান্ডে স্কিল ইনস্টল করুন — OpenCode, Cursor, Codex বা Claude Code-এ।"
+    },
+    "install-2": {
+      "file": "assets/audio/install-2.mp3",
+      "duration": 4.911,
+      "id": "install-2",
+      "vo": "ক্যাশিং, রিট্রাই, চাঙ্কিং আর অডিও কিউইলিং — সব অটোমেটিক।"
+    },
+    "use-1": {
+      "file": "assets/audio/use-1.mp3",
+      "duration": 3.474,
+      "id": "use-1",
+      "vo": "কনটেন্ট তৈরি, অ্যাপ বিল্ডিং, বা ভাষা শেখা —"
+    },
+    "use-2": {
+      "file": "assets/audio/use-2.mp3",
+      "duration": 3.396,
+      "id": "use-2",
+      "vo": "স্পিকি দিচ্ছে সম্পূর্ণ ফ্রিতে পেশাদার ভয়েস জেনারেশন।"
+    },
+    "outro-1": {
+      "file": "assets/audio/outro-1.mp3",
+      "duration": 4.127,
+      "id": "outro-1",
+      "vo": "আজই ভিজিট করুন speakee.tnxbd.top।"
+    },
+    "outro-2": {
+      "file": "assets/audio/outro-2.mp3",
+      "duration": 3.474,
+      "id": "outro-2",
+      "vo": "বিয়াল্লিশটি ভাষায়, টেক্সটকে বদলে দিন প্রাকৃতিক স্পিচে।"
+    },
+    "demo-pooja": {
+      "file": "assets/audio/demo-pooja.mp3",
+      "duration": 4.206,
+      "id": "demo-pooja",
+      "vo": "হ্যালো! আমি পূজা — আপনার প্রতিদিনের সহকারী।",
+      "voice": "Pooja - Everyday Assistant",
+      "lang": "bn",
+      "model": "sonic-3.5",
+      "emotion": "happy",
+      "speed": 1.1
+    },
+    "demo-rubel": {
+      "file": "assets/audio/demo-rubel.mp3",
+      "duration": 3.161,
+      "id": "demo-rubel",
+      "vo": "আমি রুবেল। চলুন, শহরটা ঘুরে দেখি!",
+      "voice": "Rubel - City Guide",
+      "lang": "bn",
+      "model": "sonic-3.5",
+      "emotion": "excited",
+      "speed": 1.1
+    },
+    "demo-news": {
+      "file": "assets/audio/demo-news.mp3",
+      "duration": 2.586,
+      "id": "demo-news",
+      "vo": "স্পিকি থেকে সরাসরি — বাংলা সংবাদ।",
+      "voice": "News Reader",
+      "lang": "bn",
+      "model": "sonic-3.5",
+      "emotion": "confident",
+      "speed": 1.12
+    },
+    "demo-ailsa": {
+      "file": "assets/audio/demo-ailsa.mp3",
+      "duration": 2.847,
+      "id": "demo-ailsa",
+      "vo": "Welcome to Speakee. Let's get started.",
+      "voice": "Ailsa - Warm Guide",
+      "lang": "en",
+      "model": "sonic-3.6",
+      "emotion": "content",
+      "speed": 1.05
+    },
+    "demo-aarav": {
+      "file": "assets/audio/demo-aarav.mp3",
+      "duration": 2.116,
+      "id": "demo-aarav",
+      "vo": "Once upon a time, a voice came alive.",
+      "voice": "Aarav - Old Time Storyteller",
+      "lang": "en",
+      "model": "sonic-3",
+      "emotion": "mysterious",
+      "speed": 1.0
+    },
+    "demo-adrian": {
+      "file": "assets/audio/demo-adrian.mp3",
+      "duration": 2.926,
+      "id": "demo-adrian",
+      "vo": "Adventure is out there. Let's explore!",
+      "voice": "Adrian - Explorer",
+      "lang": "en",
+      "model": "sonic-preview",
+      "emotion": "excited",
+      "speed": 1.05
+    },
+    "model-demo-36": {
+      "file": "assets/audio/model-demo-36.mp3",
+      "duration": 2.429,
+      "id": "model-demo-36",
+      "vo": "Studio quality, in seconds.",
+      "voice": "Brandon - Confident Guy",
+      "lang": "en",
+      "model": "sonic-3.6",
+      "emotion": "confident",
+      "speed": 1.05
+    },
+    "model-demo-35": {
+      "file": "assets/audio/model-demo-35.mp3",
+      "duration": 2.273,
+      "id": "model-demo-35",
+      "vo": "Studio quality, in seconds.",
+      "voice": "Brandon - Confident Guy",
+      "lang": "en",
+      "model": "sonic-3.5",
+      "emotion": "confident",
+      "speed": 1.05
+    },
+    "model-demo-3": {
+      "file": "assets/audio/model-demo-3.mp3",
+      "duration": 4.049,
+      "id": "model-demo-3",
+      "vo": "Studio quality, in seconds.",
+      "voice": "Brandon - Confident Guy",
+      "lang": "en",
+      "model": "sonic-3",
+      "emotion": "confident",
+      "speed": 1.05
+    },
+    "emo-happy": {
+      "file": "assets/audio/emo-happy.mp3",
+      "duration": 3.474,
+      "id": "emo-happy",
+      "vo": "এটা দারুণ খবর! আজ নতুন কিছু শিখব।",
+      "voice": "Pooja - Everyday Assistant",
+      "lang": "bn",
+      "model": "sonic-3.5",
+      "emotion": "happy",
+      "speed": 1.1
+    },
+    "emo-sad": {
+      "file": "assets/audio/emo-sad.mp3",
+      "duration": 3.709,
+      "id": "emo-sad",
+      "vo": "আজ আকাশটা খুব বিষণ্ণ। মনটা ভালো নেই।",
+      "voice": "Pooja - Everyday Assistant",
+      "lang": "bn",
+      "model": "sonic-3.5",
+      "emotion": "sad",
+      "speed": 1.08
+    },
+    "emo-angry": {
+      "file": "assets/audio/emo-angry.mp3",
+      "duration": 3.474,
+      "id": "emo-angry",
+      "vo": "এটা আর চলবে না! আমাকে সঠিক উত্তর চাই।",
+      "voice": "Pooja - Everyday Assistant",
+      "lang": "bn",
+      "model": "sonic-3.5",
+      "emotion": "angry",
+      "speed": 1.12
+    },
+    "stt-clip": {
+      "file": "assets/audio/stt-clip.mp3",
+      "duration": 3.709,
+      "id": "stt-clip",
+      "vo": "This is Speakee, turning speech into text.",
+      "voice": "Ailsa - Warm Guide",
+      "lang": "en",
+      "model": "sonic-3.6",
+      "emotion": "content",
+      "speed": 1.02
+    },
+    "demo-dialog": {
+      "file": "assets/audio/demo-dialog.mp3",
+      "duration": 5.052
+    }
+  }
+}

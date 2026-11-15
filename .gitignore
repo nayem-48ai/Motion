@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+.hyperframes/
+
+# Build outputs
+*.mp4
+*.webm
+*.mov
+*.avi
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Cache
+.cache/
+.parcel-cache/

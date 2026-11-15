@@ -1,0 +1,77 @@
+<template>
+<style>
+/*__BASE__*/
+#root { background: var(--paper); }
+.left { position: absolute; left: 84px; top: 150px; width: 930px; }
+.frame { width: 930px; border-radius: 24px; overflow: hidden; box-shadow: 0 50px 110px rgba(25,25,60,0.22); background: #fff; border: 1px solid #e7e6f2; }
+.frame .bar { height: 48px; background: #ecebf5; display: flex; align-items: center; padding: 0 20px; gap: 8px; border-bottom: 1px solid #e2e1ef; }
+.frame .bar .d { width: 11px; height: 11px; border-radius: 50%; background: #d2d1e3; }
+.frame .bar .url { margin-left: 16px; font-family: JBM; font-size: 15px; color: #5d5d78; background: #fff; border: 1px solid #e2e1ef; border-radius: 7px; padding: 6px 16px; }
+.frame img { display: block; width: 100%; height: 690px; object-fit: cover; object-position: 50% 4%; }
+.tagfloat { position: absolute; right: -28px; top: -26px; background: #16c7a3; color: #04201a; font-family: Outfit; font-weight: 800; font-size: 16px; letter-spacing: 0.14em; padding: 12px 18px; border-radius: 8px; transform: rotate(3deg); box-shadow: 0 14px 30px rgba(22,199,163,0.28); }
+.right { position: absolute; left: 1100px; top: 178px; width: 730px; }
+.right .slug { margin-bottom: 28px; }
+.right h2 { font-size: 88px; line-height: 1.24; letter-spacing: -0.02em; }
+.right h2 .thin { color: #8b8aa2; }
+.stats { margin-top: 42px; }
+.stat { display: flex; align-items: center; gap: 26px; padding: 20px 0; border-top: 1px solid #dedce9; }
+.stat:last-child { border-bottom: 1px solid #dedce9; }
+.stat .n { width: 128px; font-family: Outfit; font-weight: 800; font-size: 64px; letter-spacing: -0.04em; color: #5b4bff; line-height: 1; }
+.stat .n.mint { color: #0f9e82; }
+.stat .t { font-family: "BN Sans"; font-weight: 600; font-size: 30px; color: #1b1b2a; }
+.stat .t small { display: block; font-family: Outfit; font-weight: 600; font-size: 15px; letter-spacing: 0.18em; color: #8b8aa2; margin-top: 5px; }
+.note { margin-top: 34px; display: flex; align-items: center; gap: 14px; font-family: Outfit; font-weight: 600; font-size: 18px; color: #6c6b84; }
+.note .b { display: inline-flex; width: 36px; height: 36px; border-radius: 9px; background: #ebe9ff; color: #5b4bff; align-items: center; justify-content: center; font-family: Outfit; font-weight: 800; font-size: 17px; }
+.seal { position: absolute; right: 112px; top: 88px; width: 120px; height: 120px; border-radius: 50%; border: 2px dashed #b9b6d6; display: grid; place-items: center; font-family: Outfit; font-weight: 800; font-size: 20px; letter-spacing: 0.1em; color: #5b4bff; transform: rotate(8deg); text-align: center; line-height: 1.2; }
+</style>
+<div id="root" data-composition-id="what" data-width="1920" data-height="1080">
+  <div class="stage light">
+  <div class="grid on-light"></div>
+  <div class="glow g-violet" style="width:900px;height:900px;right:-300px;top:-380px;opacity:.32"></div>
+  <div class="glow g-mint" style="width:700px;height:700px;left:-260px;bottom:-340px;opacity:.5"></div>
+  <div class="swipe" id="swipe"></div>
+  <div class="seal" id="seal">100%<br>FREE</div>
+
+  <div class="left" id="left">
+    <div class="tagfloat" id="tagfloat">LIVE SITE</div>
+    <div class="frame">
+      <div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">speakee.tnxbd.top</span></div>
+      <img src="assets/img/site-hero.png" alt="Speakee website" />
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="slug" id="slug"><span class="num">01</span> একটি প্ল্যাটফর্ম</div>
+    <h2 class="h2" id="head">এক ওয়েবসাইট।<br><span class="thin">সবকিছু</span> ফ্রি।</h2>
+    <div class="stats">
+      <div class="stat" id="s1"><div class="n">০</div><div class="t">সাইনআপ<small>NO ACCOUNT REQUIRED</small></div></div>
+      <div class="stat" id="s2"><div class="n">০</div><div class="t">এপিআই কি<small>NO API KEY</small></div></div>
+      <div class="stat" id="s3"><div class="n mint">১</div><div class="t">ক্লিকে অডিও<small>ONE CLICK TO MP3</small></div></div>
+    </div>
+    <div class="note" id="note"><span class="b">S</span> Cartesia Sonic মডেলে চালিত · ৪২টি ভাষা · ৮০০+ ভয়েস</div>
+  </div>
+</div>
+  </div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = /*__TIMING__*/;
+
+tl.fromTo("#swipe", { yPercent: 0 }, { yPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#left", { opacity: 0, y: 40, rotate: -1.6 }, { opacity: 1, y: 0, rotate: 0, duration: 0.7, ease: "expo.out" }, 0.25);
+tl.fromTo("#tagfloat", { opacity: 0, scale: 0.6, rotate: 0 }, { opacity: 1, scale: 1, rotate: 3, duration: 0.4, ease: "back.out(2)" }, 0.75);
+tl.fromTo("#seal", { opacity: 0, scale: 0.7, rotate: -8 }, { opacity: 1, scale: 1, rotate: 8, duration: 0.5, ease: "back.out(1.6)" }, 0.6);
+tl.fromTo("#slug", { opacity: 0, x: 24 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, 0.35);
+tl.fromTo("#head", { opacity: 0, y: 30, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.6, ease: "expo.out" }, 0.5);
+
+let b2 = T.b["what-2"];
+tl.fromTo("#s1", { opacity: 0, x: 34 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, b2 - 0.1);
+tl.fromTo("#s2", { opacity: 0, x: 34 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, b2 + 1.5);
+tl.fromTo("#s3", { opacity: 0, x: 34 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, b2 + 3.1);
+tl.fromTo("#note", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 }, b2 + 4.6);
+
+// slow push on the site screenshot
+tl.fromTo(".frame img", { scale: 1.03 }, { scale: 1, duration: T.dur, ease: "none" }, 0);
+
+window.__timelines["what"] = tl;
+</script>
+</template>

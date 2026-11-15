@@ -1,0 +1,257 @@
+<template>
+<style>
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Black.ttf") format("truetype"); font-weight: 900; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Black.ttf") format("truetype"); font-weight: 900; font-style: normal; }
+@font-face { font-family: "Outfit"; src: url("assets/fonts/Outfit-400.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "Inter"; src: url("assets/fonts/Inter-400.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "JBM"; src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "JBM"; src: url("assets/fonts/JetBrainsMono-600.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+
+:root {
+  --ink: #0a0a14;
+  --ink-2: #12121f;
+  --paper: #f6f5fb;
+  --paper-2: #ffffff;
+  --violet: #5b4bff;
+  --violet-2: #8b7bff;
+  --mint: #16c7a3;
+  --mint-2: #6ff0d3;
+  --coral: #ff6b5a;
+  --gold: #ffc24b;
+  --muted: #8e8ea6;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-dark: rgba(10, 10, 20, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+body { font-family: "Outfit", "BN Sans", sans-serif; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+#root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; }
+.stage { position: absolute; inset: 0; overflow: hidden; }
+.dark { background: var(--ink); color: #f5f4fb; }
+.light { background: var(--paper); color: var(--ink); }
+
+.bn { font-family: "BN Sans", "Outfit", sans-serif; }
+.bnserif { font-family: "BN Serif", "BN Sans", serif; }
+.mono { font-family: "JBM", monospace; }
+.en { font-family: "Outfit", sans-serif; }
+
+.grid { position: absolute; inset: 0; opacity: 0.5;
+  background-image: linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: 96px 96px; }
+.light .grid, .grid.on-light { background-image: linear-gradient(rgba(10,10,20,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(10,10,20,0.06) 1px, transparent 1px); opacity: 1; }
+.glow { position: absolute; border-radius: 50%; filter: blur(10px); pointer-events: none; }
+.g-violet { background: radial-gradient(circle, rgba(91,75,255,0.42) 0%, rgba(91,75,255,0.12) 42%, rgba(91,75,255,0) 70%); }
+.g-mint { background: radial-gradient(circle, rgba(22,199,163,0.35) 0%, rgba(22,199,163,0.08) 45%, rgba(22,199,163,0) 72%); }
+
+.kicker { font-family: "Outfit", sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--mint); display: flex; align-items: center; gap: 14px; }
+.kicker .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mint); }
+.kicker.on-light { color: #4a3df0; }
+.kicker.on-light .dot { background: #4a3df0; }
+
+.slug { display: inline-flex; align-items: center; gap: 14px; background: var(--violet); color: #fff; padding: 12px 22px 13px; font-weight: 700; font-size: 22px; letter-spacing: 0.03em; border-radius: 6px; }
+.slug .num { font-family: "JBM", monospace; font-size: 19px; opacity: 0.75; }
+.slug.on-light { background: var(--ink); }
+
+.h1 { font-family: "BN Serif", serif; font-weight: 900; font-size: 118px; line-height: 1.14; letter-spacing: -0.015em; }
+.h2 { font-family: "BN Serif", serif; font-weight: 700; font-size: 82px; line-height: 1.2; letter-spacing: -0.01em; }
+.h3 { font-family: "BN Sans", sans-serif; font-weight: 700; font-size: 54px; line-height: 1.3; }
+.body { font-family: "BN Sans", sans-serif; font-weight: 400; font-size: 32px; line-height: 1.65; color: #b9b8cc; }
+.light .body { color: #55556b; }
+.hl { color: var(--mint); }
+.hl-violet { color: var(--violet-2); }
+.light .hl-violet { color: var(--violet); }
+
+.card { border-radius: 28px; border: 1px solid var(--line); background: rgba(255,255,255,0.045); }
+.card-light { border-radius: 28px; border: 1px solid var(--line-dark); background: #fff; box-shadow: 0 24px 70px rgba(20,20,45,0.10); }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 100px; border: 1px solid var(--line); font-size: 20px; font-weight: 500; white-space: nowrap; }
+.light .chip { border-color: var(--line-dark); }
+.pill { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 100px; font-size: 19px; font-weight: 700; }
+
+.wave { display: flex; align-items: center; gap: 5px; }
+.wave i { display: block; width: 6px; border-radius: 6px; background: currentColor; }
+
+.browser { border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 40px 100px rgba(6,6,20,0.28); border: 1px solid rgba(10,10,20,0.10); }
+.browser .bar { height: 46px; background: #eeeef6; display: flex; align-items: center; gap: 8px; padding: 0 20px; border-bottom: 1px solid #e2e2ee; }
+.browser .bar .d { width: 11px; height: 11px; border-radius: 50%; background: #d4d4e2; }
+.browser .bar .url { margin-left: 18px; font-family: "JBM", monospace; font-size: 15px; color: #6b6b85; background: #fff; border-radius: 7px; padding: 6px 16px; border: 1px solid #e2e2ee; }
+
+.swipe { position: absolute; inset: -2px; z-index: 60; background: linear-gradient(105deg, #4b3cff 0%, #6a5bff 46%, #16c7a3 100%); transform-origin: top left; }
+.swipe::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: #fff; opacity: 0.65; }
+
+.rule { height: 1px; background: var(--line); }
+.light .rule { background: var(--line-dark); }
+.small { font-size: 20px; color: var(--muted); letter-spacing: 0.02em; }
+.light .small { color: #7a7a92; }
+
+.stamp { font-family: "JBM", monospace; font-weight: 600; border: 3px solid currentColor; border-radius: 8px; padding: 10px 16px; letter-spacing: 0.12em; text-transform: uppercase; }
+.cursor { position: absolute; width: 34px; height: 44px; z-index: 50; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3)); }
+
+.logo { display: inline-flex; align-items: center; gap: 16px; }
+.logo svg { display: block; }
+.logo .word { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 46px; letter-spacing: -0.045em; line-height: 1; }
+.logo .word em { font-style: normal; color: var(--mint); }
+.logo .sub { font-family: "Outfit", sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.55; display: block; margin-top: 6px; }
+
+
+#root { background: #08080f; }
+.head { position: absolute; left: 96px; top: 80px; right: 96px; display: flex; align-items: flex-end; justify-content: space-between; }
+.head .l .kicker { margin-bottom: 14px; }
+.head h2 { font-size: 78px; line-height: 1.1; }
+.head h2 span { color: #6ff0d3; }
+.head .r { font-family: JBM; font-size: 12px; letter-spacing: 0.14em; color: #6d6c88; padding-bottom: 8px; text-align: right; line-height: 1.9; }
+
+.studio { position: absolute; left: 96px; top: 274px; width: 1090px; height: 636px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.035); padding: 28px 30px; overflow: hidden; }
+.studio .lab { font-family: Outfit; font-weight: 800; font-size: 11px; letter-spacing: 0.2em; color: #82819b; display: flex; justify-content: space-between; }
+.studio .lab .tag { font-family: JBM; color: #6ff0d3; letter-spacing: 0.1em; }
+.turns { margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
+.turn { position: relative; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); padding: 16px 20px; display: flex; gap: 16px; }
+.turn .av { width: 54px; height: 54px; border-radius: 50%; flex: 0 0 auto; display: grid; place-items: center; font-family: "BN Serif"; font-weight: 900; font-size: 24px; color: #fff; }
+.turn .who { font-family: Outfit; font-weight: 700; font-size: 14px; letter-spacing: 0.12em; color: #b9b8cc; }
+.turn .who span { font-family: "BN Sans"; font-weight: 600; letter-spacing: 0; color: #f1f0fa; font-size: 20px; margin-right: 8px; }
+.turn .tx { margin-top: 5px; font-family: "BN Sans"; font-size: 27px; color: #f1f0fa; }
+.turn .t { position: absolute; right: 18px; top: 16px; font-family: JBM; font-size: 10px; color: #5f5e78; }
+#turn1 .av { background: linear-gradient(140deg, #5b4bff, #3a2ae0); }
+#turn2 .av { background: linear-gradient(140deg, #ff8a6a, #e0442f); }
+.turn.on { background: rgba(255,255,255,0.07); border-color: rgba(139,123,255,0.5); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+
+.timeline { position: absolute; left: 30px; right: 30px; bottom: 96px; }
+.timeline .ruler { display: flex; justify-content: space-between; font-family: JBM; font-size: 10px; color: #5f5e78; margin-bottom: 8px; }
+.timeline .wave { height: 86px; display: flex; align-items: center; gap: 3px; }
+.timeline .wave i { flex: 1; border-radius: 3px; background: #5b4bff; }
+.timeline .wave i.b { background: #ff6b5a; }
+.timeline .head { position: absolute; left: 0; top: 18px; bottom: 0; width: 2px; background: #6ff0d3; box-shadow: 0 0 12px rgba(111,240,211,0.8); transform: translateX(0); }
+.timeline .head .dot { position: absolute; top: -6px; left: -4px; width: 10px; height: 10px; border-radius: 50%; background: #6ff0d3; }
+.timeline .segs { position: absolute; left: 0; right: 0; top: 40px; height: 4px; display: flex; gap: 2px; border-radius: 3px; overflow: hidden; }
+.timeline .segs .s1 { width: 31%; background: rgba(91,75,255,0.9); }
+.timeline .segs .s2 { flex: 1; background: rgba(255,107,90,0.9); }
+
+.filecard { position: absolute; left: 30px; right: 30px; bottom: 24px; height: 58px; display: flex; align-items: center; gap: 14px; }
+.filecard .ic { width: 44px; height: 44px; border-radius: 10px; background: #16c7a3; display: grid; place-items: center; font-family: JBM; font-size: 11px; font-weight: 600; color: #04201a; }
+.filecard .n { font-family: Outfit; font-weight: 700; font-size: 17px; color: #f1f0fa; }
+.filecard .m { font-family: JBM; font-size: 10px; color: #82819b; margin-top: 2px; letter-spacing: 0.08em; }
+.filecard .p { margin-left: auto; display: flex; align-items: center; gap: 10px; font-family: JBM; font-size: 11px; color: #82819b; }
+.filecard .p .b { width: 40px; height: 40px; border-radius: 50%; background: #16c7a3; display: grid; place-items: center; }
+
+.side { position: absolute; right: 96px; top: 274px; width: 574px; height: 636px; }
+.feat { border-radius: 18px; border: 1px solid rgba(255,255,255,0.11); background: rgba(255,255,255,0.04); padding: 20px 22px; display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+.feat .ic { width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; flex: 0 0 auto; }
+.feat .t { font-family: "BN Sans"; font-weight: 700; font-size: 22px; color: #f1f0fa; line-height: 1.25; }
+.feat .e { font-family: Outfit; font-weight: 600; font-size: 11px; letter-spacing: 0.14em; color: #82819b; margin-top: 3px; }
+.feat .chk { margin-left: auto; color: #16c7a3; font-family: Outfit; font-weight: 800; font-size: 18px; }
+#f1 .ic { background: rgba(91,75,255,0.2); }
+#f2 .ic { background: rgba(255,193,7,0.16); }
+#f3 .ic { background: rgba(22,199,163,0.16); }
+#f4 .ic { background: rgba(255,107,90,0.16); }
+
+.srt { border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); background: #0c0c17; padding: 14px 16px; margin-top: 4px; }
+.srt .h { display: flex; justify-content: space-between; font-family: JBM; font-size: 10px; letter-spacing: 0.12em; color: #5f5e78; margin-bottom: 8px; }
+.srt .l { font-family: JBM; font-size: 11.5px; line-height: 1.65; color: #b9b8cc; white-space: pre; }
+.srt .l .tm { color: #ffc24b; }
+.srt .l .sp { color: #8b7bff; }
+.subs { position: absolute; left: 0; right: 0; bottom: 0; border-radius: 14px; background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.1); padding: 12px 16px; text-align: center; font-family: "BN Sans"; font-size: 21px; color: #fff; }
+.subs b { color: #6ff0d3; font-weight: 600; margin-right: 8px; }
+</style>
+<div id="root" data-composition-id="tasts" data-width="1920" data-height="1080">
+  <div class="stage dark">
+    <div class="grid"></div>
+    <div class="glow g-violet" style="width:900px;height:900px;left:-360px;top:-360px"></div>
+    <div class="glow g-mint" style="width:800px;height:800px;right:-340px;bottom:-400px"></div>
+    <div class="swipe" id="swipe"></div>
+
+    <div class="head">
+      <div class="l">
+        <div class="kicker" id="kicker"><span class="dot"></span>TAS · TEXT TO SPEECH</div>
+        <h2 class="h2" id="head">দুই কণ্ঠ। <span>এক ট্র্যাক।</span></h2>
+      </div>
+      <div class="r" id="r">MULTI-SPEAKER DIALOGUE<br>SRT + LOUDNESS NORMALIZATION</div>
+    </div>
+
+    <div class="studio" id="studio">
+      <div class="lab"><span>DIALOGUE SCRIPT</span><span class="tag">2 SPEAKERS · BN</span></div>
+      <div class="turns">
+        <div class="turn on" id="turn1"><span class="av">না</span><div><div class="who"><span>নাঈম</span>NAEEM</div><div class="tx">আজ আমরা কী শিখব?</div></div><span class="t">00:00.000</span></div>
+        <div class="turn" id="turn2"><span class="av">পূ</span><div><div class="who"><span>পূজা</span>POOJA</div><div class="tx">ভয়েস, সাবটাইটেল — আরও অনেক কিছু!</div></div><span class="t">00:01.578</span></div>
+      </div>
+
+      <div class="timeline">
+        <div class="ruler"><span>0:00</span><span>0:01</span><span>0:02</span><span>0:03</span><span>0:04</span><span>0:05</span></div>
+        <div class="wave" data-wave></div>
+        <div class="segs"><span class="s1"></span><span class="s2"></span></div>
+        <div class="head" id="head"><span class="dot"></span></div>
+      </div>
+
+      <div class="filecard">
+        <span class="ic">MP3</span><div><div class="n">dialog.mp3</div><div class="m">2 VOICES · 0:05 · 48kHz</div></div>
+        <div class="p"><span>LOUDNESS −16 LUFS</span><span class="b"><svg width="13" height="15" viewBox="0 0 15 17"><path d="M1 1l13 7.5L1 16V1z" fill="#04201a"/></svg></span></div>
+      </div>
+    </div>
+
+    <div class="side" id="side">
+      <div class="feat" id="f1"><span class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#8b7bff" stroke-width="1.8"><path d="M4 5h7v14H4zM13 5h7v14h-7z"/><path d="M7 9h.01M17 9h.01" stroke-width="2.6" stroke-linecap="round"/></svg></span><div><div class="t">মাল্টি-স্পিকার ডায়ালগ</div><div class="e">TWO VOICES · ONE FILE</div></div><span class="chk">✓</span></div>
+      <div class="feat" id="f2"><span class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#ffc24b" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h5M7 11h10"/></svg></span><div><div class="t">সাবটাইটেল, অটোমেটিক</div><div class="e">SRT + WEBVTT</div></div><span class="chk">✓</span></div>
+      <div class="feat" id="f3"><span class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#16c7a3" stroke-width="1.8"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2" stroke-linecap="round"/></svg></span><div><div class="t">লাউডনেস নরমালাইজেশন</div><div class="e">CONSISTENT −16 LUFS</div></div><span class="chk">✓</span></div>
+      <div class="feat" id="f4"><span class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#ff6b5a" stroke-width="1.8"><path d="M4 7h16M4 12h10M4 17h13" stroke-linecap="round"/></svg></span><div><div class="t">অটো চাঙ্কিং</div><div class="e">LONG SCRIPTS · NO LIMIT</div></div><span class="chk">✓</span></div>
+
+      <div class="srt" id="srt">
+        <div class="h"><span>DIALOG.SRT</span><span>2 CUES</span></div>
+        <div class="l"><span class="sp">1</span>
+<span class="tm">00:00:00,000 --> 00:00:01,578</span>
+নাঈম: আজ আমরা কী শিখব?
+
+<span class="sp">2</span>
+<span class="tm">00:00:01,578 --> 00:00:05,052</span>
+পূজা: ভয়েস, সাবটাইটেল — আরও অনেক কিছু!</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = {"start": 229.44, "dur": 12.88, "b": {"tas-tts-1": 0.67, "tas-tts-2": 3.681, "demo-dialog": 6.928}, "d": {"tas-tts-1": 2.691, "tas-tts-2": 2.847, "demo-dialog": 5.052}};
+
+document.querySelectorAll("[data-wave]").forEach(w => {
+  for (let i = 0; i < 92; i++) {
+    const b = document.createElement("i");
+    b.style.height = (8 + Math.abs(Math.sin(i * 1.17) * Math.cos(i * 0.37)) * 62) + "px";
+    if (i >= 29) b.classList.add("b");
+    w.appendChild(b);
+  }
+});
+
+tl.fromTo("#swipe", { yPercent: 0 }, { yPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#kicker", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.35 }, 0.15);
+tl.fromTo("#head", { opacity: 0, y: 24, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "expo.out" }, 0.25);
+tl.fromTo("#r", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.55);
+tl.fromTo("#studio", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.55, ease: "expo.out" }, 0.4);
+tl.fromTo("#side", { opacity: 0, x: 32 }, { opacity: 1, x: 0, duration: 0.55, ease: "expo.out" }, 0.5);
+tl.fromTo(".turn", { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.4, stagger: 0.12 }, 0.7);
+tl.fromTo(".timeline .wave i", { scaleY: 0.15 }, { scaleY: 1, duration: 0.4, stagger: 0.004, ease: "power2.out" }, 0.9);
+tl.fromTo(".feat", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.1 }, 0.8);
+tl.fromTo("#srt", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45 }, 1.3);
+
+// feature highlights at tas-tts-1 / tas-tts-2
+tl.to("#f1", { borderColor: "rgba(139,123,255,0.55)", backgroundColor: "rgba(91,75,255,0.12)", duration: 0.35, yoyo: true, repeat: 1 }, T.b["tas-tts-1"] + 0.5);
+tl.to("#f2, #f3", { borderColor: "rgba(22,199,163,0.45)", backgroundColor: "rgba(22,199,163,0.08)", duration: 0.35, stagger: 0.12, yoyo: true, repeat: 1 }, T.b["tas-tts-2"] + 0.2);
+
+// play dialogue
+const d = T.b["demo-dialog"];
+tl.to("#turn2", { backgroundColor: "rgba(255,255,255,0.07)", borderColor: "rgba(255,107,90,0.55)", duration: 0.3 }, d - 0.1);
+tl.to("#turn1", { backgroundColor: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.1)", duration: 0.3 }, d - 0.1);
+tl.to("#head", { x: 319, duration: 1.55, ease: "none" }, d);
+tl.to("#head", { x: 1030, duration: T.d["demo-dialog"] - 1.55, ease: "none" }, d + 1.55);
+tl.to("#studio", { borderColor: "rgba(139,123,255,0.4)", duration: 0.4 }, d);
+tl.to("#srt", { borderColor: "rgba(255,194,75,0.35)", duration: 0.4 }, d);
+
+tl.to("#turn1", { backgroundColor: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.1)", duration: 0.3 }, d + 1.55);
+tl.to("#turn2", { backgroundColor: "rgba(255,255,255,0.07)", borderColor: "rgba(255,107,90,0.55)", duration: 0.3 }, d + 1.55);
+
+window.__timelines["tasts"] = tl;
+</script>
+</template>

@@ -1,0 +1,249 @@
+<template>
+<style>
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Black.ttf") format("truetype"); font-weight: 900; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Black.ttf") format("truetype"); font-weight: 900; font-style: normal; }
+@font-face { font-family: "Outfit"; src: url("assets/fonts/Outfit-400.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "Inter"; src: url("assets/fonts/Inter-400.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "JBM"; src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "JBM"; src: url("assets/fonts/JetBrainsMono-600.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+
+:root {
+  --ink: #0a0a14;
+  --ink-2: #12121f;
+  --paper: #f6f5fb;
+  --paper-2: #ffffff;
+  --violet: #5b4bff;
+  --violet-2: #8b7bff;
+  --mint: #16c7a3;
+  --mint-2: #6ff0d3;
+  --coral: #ff6b5a;
+  --gold: #ffc24b;
+  --muted: #8e8ea6;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-dark: rgba(10, 10, 20, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+body { font-family: "Outfit", "BN Sans", sans-serif; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+#root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; }
+.stage { position: absolute; inset: 0; overflow: hidden; }
+.dark { background: var(--ink); color: #f5f4fb; }
+.light { background: var(--paper); color: var(--ink); }
+
+.bn { font-family: "BN Sans", "Outfit", sans-serif; }
+.bnserif { font-family: "BN Serif", "BN Sans", serif; }
+.mono { font-family: "JBM", monospace; }
+.en { font-family: "Outfit", sans-serif; }
+
+.grid { position: absolute; inset: 0; opacity: 0.5;
+  background-image: linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: 96px 96px; }
+.light .grid, .grid.on-light { background-image: linear-gradient(rgba(10,10,20,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(10,10,20,0.06) 1px, transparent 1px); opacity: 1; }
+.glow { position: absolute; border-radius: 50%; filter: blur(10px); pointer-events: none; }
+.g-violet { background: radial-gradient(circle, rgba(91,75,255,0.42) 0%, rgba(91,75,255,0.12) 42%, rgba(91,75,255,0) 70%); }
+.g-mint { background: radial-gradient(circle, rgba(22,199,163,0.35) 0%, rgba(22,199,163,0.08) 45%, rgba(22,199,163,0) 72%); }
+
+.kicker { font-family: "Outfit", sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--mint); display: flex; align-items: center; gap: 14px; }
+.kicker .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mint); }
+.kicker.on-light { color: #4a3df0; }
+.kicker.on-light .dot { background: #4a3df0; }
+
+.slug { display: inline-flex; align-items: center; gap: 14px; background: var(--violet); color: #fff; padding: 12px 22px 13px; font-weight: 700; font-size: 22px; letter-spacing: 0.03em; border-radius: 6px; }
+.slug .num { font-family: "JBM", monospace; font-size: 19px; opacity: 0.75; }
+.slug.on-light { background: var(--ink); }
+
+.h1 { font-family: "BN Serif", serif; font-weight: 900; font-size: 118px; line-height: 1.14; letter-spacing: -0.015em; }
+.h2 { font-family: "BN Serif", serif; font-weight: 700; font-size: 82px; line-height: 1.2; letter-spacing: -0.01em; }
+.h3 { font-family: "BN Sans", sans-serif; font-weight: 700; font-size: 54px; line-height: 1.3; }
+.body { font-family: "BN Sans", sans-serif; font-weight: 400; font-size: 32px; line-height: 1.65; color: #b9b8cc; }
+.light .body { color: #55556b; }
+.hl { color: var(--mint); }
+.hl-violet { color: var(--violet-2); }
+.light .hl-violet { color: var(--violet); }
+
+.card { border-radius: 28px; border: 1px solid var(--line); background: rgba(255,255,255,0.045); }
+.card-light { border-radius: 28px; border: 1px solid var(--line-dark); background: #fff; box-shadow: 0 24px 70px rgba(20,20,45,0.10); }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 100px; border: 1px solid var(--line); font-size: 20px; font-weight: 500; white-space: nowrap; }
+.light .chip { border-color: var(--line-dark); }
+.pill { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 100px; font-size: 19px; font-weight: 700; }
+
+.wave { display: flex; align-items: center; gap: 5px; }
+.wave i { display: block; width: 6px; border-radius: 6px; background: currentColor; }
+
+.browser { border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 40px 100px rgba(6,6,20,0.28); border: 1px solid rgba(10,10,20,0.10); }
+.browser .bar { height: 46px; background: #eeeef6; display: flex; align-items: center; gap: 8px; padding: 0 20px; border-bottom: 1px solid #e2e2ee; }
+.browser .bar .d { width: 11px; height: 11px; border-radius: 50%; background: #d4d4e2; }
+.browser .bar .url { margin-left: 18px; font-family: "JBM", monospace; font-size: 15px; color: #6b6b85; background: #fff; border-radius: 7px; padding: 6px 16px; border: 1px solid #e2e2ee; }
+
+.swipe { position: absolute; inset: -2px; z-index: 60; background: linear-gradient(105deg, #4b3cff 0%, #6a5bff 46%, #16c7a3 100%); transform-origin: top left; }
+.swipe::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: #fff; opacity: 0.65; }
+
+.rule { height: 1px; background: var(--line); }
+.light .rule { background: var(--line-dark); }
+.small { font-size: 20px; color: var(--muted); letter-spacing: 0.02em; }
+.light .small { color: #7a7a92; }
+
+.stamp { font-family: "JBM", monospace; font-weight: 600; border: 3px solid currentColor; border-radius: 8px; padding: 10px 16px; letter-spacing: 0.12em; text-transform: uppercase; }
+.cursor { position: absolute; width: 34px; height: 44px; z-index: 50; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3)); }
+
+.logo { display: inline-flex; align-items: center; gap: 16px; }
+.logo svg { display: block; }
+.logo .word { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 46px; letter-spacing: -0.045em; line-height: 1; }
+.logo .word em { font-style: normal; color: var(--mint); }
+.logo .sub { font-family: "Outfit", sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.55; display: block; margin-top: 6px; }
+
+
+#root { background: var(--paper); }
+.head { position: absolute; left: 96px; top: 74px; right: 96px; display: flex; align-items: flex-end; justify-content: space-between; }
+.head .l .slug { margin-bottom: 16px; }
+.head h2 { font-size: 80px; line-height: 1.1; }
+.head h2 span { color: #5b4bff; }
+.head .r { font-family: "BN Sans"; font-size: 21px; line-height: 1.55; color: #5c5b74; width: 420px; text-align: right; padding-bottom: 6px; }
+.head .r b { color: #14141f; }
+
+.cards { position: absolute; left: 96px; right: 96px; top: 292px; display: flex; gap: 24px; }
+.ucard { flex: 1; height: 566px; border-radius: 26px; background: #fff; border: 1px solid #e4e2ee; box-shadow: 0 20px 54px rgba(25,25,60,0.08); padding: 28px 30px; position: relative; overflow: hidden; }
+.ucard .top { display: flex; align-items: center; justify-content: space-between; }
+.ucard .n { font-family: JBM; font-size: 13px; color: #a2a1b6; border: 1px solid #e6e4f0; border-radius: 100px; padding: 5px 10px; }
+.ucard .tag { font-family: Outfit; font-weight: 800; font-size: 11px; letter-spacing: 0.18em; }
+.ucard h3 { margin-top: 20px; font-family: "BN Serif"; font-weight: 700; font-size: 52px; line-height: 1.1; color: #14141f; }
+.ucard .d { margin-top: 10px; font-family: "BN Sans"; font-size: 20px; line-height: 1.55; color: #5c5b74; height: 62px; }
+.mock { position: absolute; left: 30px; right: 30px; bottom: 28px; height: 258px; border-radius: 18px; border: 1px solid #eeedf5; background: #faf9fd; overflow: hidden; }
+.ucard .glow { position: absolute; right: -100px; top: -100px; width: 300px; height: 300px; border-radius: 50%; opacity: 0.12; }
+#u1 .tag { color: #4a3df0; }
+#u1 .glow { background: #5b4bff; }
+#u2 .tag { color: #0f9e82; }
+#u2 .glow { background: #16c7a3; }
+#u3 .tag { color: #d4452f; }
+#u3 .glow { background: #ff6b5a; }
+
+.pod { padding: 18px; }
+.pod .ep { display: flex; justify-content: space-between; font-family: JBM; font-size: 10px; letter-spacing: 0.12em; color: #8b8aa2; }
+.pod .t { margin-top: 12px; font-family: Outfit; font-weight: 700; font-size: 21px; color: #14141f; line-height: 1.25; }
+.pod .who { margin-top: 4px; font-family: "BN Sans"; font-size: 14px; color: #6c6b84; }
+.pod .wave { margin-top: 16px; height: 62px; display: flex; align-items: center; gap: 3px; color: #8b7bff; }
+.pod .wave i { flex: 1; border-radius: 3px; background: currentColor; }
+.pod .bar { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+.pod .bar .p { width: 40px; height: 40px; border-radius: 50%; background: #5b4bff; display: grid; place-items: center; }
+.pod .bar .l { flex: 1; height: 4px; border-radius: 3px; background: #e9e7f3; overflow: hidden; }
+.pod .bar .l i { display: block; height: 100%; width: 62%; background: #5b4bff; }
+.pod .bar .tm { font-family: JBM; font-size: 10px; color: #8b8aa2; }
+
+.phone { position: absolute; left: 50%; transform: translateX(-50%); top: 18px; width: 200px; height: 300px; border-radius: 22px; background: #14141f; padding: 9px; box-shadow: 0 18px 34px rgba(20,20,45,0.25); }
+.phone .scr { height: 100%; border-radius: 15px; background: #f6f5fb; overflow: hidden; position: relative; }
+.phone .scr .hd { height: 50px; background: #16c7a3; display: flex; align-items: center; justify-content: center; font-family: "BN Sans"; font-weight: 600; font-size: 11px; color: #04201a; }
+.phone .bub { margin: 14px 10px 0; border-radius: 10px 10px 10px 2px; background: #fff; border: 1px solid #e6e4f0; padding: 8px 10px; font-family: "BN Sans"; font-size: 11px; color: #3a3950; line-height: 1.45; }
+.phone .bub.me { border-radius: 10px 10px 2px 10px; background: #5b4bff; border-color: #5b4bff; color: #fff; margin-left: 36px; }
+.phone .call { position: absolute; left: 10px; right: 10px; bottom: 10px; height: 34px; border-radius: 9px; background: #16c7a3; display: flex; align-items: center; justify-content: center; gap: 6px; font-family: Outfit; font-weight: 700; font-size: 10px; letter-spacing: 0.08em; color: #04201a; }
+
+.word { position: absolute; left: 22px; right: 22px; top: 24px; border-radius: 14px; background: #fff; border: 1px solid #e6e4f0; padding: 18px; box-shadow: 0 10px 24px rgba(25,25,60,0.06); }
+.word .bn { font-family: "BN Serif"; font-weight: 700; font-size: 44px; color: #14141f; line-height: 1; }
+.word .en { margin-top: 5px; font-family: Outfit; font-weight: 600; font-size: 16px; color: #6c6b84; }
+.word .sp { position: absolute; right: 16px; top: 16px; width: 36px; height: 36px; border-radius: 50%; background: #ffe9e5; display: grid; place-items: center; }
+.pron { position: absolute; left: 22px; right: 22px; bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.pron .p { flex: 1; border-radius: 9px; background: #fff; border: 1px solid #e6e4f0; padding: 9px 12px; font-family: JBM; font-size: 11px; color: #5c5b74; }
+.pron .p.ok { border-color: #16c7a3; color: #0f9e82; background: #effcf9; }
+.pron .p.bad { border-color: #ffc9c2; color: #d4452f; background: #fff4f2; }
+
+.banner { position: absolute; left: 96px; right: 96px; bottom: 78px; height: 92px; border-radius: 18px; background: #14141f; display: flex; align-items: center; justify-content: space-between; padding: 0 34px; opacity: 0; }
+.banner .l { display: flex; align-items: center; gap: 18px; }
+.banner .l .big { font-family: "BN Sans"; font-weight: 800; font-size: 32px; color: #fff; }
+.banner .l .big span { color: #6ff0d3; }
+.banner .r { display: flex; gap: 10px; }
+.banner .r .c { font-family: JBM; font-size: 11px; letter-spacing: 0.12em; color: #d8d7e8; border: 1px solid rgba(255,255,255,0.18); border-radius: 100px; padding: 8px 12px; }
+</style>
+<div id="root" data-composition-id="use" data-width="1920" data-height="1080">
+  <div class="stage light">
+    <div class="grid on-light"></div>
+    <div class="glow g-violet" style="width:800px;height:800px;right:-360px;bottom:-360px;opacity:.18"></div>
+    <div class="swipe" id="swipe"></div>
+
+    <div class="head">
+      <div class="l">
+        <div class="slug" id="slug"><span class="num">14</span> ব্যবহার</div>
+        <h2 class="h2" id="head">কোথায় <span>কাজে লাগবে?</span></h2>
+      </div>
+      <div class="r" id="r">একই কণ্ঠ — <b>কনটেন্ট, অ্যাপ আর শেখা</b> — তিন জায়গাতেই।</div>
+    </div>
+
+    <div class="cards" id="cards">
+      <div class="ucard" id="u1">
+        <div class="glow"></div>
+        <div class="top"><span class="n">01</span><span class="tag">CONTENT</span></div>
+        <h3>কনটেন্ট</h3>
+        <div class="d">পডকাস্ট, ভিডিও ভয়েসওভার, রিলস — এক টেক্সট থেকে পুরো এপিসোড।</div>
+        <div class="mock">
+          <div class="pod">
+            <div class="ep"><span>EPISODE 12</span><span>BENGALI · BN</span></div>
+            <div class="t">ভয়েস দিয়ে গল্প বলা</div>
+            <div class="who">নিউজ রিডার · sonic-3.5</div>
+            <div class="wave" data-wave></div>
+            <div class="bar"><span class="p"><svg width="11" height="13" viewBox="0 0 15 17"><path d="M1 1l13 7.5L1 16V1z" fill="#fff"/></svg></span><span class="l"><i></i></span><span class="tm">0:14 / 0:24</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ucard" id="u2">
+        <div class="glow"></div>
+        <div class="top"><span class="n">02</span><span class="tag">APPS</span></div>
+        <h3>অ্যাপ</h3>
+        <div class="d">IVR, অডিওবুক, নোটিফিকেশন — যেকোনো অ্যাপে বাংলা কণ্ঠ।</div>
+        <div class="mock">
+          <div class="phone"><div class="scr"><div class="hd">স্পিকি সাপোর্ট</div><div class="bub">আপনার অর্ডার কনফার্ম হয়েছে!</div><div class="bub me">ধন্যবাদ! কবে পাব?</div><div class="call"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#04201a" stroke-width="2.4"><path d="M4 5c0 8 7 15 15 15l2-4-5-2-2 2c-3-1-5-3-6-6l2-2-2-5L4 5Z"/></svg>CALL · BN</div></div></div>
+        </div>
+      </div>
+
+      <div class="ucard" id="u3">
+        <div class="glow"></div>
+        <div class="top"><span class="n">03</span><span class="tag">LEARNING</span></div>
+        <h3>শেখা</h3>
+        <div class="d">উচ্চারণ, শব্দভাণ্ডার, ভাষা ড্রিল — নিজের গতিতে শুনুন।</div>
+        <div class="mock">
+          <div class="word"><div class="bn">নমস্কার</div><div class="en">Hello · greeting</div><span class="sp"><svg width="14" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4452f" stroke-width="2"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 10v4" stroke-linecap="round"/></svg></span></div>
+          <div class="pron"><span class="p ok">✓ nomoskar</span><span class="p bad">✗ namaskar</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="banner" id="banner">
+      <div class="l"><span class="big">সবই <span>ফ্রি</span> — চিরকাল।</span></div>
+      <div class="r"><span class="c">৪২ LANGUAGES</span><span class="c">৮০০+ VOICES</span><span class="c">NO SIGNUP</span><span class="c">NO API KEY</span></div>
+    </div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = {"start": 276.403, "dur": 8.93, "b": {"use-1": 0.67, "use-2": 4.514}, "d": {"use-1": 3.474, "use-2": 3.396}};
+
+document.querySelectorAll("[data-wave]").forEach(w => {
+  for (let i = 0; i < 44; i++) {
+    const b = document.createElement("i");
+    b.style.height = (8 + Math.abs(Math.sin(i * 1.29) * Math.cos(i * 0.45)) * 44) + "px";
+    w.appendChild(b);
+  }
+});
+
+tl.fromTo("#swipe", { xPercent: 0 }, { xPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#slug", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.38 }, 0.18);
+tl.fromTo("#head", { opacity: 0, y: 26, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "expo.out" }, 0.3);
+tl.fromTo("#r", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.6);
+tl.fromTo(".ucard", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "expo.out" }, 0.42);
+tl.fromTo("#u1 .wave i", { scaleY: 0.15 }, { scaleY: 1, duration: 0.4, stagger: 0.005, ease: "power2.out" }, 0.95);
+tl.fromTo(".phone", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "expo.out" }, 0.95);
+tl.fromTo(".word", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "expo.out" }, 1.05);
+tl.fromTo(".pron .p", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.1 }, 1.35);
+
+tl.fromTo("#banner", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, T.b["use-2"] + 0.15);
+tl.fromTo("#banner .c", { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 0.3, stagger: 0.06 }, T.b["use-2"] + 0.6);
+tl.to(".ucard", { y: -8, duration: 0.5, stagger: 0.06, ease: "power2.out" }, T.b["use-2"] + 0.2);
+
+window.__timelines["use"] = tl;
+</script>
+</template>

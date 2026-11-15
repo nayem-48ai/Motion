@@ -1,0 +1,151 @@
+<template>
+<style>
+/*__BASE__*/
+#root { background: var(--paper); }
+.head { position: absolute; left: 96px; top: 74px; right: 96px; display: flex; align-items: flex-end; justify-content: space-between; }
+.head .l .kicker { margin-bottom: 16px; }
+.head h2 { font-size: 84px; line-height: 1.1; }
+.head h2 span { color: #5b4bff; }
+.head .r { text-align: right; font-family: "BN Sans"; font-size: 21px; line-height: 1.55; color: #5c5b74; width: 430px; padding-bottom: 4px; }
+.head .r b { color: #14141f; }
+
+.cards { position: absolute; left: 96px; right: 96px; top: 274px; display: flex; gap: 24px; }
+.ecard { position: relative; flex: 1; height: 606px; border-radius: 28px; background: #fff; border: 1px solid #e4e2ee; box-shadow: 0 20px 54px rgba(25,25,60,0.08); padding: 30px 32px; overflow: hidden; }
+.ecard .wash { position: absolute; right: -90px; top: -90px; width: 340px; height: 340px; border-radius: 50%; opacity: 0.1; }
+.ecard .top { position: relative; display: flex; align-items: center; justify-content: space-between; }
+.ecard .emoji { width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; }
+.ecard .emoji svg { width: 48px; height: 48px; }
+.ecard .tag { text-align: right; }
+.ecard .tag .e { font-family: Outfit; font-weight: 800; font-size: 13px; letter-spacing: 0.2em; }
+.ecard .tag .b { font-family: "BN Sans"; font-weight: 700; font-size: 25px; color: #14141f; margin-top: 3px; }
+.ecard .ava { position: relative; margin-top: 30px; display: flex; align-items: center; gap: 14px; }
+.ecard .ava .p { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(140deg, #16c7a3, #0a9c7e); display: grid; place-items: center; font-family: "BN Serif"; font-weight: 900; font-size: 23px; color: #fff; }
+.ecard .ava .n { font-family: Outfit; font-weight: 700; font-size: 18px; color: #14141f; }
+.ecard .ava .rr { font-family: Outfit; font-weight: 600; font-size: 11px; letter-spacing: 0.14em; color: #8b8aa2; margin-top: 2px; }
+.ecard .quote { position: relative; margin-top: 24px; font-family: "BN Sans"; font-size: 29px; line-height: 1.55; color: #1b1b2a; height: 138px; }
+.ecard .quote b { font-weight: 700; }
+.ecard .wave { position: relative; height: 88px; display: flex; align-items: center; gap: 4px; color: #5b4bff; margin-top: 8px; }
+.ecard .wave i { flex: 1; border-radius: 3px; background: currentColor; min-width: 3px; }
+.ecard .bottom { position: absolute; left: 32px; right: 32px; bottom: 24px; display: flex; align-items: center; justify-content: space-between; }
+.ecard .play { display: flex; align-items: center; gap: 12px; }
+.ecard .play .b { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; }
+.ecard .play .t { font-family: Outfit; font-weight: 700; font-size: 13px; letter-spacing: 0.14em; color: #3a3950; }
+.ecard .meta { font-family: JBM; font-size: 12px; color: #a2a1b6; text-align: right; line-height: 1.5; }
+.ecard .prog { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; transform: scaleX(0); transform-origin: left; }
+#e-happy .wash { background: #ffb020; }
+#e-happy .emoji { background: #fff4dd; }
+#e-happy .tag .e { color: #b87a00; }
+#e-happy .wave { color: #f0a400; }
+#e-happy .play .b { background: #ffb020; }
+#e-happy .prog { background: #ffb020; }
+#e-sad .wash { background: #4a7dff; }
+#e-sad .emoji { background: #e9efff; }
+#e-sad .tag .e { color: #2f57c9; }
+#e-sad .wave { color: #4a7dff; }
+#e-sad .play .b { background: #4a7dff; }
+#e-sad .prog { background: #4a7dff; }
+#e-angry .wash { background: #ff5a4a; }
+#e-angry .emoji { background: #ffe9e5; }
+#e-angry .tag .e { color: #c92f1e; }
+#e-angry .wave { color: #ff5a4a; }
+#e-angry .play .b { background: #ff5a4a; }
+#e-angry .prog { background: #ff5a4a; }
+
+.foot { position: absolute; left: 96px; right: 96px; bottom: 82px; display: flex; align-items: center; justify-content: space-between; font-family: JBM; font-size: 13px; letter-spacing: 0.14em; color: #8b8aa2; }
+.foot b { color: #3a3950; font-weight: 600; }
+</style>
+<div id="root" data-composition-id="emotions" data-width="1920" data-height="1080">
+  <div class="stage light">
+    <div class="grid on-light"></div>
+    <div class="glow g-violet" style="width:800px;height:800px;right:-340px;top:-360px;opacity:.2"></div>
+    <div class="swipe" id="swipe"></div>
+
+    <div class="head">
+      <div class="l">
+        <div class="kicker on-light" id="kicker"><span class="dot"></span>SAME VOICE · 3 EMOTIONS</div>
+        <h2 class="h2" id="head">একই ভয়েস। <span>তিনটি অনুভূতি।</span></h2>
+      </div>
+      <div class="r" id="r">একই পূজা, একই মডেল — শুধু <b>ইমোশন</b> বদলেছে।</div>
+    </div>
+
+    <div class="cards" id="cards">
+      <div class="ecard" id="e-happy">
+        <div class="wash"></div>
+        <div class="top">
+          <div class="emoji"><svg viewBox="0 0 48 48" fill="none" stroke="#b87a00" stroke-width="2.6" stroke-linecap="round"><circle cx="24" cy="24" r="20"/><path d="M15 20.5h.01M33 20.5h.01" stroke-width="4"/><path d="M14 29c2.6 4.4 6.1 6.6 10 6.6S31.4 33.4 34 29"/></svg></div>
+          <div class="tag"><div class="e" style="color:#b87a00">HAPPY</div><div class="b">আনন্দ</div></div>
+        </div>
+        <div class="ava"><span class="p">পূ</span><div><div class="n">Pooja</div><div class="rr">EVERYDAY ASSISTANT · BN</div></div></div>
+        <div class="quote">“<b>এটা দারুণ খবর!</b> আজ নতুন কিছু শিখব।”</div>
+        <div class="wave" data-wave></div>
+        <div class="bottom"><div class="play"><span class="b"><svg width="16" height="18" viewBox="0 0 15 17"><path d="M1 1l13 7.5L1 16V1z" fill="#fff"/></svg></span><span class="t">PLAY</span></div><div class="meta">0:03<br>SONIC 3.5</div></div>
+        <div class="prog"></div>
+      </div>
+
+      <div class="ecard" id="e-sad">
+        <div class="wash"></div>
+        <div class="top">
+          <div class="emoji"><svg viewBox="0 0 48 48" fill="none" stroke="#2f57c9" stroke-width="2.6" stroke-linecap="round"><circle cx="24" cy="24" r="20"/><path d="M15 20h.01M33 20h.01" stroke-width="4"/><path d="M15 33c2.4-3.8 5.7-5.7 9-5.7s6.6 1.9 9 5.7"/><path d="M35 25c1.6 2.4 2.4 4 2.4 5.2a2.4 2.4 0 0 1-4.8 0c0-1.2.8-2.8 2.4-5.2Z" fill="#4a7dff" stroke="none"/></svg></div>
+          <div class="tag"><div class="e" style="color:#2f57c9">SAD</div><div class="b">বিষণ্ণ</div></div>
+        </div>
+        <div class="ava"><span class="p">পূ</span><div><div class="n">Pooja</div><div class="rr">EVERYDAY ASSISTANT · BN</div></div></div>
+        <div class="quote">“আজ আকাশটা খুব <b>বিষণ্ণ</b>। মনটা ভালো নেই।”</div>
+        <div class="wave" data-wave></div>
+        <div class="bottom"><div class="play"><span class="b"><svg width="16" height="18" viewBox="0 0 15 17"><path d="M1 1l13 7.5L1 16V1z" fill="#fff"/></svg></span><span class="t">PLAY</span></div><div class="meta">0:04<br>SONIC 3.5</div></div>
+        <div class="prog"></div>
+      </div>
+
+      <div class="ecard" id="e-angry">
+        <div class="wash"></div>
+        <div class="top">
+          <div class="emoji"><svg viewBox="0 0 48 48" fill="none" stroke="#c92f1e" stroke-width="2.6" stroke-linecap="round"><circle cx="24" cy="24" r="20"/><path d="M13 16l7 3M35 16l-7 3"/><path d="M16 21h.01M32 21h.01" stroke-width="4"/><path d="M15 34c2.4-4 5.7-6 9-6s6.6 2 9 6"/></svg></div>
+          <div class="tag"><div class="e" style="color:#c92f1e">ANGRY</div><div class="b">রাগ</div></div>
+        </div>
+        <div class="ava"><span class="p">পূ</span><div><div class="n">Pooja</div><div class="rr">EVERYDAY ASSISTANT · BN</div></div></div>
+        <div class="quote">“<b>এটা আর চলবে না!</b> আমাকে সঠিক উত্তর চাই।”</div>
+        <div class="wave" data-wave></div>
+        <div class="bottom"><div class="play"><span class="b"><svg width="16" height="18" viewBox="0 0 15 17"><path d="M1 1l13 7.5L1 16V1z" fill="#fff"/></svg></span><span class="t">PLAY</span></div><div class="meta">0:03<br>SONIC 3.5</div></div>
+        <div class="prog"></div>
+      </div>
+    </div>
+
+    <div class="foot" id="foot"><span><b>POOJA · EVERYDAY ASSISTANT</b> — এক ভয়েস, ৫৮টি ইমোশন</span><span>EMOTION: HAPPY · SAD · ANGRY</span></div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = /*__TIMING__*/;
+
+document.querySelectorAll("[data-wave]").forEach((w, k) => {
+  for (let i = 0; i < 42; i++) {
+    const b = document.createElement("i");
+    b.style.height = (12 + Math.abs(Math.sin(i * 1.33 + k) * Math.cos(i * 0.45)) * 62) + "px";
+    w.appendChild(b);
+  }
+});
+
+tl.fromTo("#swipe", { xPercent: 0 }, { xPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#kicker", { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.4 }, 0.18);
+tl.fromTo("#head", { opacity: 0, y: 26, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.6, ease: "expo.out" }, 0.3);
+tl.fromTo("#r", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0.6);
+tl.fromTo(".ecard", { opacity: 0, y: 44 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "expo.out" }, 0.42);
+tl.fromTo(".ecard .wave i", { scaleY: 0.15 }, { scaleY: 1, duration: 0.45, stagger: 0.005, ease: "power2.out" }, 0.95);
+tl.fromTo("#foot", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 1.4);
+
+function play(card, start, dur) {
+  tl.to(".ecard", { y: 0, scale: 0.975, opacity: 0.55, duration: 0.32, ease: "power2.out" }, start - 0.12);
+  tl.to(card, { y: -14, scale: 1.01, opacity: 1, duration: 0.32, ease: "power2.out" }, start - 0.12);
+  tl.fromTo(card + " .wave i", { scaleY: 0.25 }, { scaleY: 1, duration: 0.17, stagger: { each: 0.016, yoyo: true, repeat: 8 }, ease: "sine.inOut" }, start);
+  tl.fromTo(card + " .prog", { scaleX: 0 }, { scaleX: 1, duration: dur * 0.94, ease: "none" }, start);
+  tl.to(card + " .play .b", { scale: 1.09, duration: 0.18, yoyo: true, repeat: 1, ease: "sine.inOut" }, start);
+  tl.set(card + " .play .t", { textContent: "PLAYING" }, start);
+  tl.set(card + " .play .t", { textContent: "PLAYED", color: "#8b8aa2" }, start + dur);
+  tl.to(card + " .prog", { opacity: 0.3, duration: 0.2 }, start + dur);
+}
+play("#e-happy", T.b["emo-happy"], T.d["emo-happy"]);
+play("#e-sad", T.b["emo-sad"], T.d["emo-sad"]);
+play("#e-angry", T.b["emo-angry"], T.d["emo-angry"]);
+
+window.__timelines["emotions"] = tl;
+</script>
+</template>

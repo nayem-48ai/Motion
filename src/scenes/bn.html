@@ -1,0 +1,125 @@
+<template>
+<style>
+/*__BASE__*/
+#root { background: var(--paper); }
+.head { position: absolute; left: 96px; top: 74px; right: 96px; display: flex; align-items: flex-end; justify-content: space-between; }
+.head .l { display: flex; align-items: center; gap: 26px; }
+.head h2 { font-size: 92px; line-height: 1; }
+.head .pill { background: #ebe9ff; color: #4a3df0; border: 1px solid #d3ceff; font-family: "BN Sans"; font-weight: 700; font-size: 20px; padding: 10px 18px; }
+.head .r { text-align: right; font-family: Outfit; font-weight: 700; font-size: 14px; letter-spacing: 0.2em; color: #8b8aa2; }
+.head .r b { display: block; color: #1a1a2a; font-size: 20px; letter-spacing: 0.1em; margin-top: 3px; }
+.cards { position: absolute; left: 96px; right: 96px; top: 244px; display: flex; gap: 24px; }
+.vcard { width: 544px; height: 610px; border-radius: 28px; background: #fff; border: 1px solid #e4e2ee; box-shadow: 0 20px 50px rgba(25,25,60,0.08); padding: 30px 32px; position: relative; overflow: hidden; }
+.vcard .top { display: flex; align-items: center; justify-content: space-between; }
+.vcard .role { font-family: Outfit; font-weight: 700; font-size: 13px; letter-spacing: 0.18em; color: #8b8aa2; }
+.vcard .g { font-family: Outfit; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: #6c6b84; border: 1px solid #e2e0ec; border-radius: 100px; padding: 5px 10px; }
+.vcard .ava { width: 118px; height: 118px; border-radius: 50%; margin-top: 24px; display: grid; place-items: center; font-family: "BN Serif"; font-weight: 900; font-size: 54px; color: #fff; }
+.vcard .nm { margin-top: 18px; font-family: "BN Serif"; font-weight: 700; font-size: 58px; line-height: 1.1; }
+.vcard .rl { margin-top: 4px; font-family: "BN Sans"; font-weight: 500; font-size: 22px; color: #5c5b74; }
+.vcard .quote { margin-top: 18px; font-family: "BN Sans"; font-size: 23px; line-height: 1.55; color: #3a3950; height: 72px; }
+.vcard .wave { height: 74px; display: flex; align-items: center; gap: 4px; margin-top: 14px; }
+.vcard .wave i { flex: 1; border-radius: 4px; min-width: 3px; }
+.vcard .bottom { position: absolute; left: 32px; right: 32px; bottom: 26px; display: flex; align-items: center; justify-content: space-between; }
+.vcard .play { display: flex; align-items: center; gap: 12px; font-family: Outfit; font-weight: 700; font-size: 15px; letter-spacing: 0.12em; }
+.vcard .play .btn { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; }
+.vcard .id { font-family: JBM; font-size: 12px; color: #a2a1b6; }
+.vcard .prog { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; transform: scaleX(0); transform-origin: left; }
+.ribbon { position: absolute; right: -46px; top: 26px; background: #ff6b5a; color: #fff; font-family: "BN Sans"; font-weight: 700; font-size: 15px; padding: 7px 54px; transform: rotate(38deg); }
+#card-pooja .ava { background: linear-gradient(140deg, #16c7a3, #0a9c7e); }
+#card-pooja .wave i { background: #16c7a3; }
+#card-pooja .play .btn { background: #16c7a3; }
+#card-pooja .prog { background: #16c7a3; }
+#card-rubel .ava { background: linear-gradient(140deg, #6a5bff, #4432e0); }
+#card-rubel .wave i { background: #5b4bff; }
+#card-rubel .play .btn { background: #5b4bff; }
+#card-rubel .prog { background: #5b4bff; }
+#card-news .ava { background: linear-gradient(140deg, #ff8a6a, #e0442f); }
+#card-news .wave i { background: #ff6b5a; }
+#card-news .play .btn { background: #ff6b5a; }
+#card-news .prog { background: #ff6b5a; }
+</style>
+<div id="root" data-composition-id="bn" data-width="1920" data-height="1080">
+  <div class="stage light">
+    <div class="grid on-light"></div>
+    <div class="glow g-violet" style="width:800px;height:800px;right:-320px;top:-340px;opacity:.2"></div>
+    <div class="swipe" id="swipe"></div>
+
+    <div class="head">
+      <div class="l"><h2 class="h2" id="head">বাংলা</h2><span class="pill" id="pill">১১টি কিউরেটেড ভয়েস</span></div>
+      <div class="r">VOICE PREVIEW<b>BENGALI · BN</b></div>
+    </div>
+
+    <div class="cards" id="cards">
+      <div class="vcard" id="card-pooja">
+        <div class="top"><span class="role">EVERYDAY ASSISTANT</span><span class="g">FEMALE</span></div>
+        <div class="ava">পূ</div>
+        <div class="nm">পূজা</div>
+        <div class="rl">এভারিডে অ্যাসিস্ট্যান্ট</div>
+        <div class="quote">“হ্যালো! আমি পূজা — আপনার প্রতিদিনের সহকারী।”</div>
+        <div class="wave" data-wave></div>
+        <div class="bottom"><div class="play"><span class="btn"><svg width="15" height="17" viewBox="0 0 15 17"><path d="M1 1l13 7.5L1 16V1z" fill="#fff"/></svg></span><span data-state>PREVIEW</span></div><span class="id">59ba7dee…</span></div>
+        <div class="prog"></div>
+      </div>
+
+      <div class="vcard" id="card-rubel">
+        <div class="top"><span class="role">CITY GUIDE</span><span class="g">MALE</span></div>
+        <div class="ava">রু</div>
+        <div class="nm">রুবেল</div>
+        <div class="rl">সিটি গাইড</div>
+        <div class="quote">“আমি রুবেল। চলুন, শহরটা ঘুরে দেখি!”</div>
+        <div class="wave" data-wave></div>
+        <div class="bottom"><div class="play"><span class="btn"><svg width="15" height="17" viewBox="0 0 15 17"><path d="M1 1l13 7.5L1 16V1z" fill="#fff"/></svg></span><span data-state>PREVIEW</span></div><span class="id">2ba861ea…</span></div>
+        <div class="prog"></div>
+      </div>
+
+      <div class="vcard" id="card-news">
+        <div class="ribbon">এই ভিডিওর কণ্ঠ</div>
+        <div class="top"><span class="role">NEWS READER</span><span class="g">MALE</span></div>
+        <div class="ava">নি</div>
+        <div class="nm">নিউজ রিডার</div>
+        <div class="rl">সংবাদ পাঠক</div>
+        <div class="quote">“স্পিকি থেকে সরাসরি — বাংলা সংবাদ।”</div>
+        <div class="wave" data-wave></div>
+        <div class="bottom"><div class="play"><span class="btn"><svg width="15" height="17" viewBox="0 0 15 17"><path d="M1 1l13 7.5L1 16V1z" fill="#fff"/></svg></span><span data-state>PREVIEW</span></div><span class="id">ec514ae6…</span></div>
+        <div class="prog"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = /*__TIMING__*/;
+
+document.querySelectorAll("[data-wave]").forEach(w => {
+  for (let i = 0; i < 34; i++) {
+    const b = document.createElement("i");
+    b.style.height = (18 + Math.abs(Math.sin(i * 1.31) * Math.cos(i * 0.47)) * 52) + "%";
+    w.appendChild(b);
+  }
+});
+
+tl.fromTo("#swipe", { xPercent: 0 }, { xPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#head", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.2);
+tl.fromTo("#pill", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 0.5);
+tl.fromTo(".vcard", { opacity: 0, y: 46 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "expo.out" }, 0.45);
+tl.fromTo(".vcard", { scale: 1 }, { scale: 0.97, opacity: 0.55, duration: 0.45, ease: "power2.out" }, 0.5);
+tl.fromTo("#card-pooja", { y: 0, scale: 0.97 }, { y: -14, scale: 1.015, opacity: 1, duration: 0.45, ease: "power3.out" }, T.b["bn-1"] + 0.15);
+tl.fromTo("#card-pooja [data-state]", { opacity: 0 }, { opacity: 1, duration: 0.2 }, T.b["bn-1"] + 0.4);
+
+function activate(card, demoStart, demoDur, dimId) {
+  tl.to([dimId], { y: 0, scale: 0.97, opacity: 0.55, duration: 0.35, ease: "power2.out" }, demoStart - 0.1);
+  tl.to(card, { y: -14, scale: 1.015, opacity: 1, duration: 0.35, ease: "power3.out" }, demoStart - 0.1);
+  tl.to(card + " [data-state]", { opacity: 0, duration: 0.12 }, demoStart - 0.05);
+  tl.fromTo(card + " [data-state]", { opacity: 0 }, { opacity: 1, duration: 0.2 }, demoStart + 0.05);
+  tl.set(card + " [data-state]", { textContent: "PLAYING" }, demoStart);
+  tl.fromTo(card + " [data-wave] i", { scaleY: 0.25 }, { scaleY: 1, duration: 0.22, stagger: { each: 0.018, yoyo: true, repeat: 5 }, ease: "sine.inOut" }, demoStart);
+  tl.fromTo(card + " .prog", { scaleX: 0 }, { scaleX: 1, duration: demoDur * 0.92, ease: "none" }, demoStart);
+}
+
+activate("#card-pooja", T.b["demo-pooja"], T.d["demo-pooja"], "#card-rubel, #card-news");
+activate("#card-rubel", T.b["demo-rubel"], T.d["demo-rubel"], "#card-pooja, #card-news");
+activate("#card-news", T.b["demo-news"], T.d["demo-news"], "#card-pooja, #card-rubel");
+
+window.__timelines["bn"] = tl;
+</script>
+</template>

@@ -1,0 +1,162 @@
+<template>
+<style>
+/*__BASE__*/
+#root { background: #08080f; }
+.head { position: absolute; left: 96px; top: 82px; right: 96px; display: flex; align-items: flex-end; justify-content: space-between; }
+.head .l .slug { margin-bottom: 18px; }
+.head h2 { font-size: 78px; line-height: 1.12; }
+.head h2 span { color: #6ff0d3; }
+.head .r { display: flex; align-items: center; gap: 12px; padding-bottom: 8px; }
+.head .r .ep { font-family: JBM; font-size: 14px; letter-spacing: 0.08em; color: #b7adff; background: rgba(91,75,255,0.14); border: 1px solid rgba(139,123,255,0.35); border-radius: 8px; padding: 10px 14px; }
+.head .r .no { font-family: JBM; font-size: 11px; letter-spacing: 0.14em; color: #6d6c88; }
+
+.win { position: absolute; left: 96px; top: 282px; width: 1010px; height: 620px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.12); background: #0c0c17; overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,0.5); }
+.win .bar { height: 50px; background: #141422; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 7px; padding: 0 18px; }
+.win .bar .d { width: 10px; height: 10px; border-radius: 50%; background: #2e2e44; }
+.win .bar .f { margin-left: 14px; font-family: JBM; font-size: 12px; color: #82819b; }
+.win .bar .c { margin-left: auto; font-family: JBM; font-size: 11px; color: #5f5e78; letter-spacing: 0.08em; }
+.code { padding: 22px 0; font-family: JBM; font-size: 16.5px; line-height: 1.9; }
+.code .ln { display: flex; opacity: 0; }
+.code .n { width: 54px; flex: 0 0 auto; text-align: right; padding-right: 18px; color: #33324a; font-size: 13px; }
+.code .c { white-space: pre; color: #c9c8d8; }
+.k { color: #8b7bff; }
+.s { color: #ffc24b; }
+.nm2 { color: #6ff0d3; }
+.cm { color: #4e4d67; }
+.fl { color: #ff8a7c; }
+.dollar { color: #16c7a3; }
+.win .foot { position: absolute; left: 18px; right: 18px; bottom: 12px; display: flex; justify-content: space-between; font-family: JBM; font-size: 11px; letter-spacing: 0.1em; color: #5f5e78; }
+
+.fields { position: absolute; left: 96px; bottom: 96px; display: flex; gap: 9px; }
+.fields .f { font-family: JBM; font-size: 12px; color: #8b8aa2; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.03); border-radius: 7px; padding: 8px 12px; letter-spacing: 0.06em; }
+.fields .f b { color: #6ff0d3; font-weight: 600; }
+
+.arrow { position: absolute; left: 1110px; top: 560px; width: 24px; display: flex; flex-direction: column; align-items: center; gap: 6px; color: #5b4bff; }
+.arrow .t { writing-mode: vertical-rl; font-family: JBM; font-size: 10px; letter-spacing: 0.18em; color: #6d6c88; }
+
+.resp { position: absolute; left: 1140px; top: 282px; width: 684px; height: 620px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.035); padding: 24px; overflow: hidden; }
+.resp .top { display: flex; align-items: center; justify-content: space-between; }
+.resp .lab { font-family: Outfit; font-weight: 800; font-size: 12px; letter-spacing: 0.2em; color: #8b8aa2; }
+.resp .status { font-family: JBM; font-size: 12px; color: #6ff0d3; background: rgba(22,199,163,0.12); border: 1px solid rgba(22,199,163,0.35); border-radius: 6px; padding: 6px 10px; letter-spacing: 0.08em; }
+.resp .headers { margin-top: 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.18); padding: 14px 16px; font-family: JBM; font-size: 12px; line-height: 2; color: #82819b; }
+.resp .headers b { color: #c9c8d8; font-weight: 500; }
+.resp .headers .ok { color: #6ff0d3; }
+
+.filecard { position: absolute; left: 24px; right: 24px; bottom: 26px; height: 300px; border-radius: 16px; background: #101020; border: 1px solid rgba(255,255,255,0.12); padding: 20px; opacity: 0; }
+.filecard .file { display: flex; align-items: center; gap: 13px; }
+.filecard .file .ic { width: 48px; height: 48px; border-radius: 11px; background: #16c7a3; display: grid; place-items: center; font-family: JBM; font-weight: 600; font-size: 12px; color: #04201a; }
+.filecard .file .n { font-family: Outfit; font-weight: 700; font-size: 20px; color: #fff; }
+.filecard .file .m { font-family: JBM; font-size: 11px; color: #82819b; margin-top: 3px; letter-spacing: 0.08em; }
+.filecard .wave { height: 96px; margin-top: 18px; display: flex; align-items: center; gap: 3px; color: #16c7a3; }
+.filecard .wave i { flex: 1; border-radius: 3px; background: currentColor; }
+.filecard .row { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
+.filecard .play { width: 50px; height: 50px; border-radius: 50%; background: #16c7a3; display: grid; place-items: center; }
+.filecard .time { font-family: JBM; font-size: 12px; color: #82819b; }
+.filecard .dl { display: flex; align-items: center; gap: 8px; background: #fff; color: #0a0a14; font-family: Outfit; font-weight: 800; font-size: 12px; letter-spacing: 0.08em; padding: 12px 14px; border-radius: 8px; }
+.waiting { position: absolute; left: 24px; right: 24px; bottom: 26px; height: 300px; border-radius: 16px; border: 2px dashed rgba(255,255,255,0.12); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: #5f5e78; }
+.waiting .t { font-family: "BN Sans"; font-size: 17px; }
+.waiting .e { font-family: JBM; font-size: 10px; letter-spacing: 0.16em; }
+.spinner { width: 52px; height: 52px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.1); border-top-color: #5b4bff; }
+</style>
+<div id="root" data-composition-id="api" data-width="1920" data-height="1080">
+  <div class="stage dark">
+    <div class="grid"></div>
+    <div class="glow g-violet" style="width:900px;height:900px;left:-360px;top:-380px"></div>
+    <div class="glow g-mint" style="width:800px;height:800px;right:-340px;bottom:-400px"></div>
+    <div class="swipe" id="swipe"></div>
+
+    <div class="head">
+      <div class="l">
+        <div class="slug" id="slug"><span class="num">10</span> ডেভেলপার API</div>
+        <h2 class="h2" id="head">একটি POST। <span>MP3 ফিরে আসে।</span></h2>
+      </div>
+      <div class="r"><span class="ep">POST /api/tts</span><span class="no">NO API KEY</span></div>
+    </div>
+
+    <div class="win" id="win">
+      <div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="f">request.sh</span><span class="c">BASH</span></div>
+      <div class="code" id="code">
+        <div class="ln"><span class="n">1</span><span class="c"><span class="dollar">$</span> curl -X POST https://speakee.tnxbd.top/api/tts \</span></div>
+        <div class="ln"><span class="n">2</span><span class="c">    -H <span class="s">"Content-Type: application/json"</span> \</span></div>
+        <div class="ln"><span class="n">3</span><span class="c">    -d <span class="s">'{</span></span></div>
+        <div class="ln"><span class="n">4</span><span class="c"><span class="s">      "text":</span> <span class="s">"স্পিকিতে স্বাগতম!"</span><span class="s">,</span></span></div>
+        <div class="ln"><span class="n">5</span><span class="c"><span class="s">      "language":</span> <span class="s">"bn"</span><span class="s">,</span></span></div>
+        <div class="ln"><span class="n">6</span><span class="c"><span class="s">      "model":</span> <span class="s">"sonic-3.5"</span><span class="s">,</span></span></div>
+        <div class="ln"><span class="n">7</span><span class="c"><span class="s">      "voice_id":</span> <span class="s">"ec514ae6-7f63-4b38-b758-fa72b4542136"</span><span class="s">,</span></span></div>
+        <div class="ln"><span class="n">8</span><span class="c"><span class="s">      "emotion":</span> <span class="s">"confident"</span><span class="s">,</span> <span class="s">"speed":</span> <span class="fl">1.05</span></span></div>
+        <div class="ln"><span class="n">9</span><span class="c"><span class="s">    }'</span> --output <span class="nm2">speech.mp3</span></span></div>
+      </div>
+      <div class="foot"><span>SPEAKEE API · v1</span><span id="codefoot">READY</span></div>
+    </div>
+
+    <div class="fields" id="fields">
+      <span class="f" data-f="lang">ভাষা <b>bn</b></span>
+      <span class="f" data-f="model">মডেল <b>sonic-3.5</b></span>
+      <span class="f" data-f="voice">ভয়েস <b>ec514ae6</b></span>
+      <span class="f" data-f="text">টেক্সট <b>বাংলা</b></span>
+    </div>
+
+    <div class="arrow" id="arrow">
+      <svg width="22" height="70" viewBox="0 0 22 70" fill="none" stroke="#5b4bff" stroke-width="2"><path d="M2 4h18v52M11 62l9-9M11 62l-9-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="t">RESPONSE</span>
+    </div>
+
+    <div class="resp" id="resp">
+      <div class="top"><span class="lab">RESPONSE</span><span class="status" id="status">● 200 OK</span></div>
+      <div class="headers">
+        <div><b>content-type:</b> <span class="ok">audio/mpeg</span></div>
+        <div><b>content-length:</b> 172032</div>
+        <div><b>x-generation-time:</b> 1.42s</div>
+      </div>
+      <div class="waiting" id="waiting"><div class="spinner" id="spin"></div><div class="t">অডিও আসছে…</div><div class="e">AWAITING RESPONSE</div></div>
+      <div class="filecard" id="filecard">
+        <div class="file"><span class="ic">MP3</span><div><div class="n">speech.mp3</div><div class="m">0:07 · 48kHz · 168 KB</div></div></div>
+        <div class="wave" data-wave></div>
+        <div class="row"><div style="display:flex;align-items:center;gap:12px"><span class="play"><svg width="15" height="17" viewBox="0 0 15 17"><path d="M1 1l13 7.5L1 16V1z" fill="#04201a"/></svg></span><span class="time">0:00 / 0:07</span></div><span class="dl"><svg width="13" height="14" viewBox="0 0 24 24" fill="none" stroke="#0a0a14" stroke-width="2.4" stroke-linecap="round"><path d="M12 3v12M6 11l6 6 6-6M4 21h16"/></svg>DOWNLOAD</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = /*__TIMING__*/;
+
+document.querySelectorAll("[data-wave]").forEach(w => {
+  for (let i = 0; i < 56; i++) {
+    const b = document.createElement("i");
+    b.style.height = (10 + Math.abs(Math.sin(i * 1.21) * Math.cos(i * 0.43)) * 62) + "px";
+    w.appendChild(b);
+  }
+});
+
+tl.fromTo("#swipe", { yPercent: 0 }, { yPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#slug", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.38 }, 0.18);
+tl.fromTo("#head", { opacity: 0, y: 26, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "expo.out" }, 0.3);
+tl.fromTo("#win", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.55, ease: "expo.out" }, 0.4);
+tl.fromTo("#resp", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.55, ease: "expo.out" }, 0.5);
+tl.fromTo("#arrow", { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.4 }, 0.8);
+tl.fromTo(".fields .f", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.07 }, 0.9);
+
+// code lines type in
+tl.to(".code .ln", { opacity: 1, duration: 0.01, stagger: 0.22, ease: "none" }, T.b["api-1"] + 0.6);
+tl.set("#codefoot", { textContent: "WRITING…", color: "#ffc24b" }, T.b["api-1"] + 0.65);
+tl.set("#codefoot", { textContent: "REQUEST SENT", color: "#6ff0d3" }, T.b["api-2"] + 2.2);
+
+// highlight fields as they are narrated
+const fdefs = [["lang", 0.55], ["model", 1.4], ["voice", 2.3], ["text", 3.3]];
+fdefs.forEach(([f, t]) => {
+  tl.to(`[data-f="${f}"]`, { borderColor: "#8b7bff", backgroundColor: "rgba(91,75,255,0.16)", color: "#fff", duration: 0.3 }, T.b["api-2"] + t);
+  tl.to(`[data-f="${f}"]`, { borderColor: "rgba(255,255,255,0.12)", backgroundColor: "rgba(255,255,255,0.03)", color: "#8b8aa2", duration: 0.35 }, T.b["api-2"] + t + 0.75);
+});
+
+// response
+const r = T.b["api-3"] - 0.1;
+tl.set("#status", { textContent: "● 200 OK", color: "#6ff0d3" }, r);
+tl.to("#waiting", { opacity: 0, duration: 0.25 }, r + 0.15);
+tl.fromTo("#filecard", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, r + 0.25);
+tl.fromTo("#filecard .wave i", { scaleY: 0.12 }, { scaleY: 1, duration: 0.4, stagger: 0.006, ease: "power2.out" }, r + 0.3);
+tl.fromTo("#arrow svg", { opacity: 0.35 }, { opacity: 1, duration: 0.5 }, r + 0.2);
+
+window.__timelines["api"] = tl;
+</script>
+</template>

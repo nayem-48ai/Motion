@@ -1,0 +1,108 @@
+name: Render HyperFrames Video
+
+on:
+  workflow_dispatch:
+    inputs:
+      quality:
+        description: 'Render quality'
+        type: choice
+        options: ['looks', 'fast', 'lossless']
+        default: 'looks'
+      output_name:
+        description: 'Output filename'
+        type: string
+        default: 'speakee-feature-tour.mp4'
+
+jobs:
+  render:
+    name: Render Video
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      HYPERFRAMES_BROWSER_PATH: /usr/bin/google-chrome-stable
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            ffmpeg \
+            google-chrome-stable \
+            fonts-noto-serif-bengali \
+            fonts-noto-sans-bengali \
+            fonts-hind-siliguri \
+            libnss3 \
+            libatk1.0-0 \
+            libatk-bridge2.0-0 \
+            libcups2 \
+            libdrm2 \
+            libxkbcommon0 \
+            libxcomposite1 \
+            libxdamage1 \
+            libxfixes3 \
+            libxrandr2 \
+            libgbm1 \
+            libasound2
+
+      - name: Install HyperFrames CLI
+        run: |
+          npm ci
+          npx hyperframes --version
+
+      - name: Verify project structure
+        run: |
+          ls -la
+          npx hyperframes lint --json || true
+
+      - name: Render video
+        run: |
+          npx hyperframes render --quality ${{ github.event.inputs.quality }} -o ${{ github.event.inputs.output_name }}
+
+      - name: Verify output
+        run: |
+          ls -la ${{ github.event.inputs.output_name }}
+          ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 ${{ github.event.inputs.output_name }}
+
+      - name: Upload video artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rendered-video
+          path: ${{ github.event.inputs.output_name }}
+          retention-days: 30
+          compression-level: 0
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: render-logs
+          path: |
+            .hyperframes/artifacts/checks/*.json
+            .hyperframes/video-state.json
+          retention-days: 7
+
+  download:
+    name: Provide Download Link
+    needs: render
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: rendered-video
+          path: ./download
+
+      - name: Show file info
+        run: |
+          ls -la ./download/
+          echo "Video ready for download from workflow artifacts"

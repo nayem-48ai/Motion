@@ -1,0 +1,429 @@
+{
+  "scenes": [
+    {
+      "id": "open",
+      "lead": 2.0,
+      "tail": 2.2,
+      "items": [
+        {
+          "id": "open-1",
+          "pre": 0,
+          "post": 0
+        }
+      ]
+    },
+    {
+      "id": "what",
+      "lead": 0.5,
+      "tail": 0.6,
+      "items": [
+        {
+          "id": "what-1",
+          "pre": 0,
+          "post": 0.25
+        },
+        {
+          "id": "what-2"
+        }
+      ]
+    },
+    {
+      "id": "agenda",
+      "lead": 0.5,
+      "tail": 0.8,
+      "items": [
+        {
+          "id": "agenda-1"
+        }
+      ]
+    },
+    {
+      "id": "library",
+      "lead": 0.55,
+      "tail": 0.6,
+      "items": [
+        {
+          "id": "lib-1",
+          "post": 0.25
+        },
+        {
+          "id": "lib-2"
+        }
+      ]
+    },
+    {
+      "id": "lang",
+      "lead": 0.5,
+      "tail": 0.7,
+      "items": [
+        {
+          "id": "lang-1",
+          "post": 0.2
+        },
+        {
+          "id": "lang-2"
+        }
+      ]
+    },
+    {
+      "id": "bn",
+      "lead": 0.7,
+      "tail": 0.8,
+      "items": [
+        {
+          "id": "bn-1",
+          "post": 0.2
+        },
+        {
+          "id": "demo-pooja",
+          "pre": 0.1,
+          "post": 0.35,
+          "kind": "demo"
+        },
+        {
+          "id": "bn-2",
+          "pre": 0.1,
+          "post": 0.2
+        },
+        {
+          "id": "demo-rubel",
+          "pre": 0.1,
+          "post": 0.35,
+          "kind": "demo"
+        },
+        {
+          "id": "bn-3",
+          "pre": 0.1,
+          "post": 0.2
+        },
+        {
+          "id": "demo-news",
+          "pre": 0.1,
+          "post": 0.2,
+          "kind": "demo"
+        }
+      ]
+    },
+    {
+      "id": "en",
+      "lead": 0.5,
+      "tail": 0.8,
+      "items": [
+        {
+          "id": "en-1",
+          "post": 0.2
+        },
+        {
+          "id": "en-2a"
+        },
+        {
+          "id": "demo-ailsa",
+          "pre": 0.1,
+          "post": 0.3,
+          "kind": "demo"
+        },
+        {
+          "id": "en-2b",
+          "pre": 0.15
+        },
+        {
+          "id": "demo-aarav",
+          "pre": 0.1,
+          "post": 0.3,
+          "kind": "demo"
+        },
+        {
+          "id": "en-2c",
+          "pre": 0.15
+        },
+        {
+          "id": "demo-adrian",
+          "pre": 0.1,
+          "post": 0.2,
+          "kind": "demo"
+        }
+      ]
+    },
+    {
+      "id": "models",
+      "lead": 0.55,
+      "tail": 0.6,
+      "items": [
+        {
+          "id": "model-1",
+          "post": 0.2
+        },
+        {
+          "id": "model-2",
+          "post": 0.2
+        },
+        {
+          "id": "model-3"
+        }
+      ]
+    },
+    {
+      "id": "modeldemo",
+      "lead": 0.55,
+      "tail": 0.7,
+      "items": [
+        {
+          "id": "model-4",
+          "post": 0.25
+        },
+        {
+          "id": "model-demo-36",
+          "pre": 0.1,
+          "post": 0.3,
+          "kind": "demo"
+        },
+        {
+          "id": "model-demo-35",
+          "pre": 0.1,
+          "post": 0.3,
+          "kind": "demo"
+        },
+        {
+          "id": "model-demo-3",
+          "pre": 0.1,
+          "post": 0.2,
+          "kind": "demo"
+        }
+      ]
+    },
+    {
+      "id": "studio",
+      "lead": 0.6,
+      "tail": 0.7,
+      "items": [
+        {
+          "id": "studio-1",
+          "post": 0.25
+        },
+        {
+          "id": "studio-2"
+        }
+      ]
+    },
+    {
+      "id": "controls",
+      "lead": 0.55,
+      "tail": 0.7,
+      "items": [
+        {
+          "id": "ctrl-1",
+          "post": 0.25
+        },
+        {
+          "id": "ctrl-2",
+          "post": 0.25
+        },
+        {
+          "id": "ctrl-3",
+          "post": 0.25
+        },
+        {
+          "id": "ctrl-4"
+        }
+      ]
+    },
+    {
+      "id": "emotions",
+      "lead": 0.55,
+      "tail": 0.7,
+      "items": [
+        {
+          "id": "emo-1",
+          "post": 0.2
+        },
+        {
+          "id": "emo-happy",
+          "pre": 0.1,
+          "post": 0.3,
+          "kind": "demo"
+        },
+        {
+          "id": "emo-sad",
+          "pre": 0.1,
+          "post": 0.3,
+          "kind": "demo"
+        },
+        {
+          "id": "emo-angry",
+          "pre": 0.1,
+          "post": 0.2,
+          "kind": "demo"
+        }
+      ]
+    },
+    {
+      "id": "script",
+      "lead": 0.55,
+      "tail": 0.7,
+      "items": [
+        {
+          "id": "script-1",
+          "post": 0.25
+        },
+        {
+          "id": "script-2"
+        }
+      ]
+    },
+    {
+      "id": "generate",
+      "lead": 0.55,
+      "tail": 0.8,
+      "items": [
+        {
+          "id": "gen-1",
+          "post": 0.25
+        },
+        {
+          "id": "gen-2"
+        }
+      ]
+    },
+    {
+      "id": "recent",
+      "lead": 0.55,
+      "tail": 0.7,
+      "items": [
+        {
+          "id": "hist-1",
+          "post": 0.2
+        },
+        {
+          "id": "hist-2",
+          "post": 0.2
+        },
+        {
+          "id": "hist-3"
+        }
+      ]
+    },
+    {
+      "id": "api",
+      "lead": 0.6,
+      "tail": 0.8,
+      "items": [
+        {
+          "id": "api-1",
+          "post": 0.2
+        },
+        {
+          "id": "api-2",
+          "post": 0.2
+        },
+        {
+          "id": "api-3"
+        }
+      ]
+    },
+    {
+      "id": "tas",
+      "lead": 0.6,
+      "tail": 0.8,
+      "items": [
+        {
+          "id": "tas-1",
+          "post": 0.2
+        },
+        {
+          "id": "tas-2"
+        }
+      ]
+    },
+    {
+      "id": "tasts",
+      "lead": 0.55,
+      "tail": 0.7,
+      "items": [
+        {
+          "id": "tas-tts-1",
+          "post": 0.2
+        },
+        {
+          "id": "tas-tts-2",
+          "post": 0.25
+        },
+        {
+          "id": "demo-dialog",
+          "pre": 0.15,
+          "post": 0.2,
+          "kind": "demo"
+        }
+      ]
+    },
+    {
+      "id": "stt",
+      "lead": 0.55,
+      "tail": 0.7,
+      "items": [
+        {
+          "id": "tas-stt-1",
+          "post": 0.25
+        },
+        {
+          "id": "stt-clip",
+          "pre": 0.1,
+          "post": 0.2,
+          "kind": "demo"
+        }
+      ]
+    },
+    {
+      "id": "free",
+      "lead": 0.55,
+      "tail": 0.9,
+      "items": [
+        {
+          "id": "free-1"
+        }
+      ]
+    },
+    {
+      "id": "install",
+      "lead": 0.55,
+      "tail": 0.8,
+      "items": [
+        {
+          "id": "install-1",
+          "post": 0.25
+        },
+        {
+          "id": "install-2"
+        }
+      ]
+    },
+    {
+      "id": "use",
+      "lead": 0.55,
+      "tail": 0.8,
+      "items": [
+        {
+          "id": "use-1",
+          "post": 0.25
+        },
+        {
+          "id": "use-2"
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "lead": 1.2,
+      "tail": 4.2,
+      "items": [
+        {
+          "id": "outro-1",
+          "post": 0.3
+        },
+        {
+          "id": "outro-2"
+        }
+      ]
+    }
+  ],
+  "gap": 0.28
+}

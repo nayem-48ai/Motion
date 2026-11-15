@@ -1,0 +1,194 @@
+<template>
+<style>
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Black.ttf") format("truetype"); font-weight: 900; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Black.ttf") format("truetype"); font-weight: 900; font-style: normal; }
+@font-face { font-family: "Outfit"; src: url("assets/fonts/Outfit-400.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "Inter"; src: url("assets/fonts/Inter-400.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "JBM"; src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "JBM"; src: url("assets/fonts/JetBrainsMono-600.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+
+:root {
+  --ink: #0a0a14;
+  --ink-2: #12121f;
+  --paper: #f6f5fb;
+  --paper-2: #ffffff;
+  --violet: #5b4bff;
+  --violet-2: #8b7bff;
+  --mint: #16c7a3;
+  --mint-2: #6ff0d3;
+  --coral: #ff6b5a;
+  --gold: #ffc24b;
+  --muted: #8e8ea6;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-dark: rgba(10, 10, 20, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+body { font-family: "Outfit", "BN Sans", sans-serif; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+#root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; }
+.stage { position: absolute; inset: 0; overflow: hidden; }
+.dark { background: var(--ink); color: #f5f4fb; }
+.light { background: var(--paper); color: var(--ink); }
+
+.bn { font-family: "BN Sans", "Outfit", sans-serif; }
+.bnserif { font-family: "BN Serif", "BN Sans", serif; }
+.mono { font-family: "JBM", monospace; }
+.en { font-family: "Outfit", sans-serif; }
+
+.grid { position: absolute; inset: 0; opacity: 0.5;
+  background-image: linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: 96px 96px; }
+.light .grid, .grid.on-light { background-image: linear-gradient(rgba(10,10,20,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(10,10,20,0.06) 1px, transparent 1px); opacity: 1; }
+.glow { position: absolute; border-radius: 50%; filter: blur(10px); pointer-events: none; }
+.g-violet { background: radial-gradient(circle, rgba(91,75,255,0.42) 0%, rgba(91,75,255,0.12) 42%, rgba(91,75,255,0) 70%); }
+.g-mint { background: radial-gradient(circle, rgba(22,199,163,0.35) 0%, rgba(22,199,163,0.08) 45%, rgba(22,199,163,0) 72%); }
+
+.kicker { font-family: "Outfit", sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--mint); display: flex; align-items: center; gap: 14px; }
+.kicker .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mint); }
+.kicker.on-light { color: #4a3df0; }
+.kicker.on-light .dot { background: #4a3df0; }
+
+.slug { display: inline-flex; align-items: center; gap: 14px; background: var(--violet); color: #fff; padding: 12px 22px 13px; font-weight: 700; font-size: 22px; letter-spacing: 0.03em; border-radius: 6px; }
+.slug .num { font-family: "JBM", monospace; font-size: 19px; opacity: 0.75; }
+.slug.on-light { background: var(--ink); }
+
+.h1 { font-family: "BN Serif", serif; font-weight: 900; font-size: 118px; line-height: 1.14; letter-spacing: -0.015em; }
+.h2 { font-family: "BN Serif", serif; font-weight: 700; font-size: 82px; line-height: 1.2; letter-spacing: -0.01em; }
+.h3 { font-family: "BN Sans", sans-serif; font-weight: 700; font-size: 54px; line-height: 1.3; }
+.body { font-family: "BN Sans", sans-serif; font-weight: 400; font-size: 32px; line-height: 1.65; color: #b9b8cc; }
+.light .body { color: #55556b; }
+.hl { color: var(--mint); }
+.hl-violet { color: var(--violet-2); }
+.light .hl-violet { color: var(--violet); }
+
+.card { border-radius: 28px; border: 1px solid var(--line); background: rgba(255,255,255,0.045); }
+.card-light { border-radius: 28px; border: 1px solid var(--line-dark); background: #fff; box-shadow: 0 24px 70px rgba(20,20,45,0.10); }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 100px; border: 1px solid var(--line); font-size: 20px; font-weight: 500; white-space: nowrap; }
+.light .chip { border-color: var(--line-dark); }
+.pill { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 100px; font-size: 19px; font-weight: 700; }
+
+.wave { display: flex; align-items: center; gap: 5px; }
+.wave i { display: block; width: 6px; border-radius: 6px; background: currentColor; }
+
+.browser { border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 40px 100px rgba(6,6,20,0.28); border: 1px solid rgba(10,10,20,0.10); }
+.browser .bar { height: 46px; background: #eeeef6; display: flex; align-items: center; gap: 8px; padding: 0 20px; border-bottom: 1px solid #e2e2ee; }
+.browser .bar .d { width: 11px; height: 11px; border-radius: 50%; background: #d4d4e2; }
+.browser .bar .url { margin-left: 18px; font-family: "JBM", monospace; font-size: 15px; color: #6b6b85; background: #fff; border-radius: 7px; padding: 6px 16px; border: 1px solid #e2e2ee; }
+
+.swipe { position: absolute; inset: -2px; z-index: 60; background: linear-gradient(105deg, #4b3cff 0%, #6a5bff 46%, #16c7a3 100%); transform-origin: top left; }
+.swipe::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: #fff; opacity: 0.65; }
+
+.rule { height: 1px; background: var(--line); }
+.light .rule { background: var(--line-dark); }
+.small { font-size: 20px; color: var(--muted); letter-spacing: 0.02em; }
+.light .small { color: #7a7a92; }
+
+.stamp { font-family: "JBM", monospace; font-weight: 600; border: 3px solid currentColor; border-radius: 8px; padding: 10px 16px; letter-spacing: 0.12em; text-transform: uppercase; }
+.cursor { position: absolute; width: 34px; height: 44px; z-index: 50; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3)); }
+
+.logo { display: inline-flex; align-items: center; gap: 16px; }
+.logo svg { display: block; }
+.logo .word { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 46px; letter-spacing: -0.045em; line-height: 1; }
+.logo .word em { font-style: normal; color: var(--mint); }
+.logo .sub { font-family: "Outfit", sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.55; display: block; margin-top: 6px; }
+
+
+#root { background: var(--paper); }
+.left { position: absolute; left: 96px; top: 146px; width: 610px; }
+.left .slug { margin-bottom: 26px; }
+.left h2 { font-size: 116px; line-height: 1.02; }
+.left h2 span { color: #5b4bff; }
+.left .sub { margin-top: 24px; font-family: "BN Sans"; font-size: 28px; line-height: 1.6; color: #5c5b74; width: 560px; }
+.steps { margin-top: 54px; display: flex; flex-direction: column; gap: 18px; }
+.step { display: flex; align-items: center; gap: 22px; padding: 22px 24px; border-radius: 18px; background: #fff; border: 1px solid #e4e2ee; box-shadow: 0 14px 34px rgba(25,25,60,0.06); }
+.step .n { width: 46px; height: 46px; flex: 0 0 auto; border-radius: 12px; background: #ebe9ff; color: #4a3df0; display: grid; place-items: center; font-family: JBM; font-weight: 600; font-size: 19px; }
+.step .t { font-family: "BN Sans"; font-weight: 700; font-size: 27px; color: #14141f; line-height: 1.2; }
+.step .e { font-family: Outfit; font-weight: 600; font-size: 12px; letter-spacing: 0.16em; color: #8b8aa2; margin-top: 4px; }
+.step.on { border-color: #c9c4ff; box-shadow: 0 18px 44px rgba(91,75,255,0.16); }
+.step.on .n { background: #5b4bff; color: #fff; }
+.note { margin-top: 26px; font-family: "BN Sans"; font-size: 19px; color: #7a7a92; display: flex; align-items: center; gap: 10px; }
+.note .d { width: 8px; height: 8px; border-radius: 50%; background: #16c7a3; }
+
+.shot { position: absolute; left: 800px; top: 142px; width: 1000px; border-radius: 20px; overflow: hidden; border: 1px solid #dedce9; box-shadow: 0 40px 90px rgba(25,25,60,0.2); background: #fff; }
+.shot img { display: block; width: 100%; }
+.shot .bar { height: 42px; background: #ecebf5; display: flex; align-items: center; gap: 7px; padding: 0 18px; border-bottom: 1px solid #e2e1ef; }
+.shot .bar .d { width: 10px; height: 10px; border-radius: 50%; background: #d2d1e3; }
+.shot .bar .url { margin-left: 14px; font-family: JBM; font-size: 13px; color: #5d5d78; background: #fff; border: 1px solid #e2e1ef; border-radius: 6px; padding: 5px 14px; }
+.tagfloat { position: absolute; right: 96px; top: 112px; background: #5b4bff; color: #fff; font-family: Outfit; font-weight: 800; font-size: 13px; letter-spacing: 0.16em; padding: 9px 14px; border-radius: 7px; transform: rotate(2deg); box-shadow: 0 12px 26px rgba(91,75,255,0.3); z-index: 3; }
+.ring { position: absolute; border: 3px solid #5b4bff; border-radius: 14px; box-shadow: 0 0 0 6px rgba(91,75,255,0.12), 0 0 34px rgba(91,75,255,0.35); opacity: 0; z-index: 4; }
+.ring .lab { position: absolute; top: -40px; left: -3px; background: #5b4bff; color: #fff; font-family: Outfit; font-weight: 800; font-size: 13px; letter-spacing: 0.14em; padding: 7px 12px; border-radius: 5px; white-space: nowrap; }
+#ring-lang { left: 840px; top: 240px; width: 920px; height: 58px; }
+#ring-voice { left: 1308px; top: 334px; width: 454px; height: 82px; }
+#ring-voice { border-color: #16c7a3; box-shadow: 0 0 0 6px rgba(22,199,163,0.12), 0 0 34px rgba(22,199,163,0.35); }
+#ring-voice .lab { background: #16c7a3; color: #04201a; }
+.cursor { position: absolute; left: 0; top: 0; z-index: 20; width: 30px; height: 40px; filter: drop-shadow(0 5px 8px rgba(0,0,0,0.28)); }
+</style>
+<div id="root" data-composition-id="studio" data-width="1920" data-height="1080">
+  <div class="stage light">
+    <div class="grid on-light"></div>
+    <div class="glow g-violet" style="width:800px;height:800px;left:-360px;bottom:-380px;opacity:.25"></div>
+    <div class="swipe" id="swipe"></div>
+    <div class="tagfloat" id="tagfloat">LIVE STUDIO</div>
+
+    <div class="left">
+      <div class="slug" id="slug"><span class="num">05</span> স্টুডিও</div>
+      <h2 class="h2" id="head">ভাষা।<br><span>ভয়েস।</span> ব্যস।</h2>
+      <p class="sub" id="sub">একটাই স্ক্রিন — মডেল, ভাষা, ভয়েস, স্পিড, ভলিউম, ইমোশন আর স্ক্রিপ্ট।</p>
+
+      <div class="steps" id="steps">
+        <div class="step" id="step1"><span class="n">01</span><div><div class="t">ভাষা বেছে নিন</div><div class="e">42 LANGUAGES · ONE TAB ROW</div></div></div>
+        <div class="step" id="step2"><span class="n">02</span><div><div class="t">ভয়েস বেছে নিন</div><div class="e">874 CURATED VOICES</div></div></div>
+      </div>
+      <div class="note" id="note"><span class="d"></span>বাকিটা স্টুডিও নিজেই সামলে নেয়।</div>
+    </div>
+
+    <div class="shot" id="shot">
+      <div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">speakee.tnxbd.top/studio</span></div>
+      <img src="assets/img/site-card-filled.png" alt="Speakee studio controls" />
+    </div>
+
+    <div class="ring" id="ring-lang"><span class="lab">LANGUAGE · বাংলা</span></div>
+    <div class="ring" id="ring-voice"><span class="lab">VOICE · NEWS READER</span></div>
+
+    <div class="cursor" id="cursor"><svg width="30" height="40" viewBox="0 0 30 40"><path d="M3 2l24 17-10 2 6 12-5 3-6-12-8 7V2z" fill="#14141f" stroke="#fff" stroke-width="2"/></svg></div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = {"start": 134.708, "dur": 8.07, "b": {"studio-1": 0.72, "studio-2": 4.564}, "d": {"studio-1": 3.474, "studio-2": 2.586}};
+
+tl.fromTo("#swipe", { xPercent: 0 }, { xPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#slug", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.38 }, 0.18);
+tl.fromTo("#head", { opacity: 0, y: 28, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.6, ease: "expo.out" }, 0.3);
+tl.fromTo("#sub", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0.62);
+tl.fromTo("#shot", { opacity: 0, x: 44, y: 16 }, { opacity: 1, x: 0, y: 0, duration: 0.7, ease: "expo.out" }, 0.28);
+tl.fromTo("#tagfloat", { opacity: 0, y: -12, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(2)" }, 0.8);
+tl.fromTo("#step1", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, T.b["studio-1"] + 0.15);
+tl.fromTo("#step2", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, T.b["studio-2"] - 0.15);
+tl.fromTo("#note", { opacity: 0 }, { opacity: 1, duration: 0.4 }, T.b["studio-2"] + 0.8);
+tl.fromTo(".shot img", { scale: 1.04 }, { scale: 1, duration: T.dur, ease: "none" }, 0);
+
+// language pick
+tl.fromTo("#ring-lang", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, 1.15);
+tl.fromTo("#cursor", { opacity: 0, x: 1520, y: 470 }, { opacity: 1, x: 1006, y: 270, duration: 0.6, ease: "power2.inOut" }, 0.75);
+tl.to("#cursor", { scale: 0.86, duration: 0.1, yoyo: true, repeat: 1 }, 1.42);
+tl.to("#step1", { borderColor: "#5b4bff", backgroundColor: "#f4f2ff", duration: 0.3 }, 1.45);
+
+// voice pick
+tl.to("#ring-lang", { opacity: 0.4, boxShadow: "0 0 0 4px rgba(91,75,255,0.08)", duration: 0.3 }, T.b["studio-2"] - 0.1);
+tl.fromTo("#ring-voice", { opacity: 0, scale: 0.98 }, { opacity: 1, scale: 1, duration: 0.38, ease: "back.out(1.8)" }, T.b["studio-2"] + 0.15);
+tl.to("#cursor", { x: 1520, y: 370, duration: 0.65, ease: "power2.inOut" }, T.b["studio-2"] + 0.05);
+tl.to("#cursor", { scale: 0.86, duration: 0.1, yoyo: true, repeat: 1 }, T.b["studio-2"] + 0.75);
+tl.to("#step2", { borderColor: "#16c7a3", backgroundColor: "#effcf9", duration: 0.3 }, T.b["studio-2"] + 0.8);
+tl.to("#cursor", { opacity: 0, duration: 0.3 }, T.b["studio-2"] + 1.35);
+
+window.__timelines["studio"] = tl;
+</script>
+</template>

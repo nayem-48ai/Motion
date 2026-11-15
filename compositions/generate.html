@@ -1,0 +1,287 @@
+<template>
+<style>
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Black.ttf") format("truetype"); font-weight: 900; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Black.ttf") format("truetype"); font-weight: 900; font-style: normal; }
+@font-face { font-family: "Outfit"; src: url("assets/fonts/Outfit-400.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "Inter"; src: url("assets/fonts/Inter-400.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "JBM"; src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "JBM"; src: url("assets/fonts/JetBrainsMono-600.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+
+:root {
+  --ink: #0a0a14;
+  --ink-2: #12121f;
+  --paper: #f6f5fb;
+  --paper-2: #ffffff;
+  --violet: #5b4bff;
+  --violet-2: #8b7bff;
+  --mint: #16c7a3;
+  --mint-2: #6ff0d3;
+  --coral: #ff6b5a;
+  --gold: #ffc24b;
+  --muted: #8e8ea6;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-dark: rgba(10, 10, 20, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+body { font-family: "Outfit", "BN Sans", sans-serif; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+#root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; }
+.stage { position: absolute; inset: 0; overflow: hidden; }
+.dark { background: var(--ink); color: #f5f4fb; }
+.light { background: var(--paper); color: var(--ink); }
+
+.bn { font-family: "BN Sans", "Outfit", sans-serif; }
+.bnserif { font-family: "BN Serif", "BN Sans", serif; }
+.mono { font-family: "JBM", monospace; }
+.en { font-family: "Outfit", sans-serif; }
+
+.grid { position: absolute; inset: 0; opacity: 0.5;
+  background-image: linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: 96px 96px; }
+.light .grid, .grid.on-light { background-image: linear-gradient(rgba(10,10,20,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(10,10,20,0.06) 1px, transparent 1px); opacity: 1; }
+.glow { position: absolute; border-radius: 50%; filter: blur(10px); pointer-events: none; }
+.g-violet { background: radial-gradient(circle, rgba(91,75,255,0.42) 0%, rgba(91,75,255,0.12) 42%, rgba(91,75,255,0) 70%); }
+.g-mint { background: radial-gradient(circle, rgba(22,199,163,0.35) 0%, rgba(22,199,163,0.08) 45%, rgba(22,199,163,0) 72%); }
+
+.kicker { font-family: "Outfit", sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--mint); display: flex; align-items: center; gap: 14px; }
+.kicker .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mint); }
+.kicker.on-light { color: #4a3df0; }
+.kicker.on-light .dot { background: #4a3df0; }
+
+.slug { display: inline-flex; align-items: center; gap: 14px; background: var(--violet); color: #fff; padding: 12px 22px 13px; font-weight: 700; font-size: 22px; letter-spacing: 0.03em; border-radius: 6px; }
+.slug .num { font-family: "JBM", monospace; font-size: 19px; opacity: 0.75; }
+.slug.on-light { background: var(--ink); }
+
+.h1 { font-family: "BN Serif", serif; font-weight: 900; font-size: 118px; line-height: 1.14; letter-spacing: -0.015em; }
+.h2 { font-family: "BN Serif", serif; font-weight: 700; font-size: 82px; line-height: 1.2; letter-spacing: -0.01em; }
+.h3 { font-family: "BN Sans", sans-serif; font-weight: 700; font-size: 54px; line-height: 1.3; }
+.body { font-family: "BN Sans", sans-serif; font-weight: 400; font-size: 32px; line-height: 1.65; color: #b9b8cc; }
+.light .body { color: #55556b; }
+.hl { color: var(--mint); }
+.hl-violet { color: var(--violet-2); }
+.light .hl-violet { color: var(--violet); }
+
+.card { border-radius: 28px; border: 1px solid var(--line); background: rgba(255,255,255,0.045); }
+.card-light { border-radius: 28px; border: 1px solid var(--line-dark); background: #fff; box-shadow: 0 24px 70px rgba(20,20,45,0.10); }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 100px; border: 1px solid var(--line); font-size: 20px; font-weight: 500; white-space: nowrap; }
+.light .chip { border-color: var(--line-dark); }
+.pill { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 100px; font-size: 19px; font-weight: 700; }
+
+.wave { display: flex; align-items: center; gap: 5px; }
+.wave i { display: block; width: 6px; border-radius: 6px; background: currentColor; }
+
+.browser { border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 40px 100px rgba(6,6,20,0.28); border: 1px solid rgba(10,10,20,0.10); }
+.browser .bar { height: 46px; background: #eeeef6; display: flex; align-items: center; gap: 8px; padding: 0 20px; border-bottom: 1px solid #e2e2ee; }
+.browser .bar .d { width: 11px; height: 11px; border-radius: 50%; background: #d4d4e2; }
+.browser .bar .url { margin-left: 18px; font-family: "JBM", monospace; font-size: 15px; color: #6b6b85; background: #fff; border-radius: 7px; padding: 6px 16px; border: 1px solid #e2e2ee; }
+
+.swipe { position: absolute; inset: -2px; z-index: 60; background: linear-gradient(105deg, #4b3cff 0%, #6a5bff 46%, #16c7a3 100%); transform-origin: top left; }
+.swipe::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: #fff; opacity: 0.65; }
+
+.rule { height: 1px; background: var(--line); }
+.light .rule { background: var(--line-dark); }
+.small { font-size: 20px; color: var(--muted); letter-spacing: 0.02em; }
+.light .small { color: #7a7a92; }
+
+.stamp { font-family: "JBM", monospace; font-weight: 600; border: 3px solid currentColor; border-radius: 8px; padding: 10px 16px; letter-spacing: 0.12em; text-transform: uppercase; }
+.cursor { position: absolute; width: 34px; height: 44px; z-index: 50; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3)); }
+
+.logo { display: inline-flex; align-items: center; gap: 16px; }
+.logo svg { display: block; }
+.logo .word { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 46px; letter-spacing: -0.045em; line-height: 1; }
+.logo .word em { font-style: normal; color: var(--mint); }
+.logo .sub { font-family: "Outfit", sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.55; display: block; margin-top: 6px; }
+
+
+#root { background: var(--paper); }
+.head { position: absolute; left: 96px; top: 78px; right: 96px; display: flex; align-items: flex-end; justify-content: space-between; }
+.head .l .slug { margin-bottom: 18px; }
+.head h2 { font-size: 80px; line-height: 1.1; }
+.head h2 span { color: #5b4bff; }
+.head .r { display: flex; gap: 10px; padding-bottom: 8px; }
+.head .r .fmt { font-family: JBM; font-weight: 600; font-size: 15px; letter-spacing: 0.12em; padding: 10px 16px; border-radius: 8px; border: 1px solid #dedce9; background: #fff; color: #5c5b74; }
+.head .r .fmt.on { background: #5b4bff; border-color: #5b4bff; color: #fff; }
+
+.console { position: absolute; left: 96px; top: 280px; width: 1728px; height: 636px; border-radius: 26px; background: #fff; border: 1px solid #e4e2ee; box-shadow: 0 30px 80px rgba(25,25,60,0.13); overflow: hidden; }
+.console .bar { height: 58px; background: #f3f2f9; border-bottom: 1px solid #e6e4f0; display: flex; align-items: center; gap: 8px; padding: 0 24px; }
+.console .bar .d { width: 11px; height: 11px; border-radius: 50%; background: #d6d4e4; }
+.console .bar .t { margin-left: 16px; font-family: Outfit; font-weight: 700; font-size: 15px; letter-spacing: 0.12em; color: #5c5b74; }
+.console .bar .s { margin-left: auto; display: flex; align-items: center; gap: 8px; font-family: JBM; font-size: 12px; color: #0f9e82; letter-spacing: 0.1em; }
+.console .bar .s .d { width: 7px; height: 7px; background: #16c7a3; }
+.body { display: flex; height: 578px; }
+.left { width: 1074px; flex: 0 0 auto; padding: 36px 40px 30px; position: relative; }
+.left .lab { font-family: Outfit; font-weight: 800; font-size: 12px; letter-spacing: 0.2em; color: #8b8aa2; }
+.script { margin-top: 14px; border-radius: 14px; border: 1px solid #e4e2ee; background: #fbfaff; padding: 22px 24px; height: 210px; font-family: "BN Sans"; font-size: 25px; line-height: 1.65; color: #1b1b2a; }
+.meta { display: flex; gap: 9px; margin-top: 18px; }
+.meta .pill { font-family: JBM; font-size: 12px; color: #4a3df0; background: #f0edff; border: 1px solid #d9d4ff; padding: 7px 12px; border-radius: 100px; }
+.meta .pill.g { color: #0f9e82; background: #ecfbf7; border-color: #bdeee3; }
+.genbtn { position: absolute; left: 40px; right: 40px; bottom: 30px; height: 96px; border-radius: 16px; background: #5b4bff; display: flex; align-items: center; justify-content: center; gap: 14px; color: #fff; font-family: Outfit; font-weight: 800; font-size: 27px; letter-spacing: 0.01em; box-shadow: 0 18px 40px rgba(91,75,255,0.33); }
+.genbtn svg { width: 26px; height: 26px; }
+.fmtrow { position: absolute; left: 40px; right: 40px; bottom: 150px; display: flex; align-items: center; justify-content: space-between; }
+.fmtrow .l { font-family: "BN Sans"; font-weight: 600; font-size: 17px; color: #5c5b74; }
+.seg { display: flex; border: 1px solid #dedce9; border-radius: 10px; overflow: hidden; }
+.seg .o { font-family: JBM; font-weight: 600; font-size: 14px; letter-spacing: 0.08em; padding: 9px 18px; color: #8b8aa2; background: #fff; }
+.seg .o.on { background: #5b4bff; color: #fff; }
+
+.right { flex: 1; border-left: 1px solid #ebe9f2; background: #fbfaff; padding: 30px 32px; position: relative; }
+.right .lab { font-family: Outfit; font-weight: 800; font-size: 12px; letter-spacing: 0.2em; color: #8b8aa2; display: flex; justify-content: space-between; }
+.right .lab span:last-child { font-family: JBM; color: #a2a1b6; letter-spacing: 0.08em; }
+.placeholder { position: absolute; left: 32px; right: 32px; top: 90px; height: 300px; border-radius: 16px; border: 2px dashed #dedce9; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; color: #a2a1b6; }
+.placeholder .ic { width: 74px; height: 74px; border-radius: 50%; background: #f0edff; display: grid; place-items: center; }
+.placeholder .t { font-family: "BN Sans"; font-weight: 600; font-size: 18px; }
+.placeholder .e { font-family: JBM; font-size: 11px; letter-spacing: 0.12em; color: #b4b2c6; }
+
+.progress { position: absolute; left: 32px; right: 32px; top: 90px; height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; opacity: 0; }
+.progress .ring { width: 128px; height: 128px; position: relative; }
+.progress .ring .pct { position: absolute; inset: 0; display: grid; place-items: center; font-family: Outfit; font-weight: 800; font-size: 30px; color: #5b4bff; }
+.progress .st { font-family: "BN Sans"; font-weight: 600; font-size: 19px; color: #5c5b74; }
+.progress .bar { width: 300px; height: 7px; border-radius: 5px; background: #e9e7f3; overflow: hidden; }
+.progress .bar i { display: block; height: 100%; width: 100%; background: #5b4bff; transform: scaleX(0); transform-origin: left; }
+
+.result { position: absolute; left: 32px; right: 32px; top: 90px; height: 300px; border-radius: 16px; background: #fff; border: 1px solid #e4e2ee; box-shadow: 0 14px 34px rgba(25,25,60,0.08); padding: 20px; opacity: 0; }
+.result .file { display: flex; align-items: center; gap: 13px; }
+.result .file .ic { width: 46px; height: 46px; border-radius: 11px; background: #16c7a3; display: grid; place-items: center; font-family: JBM; font-weight: 600; font-size: 12px; color: #04201a; }
+.result .file .n { font-family: Outfit; font-weight: 700; font-size: 19px; color: #14141f; }
+.result .file .m { font-family: JBM; font-size: 11px; letter-spacing: 0.08em; color: #8b8aa2; margin-top: 3px; }
+.result .wave { height: 96px; margin-top: 20px; display: flex; align-items: center; gap: 3px; color: #16c7a3; }
+.result .wave i { flex: 1; border-radius: 3px; background: currentColor; }
+.result .row { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
+.result .play { width: 52px; height: 52px; border-radius: 50%; background: #16c7a3; display: grid; place-items: center; }
+.result .time { font-family: JBM; font-size: 13px; color: #5c5b74; }
+.result .dl { display: flex; align-items: center; gap: 8px; background: #14141f; color: #fff; font-family: Outfit; font-weight: 700; font-size: 13px; letter-spacing: 0.08em; padding: 12px 15px; border-radius: 9px; }
+
+.success { position: absolute; left: 32px; right: 32px; bottom: 78px; display: flex; align-items: center; gap: 10px; font-family: JBM; font-size: 11px; letter-spacing: 0.1em; color: #0f9e82; opacity: 0; }
+.success .d { width: 8px; height: 8px; border-radius: 50%; background: #16c7a3; }
+.downloads { position: absolute; left: 32px; right: 32px; bottom: 26px; display: flex; gap: 10px; opacity: 0; }
+.downloads .dl { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #dedce9; border-radius: 10px; padding: 12px 10px; font-family: Outfit; font-weight: 700; font-size: 13px; color: #3a3950; background: #fff; }
+.downloads .dl.on { border-color: #5b4bff; background: #f0edff; color: #3a2fd0; }
+.downloads .dl span.m { font-family: JBM; font-size: 10px; color: #8b8aa2; }
+.cursor { position: absolute; left: 0; top: 0; z-index: 30; width: 30px; height: 40px; filter: drop-shadow(0 5px 8px rgba(0,0,0,0.25)); }
+</style>
+<div id="root" data-composition-id="generate" data-width="1920" data-height="1080">
+  <div class="stage light">
+    <div class="grid on-light"></div>
+    <div class="glow g-mint" style="width:800px;height:800px;right:-340px;bottom:-380px;opacity:.35"></div>
+    <div class="swipe" id="swipe"></div>
+
+    <div class="head">
+      <div class="l">
+        <div class="slug" id="slug"><span class="num">07</span> জেনারেট</div>
+        <h2 class="h2" id="head">এক ক্লিকে <span>অডিও।</span></h2>
+      </div>
+      <div class="r"><span class="fmt">MP3 · WAV</span></div>
+    </div>
+
+    <div class="console" id="console">
+      <div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="t">SPEECH STUDIO</span><span class="s"><span class="d"></span>READY</span></div>
+      <div class="body">
+        <div class="left">
+          <div class="lab">SCRIPT</div>
+          <div class="script" id="script">স্পিকিতে স্বাগতম। আপনার স্ক্রিপ্ট লিখুন, ভাষা ও ভয়েস বেছে নিন — আর সেকেন্ডের মধ্যে ডাউনলোড করুন স্টুডিও-মানের অডিও।</div>
+          <div class="meta" id="meta"><span class="pill">বাংলা · BN</span><span class="pill">News Reader</span><span class="pill">sonic-3.5</span><span class="pill g">CONFIDENT</span></div>
+          <div class="fmtrow"><span class="l">Output format</span><div class="seg"><span class="o on" id="o-mp3">MP3</span><span class="o" id="o-wav">WAV</span></div></div>
+          <div class="genbtn" id="genbtn"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Generate Speech</div>
+        </div>
+
+        <div class="right">
+          <div class="lab"><span>AUDIO OUTPUT</span><span id="outtag">MP3</span></div>
+
+          <div class="placeholder" id="ph">
+            <span class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#5b4bff" stroke-width="1.8"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2" y="14" width="4" height="7" rx="2"/><rect x="18" y="14" width="4" height="7" rx="2"/></svg></span>
+            <span class="t">জেনারেট করুন — অডিও এখানে আসবে</span>
+            <span class="e">MP3 · 48kHz · STEREO</span>
+          </div>
+
+          <div class="progress" id="progress">
+            <div class="ring">
+              <svg width="128" height="128" viewBox="0 0 128 128"><circle cx="64" cy="64" r="55" fill="none" stroke="#e9e7f3" stroke-width="9"/><circle id="arc" cx="64" cy="64" r="55" fill="none" stroke="#5b4bff" stroke-width="9" stroke-linecap="round" stroke-dasharray="345.6" stroke-dashoffset="345.6" transform="rotate(-90 64 64)"/></svg>
+              <div class="pct" id="pct">০%</div>
+            </div>
+            <div class="st" id="st">টেক্সট → স্পিচ…</div>
+            <div class="bar"><i id="pbar"></i></div>
+          </div>
+
+          <div class="result" id="result">
+            <div class="file"><span class="ic">MP3</span><div><div class="n" id="fname">Speech_001.mp3</div><div class="m" id="fmeta">0:07 · 48kHz · 168 KB</div></div></div>
+            <div class="wave" data-wave></div>
+            <div class="row"><div style="display:flex;align-items:center;gap:12px"><span class="play"><svg width="15" height="17" viewBox="0 0 15 17"><path d="M1 1l13 7.5L1 16V1z" fill="#04201a"/></svg></span><span class="time">0:00 / 0:07</span></div><span class="dl"><svg width="14" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M12 3v12M6 11l6 6 6-6M4 21h16"/></svg>DOWNLOAD</span></div>
+          </div>
+
+          <div class="success" id="success"><span class="d"></span>GENERATED IN 1.4s · QA PASSED</div>
+          <div class="downloads" id="downloads">
+            <span class="dl on" id="dl-mp3">MP3 <span class="m">168 KB</span></span>
+            <span class="dl" id="dl-wav">WAV <span class="m">1.4 MB</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cursor" id="cursor"><svg width="30" height="40" viewBox="0 0 30 40"><path d="M3 2l24 17-10 2 6 12-5 3-6-12-8 7V2z" fill="#14141f" stroke="#fff" stroke-width="2"/></svg></div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = {"start": 186.649, "dur": 8.382, "b": {"gen-1": 0.67, "gen-2": 5.638}, "d": {"gen-1": 4.598, "gen-2": 1.724}};
+const bn = n => String(Math.round(n)).replace(/[0-9]/g, d => "০১২৩৪৫৬৭৮৯"[d]);
+
+document.querySelectorAll("[data-wave]").forEach(w => {
+  for (let i = 0; i < 54; i++) {
+    const b = document.createElement("i");
+    b.style.height = (12 + Math.abs(Math.sin(i * 1.24) * Math.cos(i * 0.44)) * 66) + "px";
+    w.appendChild(b);
+  }
+});
+
+tl.fromTo("#swipe", { yPercent: 0 }, { yPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#slug", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.38 }, 0.18);
+tl.fromTo("#head", { opacity: 0, y: 26, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "expo.out" }, 0.3);
+tl.fromTo(".fmt", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.08 }, 0.55);
+tl.fromTo("#console", { opacity: 0, y: 34, scale: 0.99 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "expo.out" }, 0.4);
+tl.fromTo("#meta .pill", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.3, stagger: 0.05 }, 0.95);
+
+// click generate at ~2.3s
+const click = T.b["gen-1"] + 1.55;
+tl.fromTo("#cursor", { opacity: 0, x: 900, y: 760 }, { opacity: 1, x: 900, y: 818, duration: 0.45, ease: "power2.out" }, click - 0.55);
+tl.to("#genbtn", { scale: 0.975, backgroundColor: "#4a3ae8", duration: 0.12, yoyo: true, repeat: 1 }, click);
+tl.to("#cursor", { opacity: 0, duration: 0.25 }, click + 0.25);
+tl.to("#genbtn", { backgroundColor: "#e9e7f3", color: "#8b8aa2", boxShadow: "0 0 0 rgba(91,75,255,0)", duration: 0.3 }, click + 0.3);
+tl.fromTo("#progress", { opacity: 0 }, { opacity: 1, duration: 0.3 }, click + 0.35);
+tl.fromTo("#ph", { opacity: 1 }, { opacity: 0, duration: 0.25 }, click + 0.3);
+
+const dur = 1.55;
+tl.to("#arc", { strokeDashoffset: 0, duration: dur, ease: "power2.inOut" }, click + 0.4);
+tl.to("#pbar", { scaleX: 1, duration: dur, ease: "power2.inOut" }, click + 0.4);
+const counter = { v: 0 };
+tl.to(counter, { v: 100, duration: dur, ease: "power2.inOut", onUpdate: () => {
+  document.getElementById("pct").textContent = bn(counter.v) + "%";
+  document.getElementById("st").textContent = counter.v < 45 ? "টেক্সট → স্পিচ…" : counter.v < 85 ? "ভয়েস রেন্ডার হচ্ছে…" : "ফাইনালাইজ…";
+} }, click + 0.4);
+
+const done = click + 0.4 + dur + 0.15;
+tl.to("#progress", { opacity: 0, duration: 0.25 }, done);
+tl.fromTo("#result", { opacity: 0, y: 16, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "expo.out" }, done + 0.05);
+tl.fromTo("#result .wave i", { scaleY: 0.15 }, { scaleY: 1, duration: 0.35, stagger: 0.005, ease: "power2.out" }, done + 0.1);
+tl.fromTo("#success", { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 0.35 }, done + 0.35);
+tl.fromTo("#downloads", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35 }, done + 0.5);
+
+// WAV switch at gen-2
+const wav = T.b["gen-2"] + 0.15;
+tl.to("#o-mp3", { backgroundColor: "#ffffff", color: "#8b8aa2", duration: 0.2 }, wav);
+tl.to("#o-wav", { backgroundColor: "#5b4bff", color: "#ffffff", duration: 0.2 }, wav);
+tl.set("#fname", { textContent: "Speech_001.wav" }, wav + 0.15);
+tl.set("#fmeta", { textContent: "0:07 · 48kHz · 1.4 MB" }, wav + 0.15);
+tl.set("#outtag", { textContent: "WAV" }, wav + 0.15);
+tl.to("#dl-mp3", { borderColor: "#dedce9", backgroundColor: "#ffffff", color: "#3a3950", duration: 0.2 }, wav + 0.15);
+tl.to("#dl-wav", { borderColor: "#5b4bff", backgroundColor: "#f0edff", color: "#3a2fd0", duration: 0.2 }, wav + 0.15);
+tl.fromTo("#result", { boxShadow: "0 14px 34px rgba(25,25,60,0.08)" }, { boxShadow: "0 20px 50px rgba(91,75,255,0.22)", duration: 0.4, yoyo: true, repeat: 1 }, wav + 0.15);
+
+window.__timelines["generate"] = tl;
+</script>
+</template>

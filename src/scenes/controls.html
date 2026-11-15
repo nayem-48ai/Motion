@@ -1,0 +1,162 @@
+<template>
+<style>
+/*__BASE__*/
+#root { background: var(--paper); }
+.head { position: absolute; left: 96px; top: 72px; right: 96px; display: flex; align-items: flex-end; justify-content: space-between; }
+.head .l .slug { margin-bottom: 18px; }
+.head h2 { font-size: 82px; line-height: 1.1; }
+.head h2 span { color: #5b4bff; }
+.head .r { text-align: right; font-family: "BN Sans"; font-size: 21px; line-height: 1.55; color: #5c5b74; width: 470px; padding-bottom: 6px; }
+.head .r b { color: #14141f; }
+
+.panel { position: absolute; border-radius: 24px; background: #fff; border: 1px solid #e4e2ee; box-shadow: 0 18px 50px rgba(25,25,60,0.08); }
+.slider { left: 96px; width: 760px; height: 300px; padding: 32px 34px; }
+.slider.vol { top: 620px; }
+.slider.spd { top: 300px; }
+.slider .top { display: flex; align-items: flex-start; justify-content: space-between; }
+.slider .lab { font-family: Outfit; font-weight: 800; font-size: 13px; letter-spacing: 0.2em; color: #8b8aa2; }
+.slider .lab b { display: block; font-family: "BN Sans"; font-weight: 700; font-size: 25px; letter-spacing: 0; color: #14141f; margin-top: 6px; }
+.slider .val { font-family: Outfit; font-weight: 800; font-size: 52px; letter-spacing: -0.04em; color: #5b4bff; line-height: 1; }
+.slider.vol .val { color: #0f9e82; }
+.slider .track { position: absolute; left: 34px; right: 34px; top: 172px; height: 8px; border-radius: 100px; background: #e9e7f3; }
+.slider .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 100px; background: #5b4bff; transform-origin: left center; }
+.slider.vol .fill { background: #16c7a3; }
+.slider .thumb { position: absolute; top: -12px; width: 32px; height: 32px; border-radius: 50%; background: #fff; border: 4px solid #5b4bff; box-shadow: 0 6px 16px rgba(91,75,255,0.35); }
+.slider.vol .thumb { border-color: #16c7a3; box-shadow: 0 6px 16px rgba(22,199,163,0.35); }
+.slider .scale { position: absolute; left: 34px; right: 34px; top: 206px; display: flex; justify-content: space-between; font-family: JBM; font-size: 13px; color: #8b8aa2; }
+.slider .hint { position: absolute; left: 34px; bottom: 24px; font-family: "BN Sans"; font-size: 15px; color: #8b8aa2; }
+
+.emo { left: 890px; top: 300px; width: 934px; height: 620px; padding: 30px 32px; overflow: hidden; }
+.emo .glow { position: absolute; right: -200px; top: -220px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(91,75,255,0.16), rgba(91,75,255,0) 68%); }
+.emo .top { position: relative; display: flex; align-items: flex-start; justify-content: space-between; }
+.emo .lab { font-family: Outfit; font-weight: 800; font-size: 13px; letter-spacing: 0.2em; color: #8b8aa2; }
+.emo .lab b { display: block; font-family: "BN Sans"; font-weight: 700; font-size: 25px; letter-spacing: 0; color: #14141f; margin-top: 6px; }
+.emo .n { text-align: right; line-height: 0.85; }
+.emo .n .big { font-family: Outfit; font-weight: 800; font-size: 104px; letter-spacing: -0.06em; color: #5b4bff; }
+.emo .n .e { font-family: JBM; font-size: 12px; letter-spacing: 0.18em; color: #8b8aa2; margin-top: 8px; }
+.chips { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 11px; margin-top: 22px; }
+.ec { height: 74px; border-radius: 12px; border: 1px solid #e6e4f0; background: #faf9fd; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font-family: Outfit; font-weight: 600; font-size: 20px; color: #3a3950; }
+.ec .i { width: 9px; height: 9px; border-radius: 50%; background: #d4d2e2; }
+.ec.hot { border-color: #c9c4ff; background: #f0edff; color: #3a2fd0; }
+.ec.hot .i { background: #5b4bff; }
+.ec.sel { background: #14141f; color: #fff; border-color: #14141f; box-shadow: 0 10px 26px rgba(20,20,45,0.24); }
+.ec.sel .i { background: #6ff0d3; }
+.ec.more { justify-content: center; gap: 12px; border-style: dashed; background: transparent; color: #6c6b84; }
+.ec.more b { font-family: "BN Sans"; font-size: 18px; }
+.emo .foot { position: absolute; left: 32px; right: 32px; bottom: 22px; display: flex; justify-content: space-between; font-family: JBM; font-size: 12px; letter-spacing: 0.12em; color: #a2a1b6; }
+.cursor { position: absolute; left: 0; top: 0; z-index: 20; width: 30px; height: 40px; filter: drop-shadow(0 5px 8px rgba(0,0,0,0.25)); }
+</style>
+<div id="root" data-composition-id="controls" data-width="1920" data-height="1080">
+  <div class="stage light">
+    <div class="grid on-light"></div>
+    <div class="glow g-violet" style="width:800px;height:800px;left:-380px;top:-360px;opacity:.22"></div>
+    <div class="swipe" id="swipe"></div>
+
+    <div class="head">
+      <div class="l">
+        <div class="slug" id="slug"><span class="num">06</span> স্টুডিও কন্ট্রোল</div>
+        <h2 class="h2" id="head">সূক্ষ্ম নিয়ন্ত্রণ।</h2>
+      </div>
+      <div class="r" id="r">গতি, জোর আর অনুভূতি — তিনটাই <b>আপনার হাতে</b>।</div>
+    </div>
+
+    <div class="panel slider spd" id="spd">
+      <div class="top">
+        <div class="lab">SPEED<b>স্পিড</b></div>
+        <div class="val"><span id="v1">1.10</span>×</div>
+      </div>
+      <div class="track"><div class="fill" id="fill1"></div><div class="thumb" id="thumb1"></div></div>
+      <div class="scale"><span>0.6×</span><span>1.0×</span><span>1.5×</span></div>
+      <div class="hint">ধীর, স্পষ্ট পড়া থেকে দ্রুত, উৎসাহী ডেলিভারি।</div>
+    </div>
+
+    <div class="panel slider vol" id="vol">
+      <div class="top">
+        <div class="lab">VOLUME<b>ভলিউম</b></div>
+        <div class="val"><span id="v2">1.00</span>×</div>
+      </div>
+      <div class="track"><div class="fill" id="fill2"></div><div class="thumb" id="thumb2"></div></div>
+      <div class="scale"><span>0.5×</span><span>1.25×</span><span>2.0×</span></div>
+      <div class="hint">সব ভয়েস একই লাউডনেসে — মিক্সে কোনো সারপ্রাইজ নেই।</div>
+    </div>
+
+    <div class="panel emo" id="emo">
+      <div class="glow"></div>
+      <div class="top">
+        <div class="lab">EMOTION<b>ইমোশন</b></div>
+        <div class="n"><div class="big">৫৮</div><div class="e">EMOTIONS · SONIC 3.5</div></div>
+      </div>
+      <div class="chips" id="chips">
+        <div class="ec hot" data-e="neutral"><span>Neutral</span><span class="i"></span></div>
+        <div class="ec hot" data-e="calm"><span>Calm</span><span class="i"></span></div>
+        <div class="ec hot" data-e="angry"><span>Angry</span><span class="i"></span></div>
+        <div class="ec hot" data-e="content"><span>Content</span><span class="i"></span></div>
+        <div class="ec hot" data-e="sad"><span>Sad</span><span class="i"></span></div>
+        <div class="ec hot" data-e="scared"><span>Scared</span><span class="i"></span></div>
+        <div class="ec hot" data-e="affectionate"><span>Affectionate</span><span class="i"></span></div>
+        <div class="ec"><span>Happy</span><span class="i"></span></div>
+        <div class="ec"><span>Excited</span><span class="i"></span></div>
+        <div class="ec"><span>Curious</span><span class="i"></span></div>
+        <div class="ec"><span>Confident</span><span class="i"></span></div>
+        <div class="ec more"><b>+ আরও ৪৬টি</b></div>
+      </div>
+      <div class="foot"><span>এক ভয়েস · ৫৮ অভিব্যক্তি</span><span>SONIC 3.5</span></div>
+    </div>
+
+    <div class="cursor" id="cursor"><svg width="30" height="40" viewBox="0 0 30 40"><path d="M3 2l24 17-10 2 6 12-5 3-6-12-8 7V2z" fill="#14141f" stroke="#fff" stroke-width="2"/></svg></div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = /*__TIMING__*/;
+
+// initial slider geometry: speed 1.10 of 0.6–1.5, volume 1.00 of 0.5–2.0
+gsap.set("#thumb1", { left: "calc(55.56% - 16px)" });
+gsap.set("#fill1", { width: "55.56%" });
+gsap.set("#thumb2", { left: "calc(33.33% - 16px)" });
+gsap.set("#fill2", { width: "33.33%" });
+
+tl.fromTo("#swipe", { xPercent: 0 }, { xPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#slug", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.38 }, 0.18);
+tl.fromTo("#head", { opacity: 0, y: 26, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "expo.out" }, 0.3);
+tl.fromTo("#r", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0.62);
+tl.fromTo("#spd", { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.55, ease: "expo.out" }, 0.38);
+tl.fromTo("#vol", { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.55, ease: "expo.out" }, 0.5);
+tl.fromTo("#emo", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 0.42);
+tl.fromTo(".ec", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.03 }, 0.9);
+
+// speed
+tl.to({ v: 1.10 }, { v: 1.35, duration: 1.2, ease: "power2.inOut", onUpdate: function() { const v = this.targets()[0].v; document.getElementById("v1").textContent = v.toFixed(2); } }, T.b["ctrl-1"] + 0.55);
+tl.to("#thumb1", { x: 192, duration: 1.2, ease: "power2.inOut" }, T.b["ctrl-1"] + 0.55);
+tl.to("#fill1", { scaleX: 1.5, duration: 1.2, ease: "power2.inOut" }, T.b["ctrl-1"] + 0.55);
+tl.fromTo("#spd", { borderColor: "#e4e2ee" }, { borderColor: "#c9c4ff", duration: 0.4, yoyo: true, repeat: 1 }, T.b["ctrl-1"] + 0.2);
+
+// volume
+tl.to({ v: 1.00 }, { v: 1.60, duration: 1.2, ease: "power2.inOut", onUpdate: function() { const v = this.targets()[0].v; document.getElementById("v2").textContent = v.toFixed(2); } }, T.b["ctrl-2"] + 0.5);
+tl.to("#thumb2", { x: 277, duration: 1.2, ease: "power2.inOut" }, T.b["ctrl-2"] + 0.5);
+tl.to("#fill2", { scaleX: 2.2, duration: 1.2, ease: "power2.inOut" }, T.b["ctrl-2"] + 0.5);
+tl.fromTo("#vol", { borderColor: "#e4e2ee" }, { borderColor: "#8fe8d6", duration: 0.4, yoyo: true, repeat: 1 }, T.b["ctrl-2"] + 0.2);
+
+// emotion count pulse
+tl.fromTo(".emo .big", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.55, ease: "back.out(1.8)" }, T.b["ctrl-3"] + 0.1);
+tl.fromTo("#emo", { boxShadow: "0 18px 50px rgba(25,25,60,0.08)" }, { boxShadow: "0 24px 70px rgba(91,75,255,0.2)", duration: 0.5, yoyo: true, repeat: 1 }, T.b["ctrl-3"] + 0.1);
+
+// highlight the seven named emotions in step with narration
+const order = ["neutral", "calm", "angry", "content", "sad", "scared", "affectionate"];
+const t0 = T.b["ctrl-4"] + 0.5;
+order.forEach((name, i) => {
+  tl.to(`[data-e="${name}"]`, { backgroundColor: "#14141f", color: "#ffffff", borderColor: "#14141f", boxShadow: "0 10px 26px rgba(20,20,45,0.24)", duration: 0.22, ease: "power2.out" }, t0 + i * 0.93);
+  tl.to(`[data-e="${name}"] .i`, { backgroundColor: "#6ff0d3", duration: 0.22 }, t0 + i * 0.93);
+});
+
+// cursor drags
+tl.fromTo("#cursor", { opacity: 0, x: 560, y: 520 }, { opacity: 1, x: 506, y: 486, duration: 0.5 }, T.b["ctrl-1"] - 0.2);
+tl.to("#cursor", { x: 726, y: 486, duration: 1.2, ease: "power2.inOut" }, T.b["ctrl-1"] + 0.55);
+tl.to("#cursor", { opacity: 0, duration: 0.3 }, T.b["ctrl-2"] - 0.3);
+tl.fromTo("#cursor", { opacity: 0, x: 380, y: 830 }, { opacity: 1, x: 352, y: 806, duration: 0.3, immediateRender: false }, T.b["ctrl-2"] + 0.2);
+tl.to("#cursor", { x: 638, y: 806, duration: 1.2, ease: "power2.inOut" }, T.b["ctrl-2"] + 0.5);
+tl.to("#cursor", { opacity: 0, duration: 0.3 }, T.b["ctrl-3"] - 0.1);
+
+window.__timelines["controls"] = tl;
+</script>
+</template>

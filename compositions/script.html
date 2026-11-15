@@ -1,0 +1,231 @@
+<template>
+<style>
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Black.ttf") format("truetype"); font-weight: 900; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Black.ttf") format("truetype"); font-weight: 900; font-style: normal; }
+@font-face { font-family: "Outfit"; src: url("assets/fonts/Outfit-400.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "Inter"; src: url("assets/fonts/Inter-400.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "JBM"; src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "JBM"; src: url("assets/fonts/JetBrainsMono-600.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+
+:root {
+  --ink: #0a0a14;
+  --ink-2: #12121f;
+  --paper: #f6f5fb;
+  --paper-2: #ffffff;
+  --violet: #5b4bff;
+  --violet-2: #8b7bff;
+  --mint: #16c7a3;
+  --mint-2: #6ff0d3;
+  --coral: #ff6b5a;
+  --gold: #ffc24b;
+  --muted: #8e8ea6;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-dark: rgba(10, 10, 20, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+body { font-family: "Outfit", "BN Sans", sans-serif; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+#root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; }
+.stage { position: absolute; inset: 0; overflow: hidden; }
+.dark { background: var(--ink); color: #f5f4fb; }
+.light { background: var(--paper); color: var(--ink); }
+
+.bn { font-family: "BN Sans", "Outfit", sans-serif; }
+.bnserif { font-family: "BN Serif", "BN Sans", serif; }
+.mono { font-family: "JBM", monospace; }
+.en { font-family: "Outfit", sans-serif; }
+
+.grid { position: absolute; inset: 0; opacity: 0.5;
+  background-image: linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: 96px 96px; }
+.light .grid, .grid.on-light { background-image: linear-gradient(rgba(10,10,20,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(10,10,20,0.06) 1px, transparent 1px); opacity: 1; }
+.glow { position: absolute; border-radius: 50%; filter: blur(10px); pointer-events: none; }
+.g-violet { background: radial-gradient(circle, rgba(91,75,255,0.42) 0%, rgba(91,75,255,0.12) 42%, rgba(91,75,255,0) 70%); }
+.g-mint { background: radial-gradient(circle, rgba(22,199,163,0.35) 0%, rgba(22,199,163,0.08) 45%, rgba(22,199,163,0) 72%); }
+
+.kicker { font-family: "Outfit", sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--mint); display: flex; align-items: center; gap: 14px; }
+.kicker .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mint); }
+.kicker.on-light { color: #4a3df0; }
+.kicker.on-light .dot { background: #4a3df0; }
+
+.slug { display: inline-flex; align-items: center; gap: 14px; background: var(--violet); color: #fff; padding: 12px 22px 13px; font-weight: 700; font-size: 22px; letter-spacing: 0.03em; border-radius: 6px; }
+.slug .num { font-family: "JBM", monospace; font-size: 19px; opacity: 0.75; }
+.slug.on-light { background: var(--ink); }
+
+.h1 { font-family: "BN Serif", serif; font-weight: 900; font-size: 118px; line-height: 1.14; letter-spacing: -0.015em; }
+.h2 { font-family: "BN Serif", serif; font-weight: 700; font-size: 82px; line-height: 1.2; letter-spacing: -0.01em; }
+.h3 { font-family: "BN Sans", sans-serif; font-weight: 700; font-size: 54px; line-height: 1.3; }
+.body { font-family: "BN Sans", sans-serif; font-weight: 400; font-size: 32px; line-height: 1.65; color: #b9b8cc; }
+.light .body { color: #55556b; }
+.hl { color: var(--mint); }
+.hl-violet { color: var(--violet-2); }
+.light .hl-violet { color: var(--violet); }
+
+.card { border-radius: 28px; border: 1px solid var(--line); background: rgba(255,255,255,0.045); }
+.card-light { border-radius: 28px; border: 1px solid var(--line-dark); background: #fff; box-shadow: 0 24px 70px rgba(20,20,45,0.10); }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 100px; border: 1px solid var(--line); font-size: 20px; font-weight: 500; white-space: nowrap; }
+.light .chip { border-color: var(--line-dark); }
+.pill { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 100px; font-size: 19px; font-weight: 700; }
+
+.wave { display: flex; align-items: center; gap: 5px; }
+.wave i { display: block; width: 6px; border-radius: 6px; background: currentColor; }
+
+.browser { border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 40px 100px rgba(6,6,20,0.28); border: 1px solid rgba(10,10,20,0.10); }
+.browser .bar { height: 46px; background: #eeeef6; display: flex; align-items: center; gap: 8px; padding: 0 20px; border-bottom: 1px solid #e2e2ee; }
+.browser .bar .d { width: 11px; height: 11px; border-radius: 50%; background: #d4d4e2; }
+.browser .bar .url { margin-left: 18px; font-family: "JBM", monospace; font-size: 15px; color: #6b6b85; background: #fff; border-radius: 7px; padding: 6px 16px; border: 1px solid #e2e2ee; }
+
+.swipe { position: absolute; inset: -2px; z-index: 60; background: linear-gradient(105deg, #4b3cff 0%, #6a5bff 46%, #16c7a3 100%); transform-origin: top left; }
+.swipe::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: #fff; opacity: 0.65; }
+
+.rule { height: 1px; background: var(--line); }
+.light .rule { background: var(--line-dark); }
+.small { font-size: 20px; color: var(--muted); letter-spacing: 0.02em; }
+.light .small { color: #7a7a92; }
+
+.stamp { font-family: "JBM", monospace; font-weight: 600; border: 3px solid currentColor; border-radius: 8px; padding: 10px 16px; letter-spacing: 0.12em; text-transform: uppercase; }
+.cursor { position: absolute; width: 34px; height: 44px; z-index: 50; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3)); }
+
+.logo { display: inline-flex; align-items: center; gap: 16px; }
+.logo svg { display: block; }
+.logo .word { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 46px; letter-spacing: -0.045em; line-height: 1; }
+.logo .word em { font-style: normal; color: var(--mint); }
+.logo .sub { font-family: "Outfit", sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.55; display: block; margin-top: 6px; }
+
+
+#root { background: #08080f; }
+.head { position: absolute; left: 96px; top: 84px; right: 96px; display: flex; align-items: flex-end; justify-content: space-between; }
+.head .l .kicker { margin-bottom: 16px; }
+.head h2 { font-size: 76px; line-height: 1.12; }
+.head h2 span { color: #16c7a3; }
+.head .r { text-align: right; font-family: "BN Sans"; font-size: 20px; color: #9c9bb2; width: 430px; line-height: 1.55; padding-bottom: 4px; }
+.head .r b { color: #f1f0fa; }
+
+.editor { position: absolute; left: 96px; top: 286px; width: 1090px; height: 610px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); background: #0e0e1a; box-shadow: 0 40px 90px rgba(0,0,0,0.45); }
+.editor .bar { height: 46px; background: #151523; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; padding: 0 18px; gap: 7px; }
+.editor .bar .d { width: 10px; height: 10px; border-radius: 50%; background: #2e2e44; }
+.editor .bar .f { margin-left: 16px; font-family: JBM; font-size: 12px; color: #82819b; letter-spacing: 0.08em; }
+.editor .bar .chars { margin-left: auto; font-family: JBM; font-size: 11px; color: #5f5e78; }
+.editor .body { display: flex; height: 564px; }
+.editor .ln { width: 62px; flex: 0 0 auto; background: #0b0b16; border-right: 1px solid rgba(255,255,255,0.06); padding: 24px 0; text-align: right; }
+.editor .ln span { display: block; font-family: JBM; font-size: 13px; color: #3f3e56; line-height: 1.95; padding-right: 14px; }
+.editor .txt { flex: 1; padding: 24px 30px; font-family: "BN Sans"; font-size: 27px; line-height: 1.95; color: #e8e7f2; position: relative; }
+.editor .txt .ch { opacity: 0; }
+.editor .txt .chunkmark { display: inline-block; width: 5px; height: 30px; border-radius: 3px; vertical-align: -5px; margin: 0 3px; background: #5b4bff; opacity: 0; }
+.editor .caret { display: inline-block; width: 2px; height: 30px; background: #16c7a3; vertical-align: -5px; margin-left: 2px; }
+.editor .foot { position: absolute; left: 62px; right: 0; bottom: 0; height: 38px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font-family: JBM; font-size: 11px; color: #5f5e78; letter-spacing: 0.1em; }
+
+.chunks { position: absolute; left: 1228px; top: 286px; width: 596px; height: 610px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.035); padding: 26px 26px; overflow: hidden; }
+.chunks .top { display: flex; align-items: flex-start; justify-content: space-between; }
+.chunks .lab { font-family: Outfit; font-weight: 800; font-size: 12px; letter-spacing: 0.2em; color: #8b8aa2; }
+.chunks .lab b { display: block; font-family: "BN Sans"; font-weight: 700; font-size: 23px; letter-spacing: 0; color: #f1f0fa; margin-top: 5px; }
+.chunks .n { font-family: Outfit; font-weight: 800; font-size: 58px; letter-spacing: -0.05em; color: #16c7a3; line-height: 0.9; }
+.chunks .n small { font-family: JBM; font-size: 11px; color: #6d6c88; letter-spacing: 0.14em; display: block; text-align: right; margin-top: 6px; }
+.chunks .list { margin-top: 26px; display: flex; flex-direction: column; gap: 12px; }
+.chunk { border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); padding: 14px 16px; }
+.chunk .h { display: flex; align-items: center; justify-content: space-between; }
+.chunk .h .k { font-family: JBM; font-size: 11px; letter-spacing: 0.14em; color: #8b7bff; }
+.chunk .h .t { font-family: JBM; font-size: 11px; color: #6d6c88; }
+.chunk .tx { margin-top: 6px; font-family: "BN Sans"; font-size: 17px; line-height: 1.5; color: #c9c8d8; height: 50px; overflow: hidden; }
+.chunk .mini { margin-top: 8px; height: 4px; border-radius: 3px; background: rgba(255,255,255,0.08); overflow: hidden; }
+.chunk .mini i { display: block; height: 100%; width: 100%; background: #5b4bff; transform: scaleX(0); transform-origin: left; }
+.chunk:nth-child(2) .h .k { color: #16c7a3; }
+.chunk:nth-child(3) .h .k { color: #ff6b5a; }
+.chunk:nth-child(2) .mini i { background: #16c7a3; }
+.chunk:nth-child(3) .mini i { background: #ff6b5a; }
+.merge { position: absolute; left: 26px; right: 26px; bottom: 22px; display: flex; align-items: center; justify-content: space-between; font-family: JBM; font-size: 11px; letter-spacing: 0.12em; color: #6d6c88; }
+.merge b { color: #6ff0d3; }
+.stamp { position: absolute; left: 96px; bottom: 74px; font-family: JBM; font-size: 12px; letter-spacing: 0.14em; color: #5f5e78; }
+</style>
+<div id="root" data-composition-id="script" data-width="1920" data-height="1080">
+  <div class="stage dark">
+    <div class="grid"></div>
+    <div class="glow g-mint" style="width:800px;height:800px;left:-340px;bottom:-400px"></div>
+    <div class="glow g-violet" style="width:800px;height:800px;right:-320px;top:-360px"></div>
+    <div class="swipe" id="swipe"></div>
+
+    <div class="head">
+      <div class="l">
+        <div class="kicker" id="kicker"><span class="dot"></span>SMART CHUNKING</div>
+        <h2 class="h2" id="head">লম্বা প্যারাগ্রাফ?<br><span>চিন্তা নেই।</span></h2>
+      </div>
+      <div class="r" id="r">স্টুডিও নিজেই স্ক্রিপ্ট ভাগ করে, <b>প্রতিটি টুকরো</b> আলাদা করে জেনারেট করে — শেষে জোড়া লাগায়।</div>
+    </div>
+
+    <div class="editor" id="editor">
+      <div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="f">script.txt — Bengali (BN)</span><span class="chars">১৮২ CHARACTERS</span></div>
+      <div class="body">
+        <div class="ln"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span></div>
+        <div class="txt" id="txt"></div>
+      </div>
+      <div class="foot"><span>UTF-8 · BENGALI</span><span>AUTO-SAVE · LOCAL</span></div>
+    </div>
+
+    <div class="chunks" id="chunks">
+      <div class="top">
+        <div class="lab">SMART CHUNKING<b>ভাগ করা হচ্ছে…</b></div>
+        <div class="n">০৩<small>CHUNKS</small></div>
+      </div>
+      <div class="list">
+        <div class="chunk" id="c1"><div class="h"><span class="k">CHUNK 01</span><span class="t">0:02</span></div><div class="tx">স্পিকিতে স্বাগতম।</div><div class="mini"><i></i></div></div>
+        <div class="chunk" id="c2"><div class="h"><span class="k">CHUNK 02</span><span class="t">0:11</span></div><div class="tx">আপনার স্ক্রিপ্ট লিখুন, ভাষা ও ভয়েস বেছে নিন — আর সেকেন্ডের মধ্যে ডাউনলোড করুন স্টুডিও-মানের অডিও।</div><div class="mini"><i></i></div></div>
+        <div class="chunk" id="c3"><div class="h"><span class="k">CHUNK 03</span><span class="t">0:07</span></div><div class="tx">বড় প্যারাগ্রাফও সমস্যা নয় — স্মার্ট চাঙ্কিং নিজেই ভাগ করে নেয়।</div><div class="mini"><i></i></div></div>
+      </div>
+      <div class="merge"><span>MERGE → <b>ONE MP3</b></span><span>42 LANGUAGES</span></div>
+    </div>
+
+    <div class="stamp" id="stamp">LONG TEXT → CHUNKS → ONE AUDIO</div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = {"start": 178.897, "dur": 7.472, "b": {"script-1": 0.67, "script-2": 3.548}, "d": {"script-1": 2.508, "script-2": 3.004}};
+
+const text = "স্পিকিতে স্বাগতম। আপনার স্ক্রিপ্ট লিখুন, ভাষা ও ভয়েস বেছে নিন — আর সেকেন্ডের মধ্যে ডাউনলোড করুন স্টুডিও-মানের অডিও। বড় প্যারাগ্রাফও সমস্যা নয় — স্মার্ট চাঙ্কিং নিজেই ভাগ করে নেয়।";
+const txt = document.getElementById("txt");
+const chunkStarts = [0, 18, 117];
+let ci = 0;
+for (let i = 0; i < text.length; i++) {
+  if (chunkStarts.includes(i) && i > 0) {
+    const m = document.createElement("span");
+    m.className = "chunkmark";
+    m.dataset.m = ci;
+    txt.appendChild(m);
+    ci++;
+  }
+  const s = document.createElement("span");
+  s.className = "ch";
+  s.textContent = text[i];
+  txt.appendChild(s);
+}
+const caret = document.createElement("span");
+caret.className = "caret";
+txt.appendChild(caret);
+
+tl.fromTo("#swipe", { yPercent: 0 }, { yPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#kicker", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.38 }, 0.18);
+tl.fromTo("#head", { opacity: 0, y: 26, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "expo.out" }, 0.3);
+tl.fromTo("#r", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0.6);
+tl.fromTo("#editor", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.55, ease: "expo.out" }, 0.4);
+tl.fromTo("#chunks", { opacity: 0, x: 34 }, { opacity: 1, x: 0, duration: 0.55, ease: "expo.out" }, 0.5);
+tl.fromTo("#stamp", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 1.1);
+
+tl.to("#txt .ch", { opacity: 1, duration: 0.01, stagger: 0.017, ease: "none" }, T.b["script-1"] + 0.35);
+tl.fromTo("#txt .caret", { opacity: 0 }, { opacity: 1, duration: 0.4, repeat: 6, yoyo: true, ease: "none" }, T.b["script-1"] + 0.4);
+
+tl.fromTo(".chunkmark", { opacity: 0, height: 0 }, { opacity: 1, height: 30, duration: 0.35, stagger: 0.2, ease: "back.out(1.6)" }, T.b["script-2"] + 0.15);
+tl.fromTo(".chunk", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.22, ease: "power3.out" }, T.b["script-2"] + 0.3);
+tl.fromTo(".chunk .mini i", { scaleX: 0 }, { scaleX: 1, duration: 0.5, stagger: 0.22, ease: "power2.out" }, T.b["script-2"] + 0.5);
+tl.fromTo("#chunks .lab b", { color: "#f1f0fa" }, { color: "#6ff0d3", duration: 0.4 }, T.b["script-2"] + 1.1);
+tl.to(".chunks .n", { scale: 1.08, duration: 0.25, yoyo: true, repeat: 1, ease: "sine.inOut" }, T.b["script-2"] + 1.0);
+
+window.__timelines["script"] = tl;
+</script>
+</template>

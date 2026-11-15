@@ -1,0 +1,222 @@
+<template>
+<style>
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "BN Serif"; src: url("assets/fonts/NotoSerifBengali-Black.ttf") format("truetype"); font-weight: 900; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "BN Sans"; src: url("assets/fonts/NotoSansBengali-Black.ttf") format("truetype"); font-weight: 900; font-style: normal; }
+@font-face { font-family: "Outfit"; src: url("assets/fonts/Outfit-400.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "Inter"; src: url("assets/fonts/Inter-400.woff2") format("woff2"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "JBM"; src: url("assets/fonts/JetBrainsMono-400.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "JBM"; src: url("assets/fonts/JetBrainsMono-600.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+
+:root {
+  --ink: #0a0a14;
+  --ink-2: #12121f;
+  --paper: #f6f5fb;
+  --paper-2: #ffffff;
+  --violet: #5b4bff;
+  --violet-2: #8b7bff;
+  --mint: #16c7a3;
+  --mint-2: #6ff0d3;
+  --coral: #ff6b5a;
+  --gold: #ffc24b;
+  --muted: #8e8ea6;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-dark: rgba(10, 10, 20, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+body { font-family: "Outfit", "BN Sans", sans-serif; -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+#root { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: hidden; }
+.stage { position: absolute; inset: 0; overflow: hidden; }
+.dark { background: var(--ink); color: #f5f4fb; }
+.light { background: var(--paper); color: var(--ink); }
+
+.bn { font-family: "BN Sans", "Outfit", sans-serif; }
+.bnserif { font-family: "BN Serif", "BN Sans", serif; }
+.mono { font-family: "JBM", monospace; }
+.en { font-family: "Outfit", sans-serif; }
+
+.grid { position: absolute; inset: 0; opacity: 0.5;
+  background-image: linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: 96px 96px; }
+.light .grid, .grid.on-light { background-image: linear-gradient(rgba(10,10,20,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(10,10,20,0.06) 1px, transparent 1px); opacity: 1; }
+.glow { position: absolute; border-radius: 50%; filter: blur(10px); pointer-events: none; }
+.g-violet { background: radial-gradient(circle, rgba(91,75,255,0.42) 0%, rgba(91,75,255,0.12) 42%, rgba(91,75,255,0) 70%); }
+.g-mint { background: radial-gradient(circle, rgba(22,199,163,0.35) 0%, rgba(22,199,163,0.08) 45%, rgba(22,199,163,0) 72%); }
+
+.kicker { font-family: "Outfit", sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--mint); display: flex; align-items: center; gap: 14px; }
+.kicker .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--mint); }
+.kicker.on-light { color: #4a3df0; }
+.kicker.on-light .dot { background: #4a3df0; }
+
+.slug { display: inline-flex; align-items: center; gap: 14px; background: var(--violet); color: #fff; padding: 12px 22px 13px; font-weight: 700; font-size: 22px; letter-spacing: 0.03em; border-radius: 6px; }
+.slug .num { font-family: "JBM", monospace; font-size: 19px; opacity: 0.75; }
+.slug.on-light { background: var(--ink); }
+
+.h1 { font-family: "BN Serif", serif; font-weight: 900; font-size: 118px; line-height: 1.14; letter-spacing: -0.015em; }
+.h2 { font-family: "BN Serif", serif; font-weight: 700; font-size: 82px; line-height: 1.2; letter-spacing: -0.01em; }
+.h3 { font-family: "BN Sans", sans-serif; font-weight: 700; font-size: 54px; line-height: 1.3; }
+.body { font-family: "BN Sans", sans-serif; font-weight: 400; font-size: 32px; line-height: 1.65; color: #b9b8cc; }
+.light .body { color: #55556b; }
+.hl { color: var(--mint); }
+.hl-violet { color: var(--violet-2); }
+.light .hl-violet { color: var(--violet); }
+
+.card { border-radius: 28px; border: 1px solid var(--line); background: rgba(255,255,255,0.045); }
+.card-light { border-radius: 28px; border: 1px solid var(--line-dark); background: #fff; box-shadow: 0 24px 70px rgba(20,20,45,0.10); }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 100px; border: 1px solid var(--line); font-size: 20px; font-weight: 500; white-space: nowrap; }
+.light .chip { border-color: var(--line-dark); }
+.pill { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 100px; font-size: 19px; font-weight: 700; }
+
+.wave { display: flex; align-items: center; gap: 5px; }
+.wave i { display: block; width: 6px; border-radius: 6px; background: currentColor; }
+
+.browser { border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 40px 100px rgba(6,6,20,0.28); border: 1px solid rgba(10,10,20,0.10); }
+.browser .bar { height: 46px; background: #eeeef6; display: flex; align-items: center; gap: 8px; padding: 0 20px; border-bottom: 1px solid #e2e2ee; }
+.browser .bar .d { width: 11px; height: 11px; border-radius: 50%; background: #d4d4e2; }
+.browser .bar .url { margin-left: 18px; font-family: "JBM", monospace; font-size: 15px; color: #6b6b85; background: #fff; border-radius: 7px; padding: 6px 16px; border: 1px solid #e2e2ee; }
+
+.swipe { position: absolute; inset: -2px; z-index: 60; background: linear-gradient(105deg, #4b3cff 0%, #6a5bff 46%, #16c7a3 100%); transform-origin: top left; }
+.swipe::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: #fff; opacity: 0.65; }
+
+.rule { height: 1px; background: var(--line); }
+.light .rule { background: var(--line-dark); }
+.small { font-size: 20px; color: var(--muted); letter-spacing: 0.02em; }
+.light .small { color: #7a7a92; }
+
+.stamp { font-family: "JBM", monospace; font-weight: 600; border: 3px solid currentColor; border-radius: 8px; padding: 10px 16px; letter-spacing: 0.12em; text-transform: uppercase; }
+.cursor { position: absolute; width: 34px; height: 44px; z-index: 50; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3)); }
+
+.logo { display: inline-flex; align-items: center; gap: 16px; }
+.logo svg { display: block; }
+.logo .word { font-family: "Outfit", sans-serif; font-weight: 800; font-size: 46px; letter-spacing: -0.045em; line-height: 1; }
+.logo .word em { font-style: normal; color: var(--mint); }
+.logo .sub { font-family: "Outfit", sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.55; display: block; margin-top: 6px; }
+
+
+#root { background: #08080f; }
+.head { position: absolute; left: 96px; top: 80px; right: 96px; display: flex; align-items: flex-end; justify-content: space-between; }
+.head .l .kicker { margin-bottom: 14px; }
+.head h2 { font-size: 78px; line-height: 1.1; }
+.head h2 span { color: #6ff0d3; }
+.head .r { display: flex; gap: 9px; padding-bottom: 8px; }
+.head .r .c { font-family: JBM; font-size: 11px; letter-spacing: 0.12em; color: #b9b8cc; border: 1px solid rgba(255,255,255,0.14); border-radius: 100px; padding: 9px 13px; }
+.head .r .c b { color: #6ff0d3; }
+
+.term { position: absolute; left: 96px; top: 282px; width: 1180px; height: 430px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.13); background: #0c0c17; overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,0.5); }
+.term .bar { height: 46px; background: #151523; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 7px; padding: 0 18px; }
+.term .bar .d { width: 10px; height: 10px; border-radius: 50%; background: #2e2e44; }
+.term .bar .t { margin-left: 14px; font-family: JBM; font-size: 12px; color: #82819b; }
+.term .bar .r { margin-left: auto; font-family: JBM; font-size: 10px; letter-spacing: 0.1em; color: #5f5e78; }
+.term .body { padding: 20px 24px; font-family: JBM; font-size: 16px; line-height: 2.05; }
+.term .body .ln { opacity: 0; white-space: pre; }
+.term .body .p { color: #16c7a3; }
+.term .body .c { color: #d8d7e8; }
+.term .body .b { color: #fff; font-weight: 600; }
+.term .body .g { color: #6ff0d3; }
+.term .body .y { color: #ffc24b; }
+.term .body .v { color: #b7adff; }
+.term .body .dim { color: #5f5e78; }
+.caret2 { display: inline-block; width: 9px; height: 18px; background: #16c7a3; vertical-align: -2px; }
+
+.agents { position: absolute; left: 1316px; top: 282px; width: 508px; height: 430px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.11); background: rgba(255,255,255,0.035); padding: 22px 24px; }
+.agents .lab { font-family: Outfit; font-weight: 800; font-size: 11px; letter-spacing: 0.2em; color: #82819b; display: flex; justify-content: space-between; }
+.agents .lab b { color: #6ff0d3; font-family: JBM; font-weight: 500; letter-spacing: 0.08em; }
+.agents .list { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.agent { display: flex; align-items: center; gap: 12px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); border-radius: 9px; padding: 10px 12px; }
+.agent .ic { width: 26px; height: 26px; border-radius: 6px; background: rgba(91,75,255,0.22); display: grid; place-items: center; font-family: Outfit; font-weight: 800; font-size: 11px; color: #b7adff; flex: 0 0 auto; }
+.agent .n { font-family: "BN Sans"; font-weight: 600; font-size: 15px; color: #f1f0fa; }
+.agent .p { font-family: JBM; font-size: 9.5px; color: #6d6c88; margin-top: 2px; }
+.agent .chk { margin-left: auto; color: #16c7a3; font-size: 14px; }
+
+.feats { position: absolute; left: 96px; right: 96px; bottom: 150px; display: flex; gap: 16px; }
+.feat { flex: 1; border-radius: 16px; border: 1px solid rgba(255,255,255,0.11); background: rgba(255,255,255,0.04); padding: 18px 20px; display: flex; align-items: center; gap: 14px; }
+.feat .ic { width: 46px; height: 46px; border-radius: 11px; display: grid; place-items: center; flex: 0 0 auto; }
+.feat .t { font-family: "BN Sans"; font-weight: 700; font-size: 20px; color: #f1f0fa; }
+.feat .e { font-family: JBM; font-size: 9.5px; letter-spacing: 0.1em; color: #82819b; margin-top: 3px; }
+#ft1 .ic { background: rgba(91,75,255,0.2); }
+#ft2 .ic { background: rgba(255,194,75,0.16); }
+#ft3 .ic { background: rgba(22,199,163,0.16); }
+#ft4 .ic { background: rgba(255,107,90,0.16); }
+.foot { position: absolute; left: 96px; right: 96px; bottom: 86px; display: flex; justify-content: space-between; font-family: JBM; font-size: 11px; letter-spacing: 0.1em; color: #5f5e78; }
+.foot b { color: #b9b8cc; font-weight: 500; }
+</style>
+<div id="root" data-composition-id="install" data-width="1920" data-height="1080">
+  <div class="stage dark">
+    <div class="grid"></div>
+    <div class="glow g-mint" style="width:900px;height:900px;right:-360px;top:-380px"></div>
+    <div class="glow g-violet" style="width:800px;height:800px;left:-360px;bottom:-400px"></div>
+    <div class="swipe" id="swipe"></div>
+
+    <div class="head">
+      <div class="l">
+        <div class="kicker" id="kicker"><span class="dot"></span>TAS · INSTALL</div>
+        <h2 class="h2" id="head">এক কমান্ডে <span>ইনস্টল।</span></h2>
+      </div>
+      <div class="r"><span class="c"><b>MIT</b> LICENSE</span><span class="c"><b>০</b> DEPENDENCIES</span></div>
+    </div>
+
+    <div class="term" id="term">
+      <div class="bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="t">bash — install tas</span><span class="r">ZSH</span></div>
+      <div class="body" id="body">
+        <div class="ln"><span class="p">$</span> <span class="b">cp -r tas ~/.config/opencode/skills/</span></div>
+        <div class="ln"><span class="g">✓</span> skill installed <span class="dim">→</span> <span class="v">~/.config/opencode/skills/tas</span></div>
+        <div class="ln"><span class="g">✓</span> SKILL.md · manifest.json · scripts/ · references/</div>
+        <div class="ln"><span class="p">$</span> <span class="b">python3 scripts/tas.py voices --language bn</span></div>
+        <div class="ln"><span class="y">→</span> 11 voices <span class="dim">·</span> Pooja <span class="dim">·</span> Rubel <span class="dim">·</span> News Reader <span class="dim">·</span> …</div>
+        <div class="ln"><span class="p">$</span> <span class="b">python3 scripts/tas.py tts "স্পিকিতে স্বাগতম" --language bn</span></div>
+        <div class="ln"><span class="g">✓</span> QA passed <span class="dim">·</span> 3.9s <span class="dim">·</span> <span class="v">speech.mp3</span> <span class="caret2"></span></div>
+      </div>
+    </div>
+
+    <div class="agents" id="agents">
+      <div class="lab"><span>ANY AGENT</span><b>4 PATHS</b></div>
+      <div class="list">
+        <div class="agent" id="a1"><span class="ic">OC</span><div><div class="n">OpenCode</div><div class="p">~/.config/opencode/skills/tas</div></div><span class="chk">✓</span></div>
+        <div class="agent" id="a2"><span class="ic">CC</span><div><div class="n">Claude Code</div><div class="p">~/.claude/skills/tas</div></div><span class="chk">✓</span></div>
+        <div class="agent" id="a3"><span class="ic">CX</span><div><div class="n">Codex</div><div class="p">~/.agents/skills/tas</div></div><span class="chk">✓</span></div>
+        <div class="agent" id="a4"><span class="ic">CU</span><div><div class="n">Cursor</div><div class="p">~/.agents/skills/tas</div></div><span class="chk">✓</span></div>
+      </div>
+    </div>
+
+    <div class="feats" id="feats">
+      <div class="feat" id="ft1"><span class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#b7adff" stroke-width="1.8"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><div><div class="t">ক্যাশিং</div><div class="e">SAME TEXT · ZERO REQUEST</div></div></div>
+      <div class="feat" id="ft2"><span class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#ffc24b" stroke-width="1.8"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 3v5h-5" stroke-linecap="round"/></svg></span><div><div class="t">অটো রিট্রাই</div><div class="e">RATE LIMIT · RETRY · BACKOFF</div></div></div>
+      <div class="feat" id="ft3"><span class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#6ff0d3" stroke-width="1.8"><path d="M4 6h16M4 12h10M4 18h13" stroke-linecap="round"/><path d="M19 15l2 2-4 4" stroke-linecap="round"/></svg></span><div><div class="t">স্মার্ট চাঙ্কিং</div><div class="e">LONG SCRIPTS · SAFE SPLITS</div></div></div>
+      <div class="feat" id="ft4"><span class="ic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#ff8a7c" stroke-width="1.8"><rect x="3" y="5" width="4" height="14" rx="1"/><rect x="10" y="5" width="4" height="14" rx="1"/><rect x="17" y="5" width="4" height="14" rx="1"/></svg></span><div><div class="t">অডিও কিউ</div><div class="e">PARALLEL · ORDERED · STITCHED</div></div></div>
+    </div>
+
+    <div class="foot" id="foot"><span><b>INSTALL ONCE</b> — every agent, every project</span><span>NO PIP · NO MODEL · NO DOWNLOAD</span></div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = {"start": 264.163, "dur": 11.96, "b": {"install-1": 0.67, "install-2": 6.029}, "d": {"install-1": 4.989, "install-2": 4.911}};
+
+tl.fromTo("#swipe", { yPercent: 0 }, { yPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#kicker", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.35 }, 0.15);
+tl.fromTo("#head", { opacity: 0, y: 26, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "expo.out" }, 0.28);
+tl.fromTo(".head .c", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.07 }, 0.55);
+tl.fromTo("#term", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.55, ease: "expo.out" }, 0.4);
+tl.fromTo("#agents", { opacity: 0, x: 34 }, { opacity: 1, x: 0, duration: 0.55, ease: "expo.out" }, 0.5);
+
+tl.to(".term .body .ln", { opacity: 1, duration: 0.01, stagger: 0.34, ease: "none" }, T.b["install-1"] + 0.55);
+tl.fromTo(".caret2", { opacity: 0 }, { opacity: 1, duration: 0.4, repeat: 4, yoyo: true, ease: "none" }, T.b["install-1"] + 0.6);
+tl.fromTo(".agent", { opacity: 0, x: 14 }, { opacity: 1, x: 0, duration: 0.32, stagger: 0.1 }, 1.5);
+tl.fromTo(".agent .chk", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.25, stagger: 0.1, ease: "back.out(3)" }, 2.0);
+
+tl.fromTo(".feat", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.11, ease: "power3.out" }, T.b["install-2"] + 0.1);
+tl.fromTo("#foot", { opacity: 0 }, { opacity: 1, duration: 0.4 }, T.b["install-2"] + 1.2);
+
+tl.to("#term", { borderColor: "rgba(22,199,163,0.35)", duration: 0.5, yoyo: true, repeat: 1 }, 3.6);
+tl.to("#agents", { borderColor: "rgba(139,123,255,0.4)", duration: 0.5, yoyo: true, repeat: 1 }, 4.3);
+
+window.__timelines["install"] = tl;
+</script>
+</template>

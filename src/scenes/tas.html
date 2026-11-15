@@ -1,0 +1,138 @@
+<template>
+<style>
+/*__BASE__*/
+#root { background: #08080f; }
+.head { position: absolute; left: 0; right: 0; top: 84px; text-align: center; }
+.head .kicker { justify-content: center; margin-bottom: 16px; }
+.head h2 { font-size: 86px; line-height: 1.08; }
+.head h2 span { color: #6ff0d3; }
+.head .sub { margin-top: 14px; font-family: "BN Sans"; font-size: 24px; color: #9c9bb2; }
+
+.badge { position: absolute; left: 50%; transform: translateX(-50%); top: 320px; display: flex; align-items: center; gap: 22px; padding: 16px 26px; border-radius: 100px; background: rgba(91,75,255,0.12); border: 1px solid rgba(139,123,255,0.35); }
+.badge .m { font-family: Outfit; font-weight: 800; font-size: 42px; letter-spacing: -0.04em; color: #fff; }
+.badge .m i { font-style: normal; color: #8b7bff; }
+.badge .d { width: 1px; height: 38px; background: rgba(255,255,255,0.16); }
+.badge .t { font-family: "BN Sans"; font-weight: 600; font-size: 19px; color: #d8d7e8; }
+.badge .t small { display: block; font-family: JBM; font-size: 10px; letter-spacing: 0.18em; color: #82819b; margin-top: 4px; }
+.badge .mit { font-family: JBM; font-size: 11px; letter-spacing: 0.1em; color: #6ff0d3; border: 1px solid rgba(22,199,163,0.35); background: rgba(22,199,163,0.08); border-radius: 6px; padding: 6px 9px; }
+
+.cards { position: absolute; left: 180px; right: 180px; top: 438px; display: flex; justify-content: space-between; }
+.card { width: 560px; height: 272px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.045); padding: 26px 28px; position: relative; overflow: hidden; }
+.card .lab { font-family: Outfit; font-weight: 800; font-size: 12px; letter-spacing: 0.2em; color: #82819b; }
+.card .big { margin-top: 8px; font-family: Outfit; font-weight: 800; font-size: 60px; letter-spacing: -0.045em; color: #fff; line-height: 1; }
+.card .big.bn { font-family: "BN Serif"; font-weight: 900; font-size: 58px; }
+.card .sample { margin-top: 20px; font-family: "BN Sans"; font-size: 24px; line-height: 1.55; color: #d8d7e8; }
+.card .sample .dim { color: #82819b; }
+.card.text { border-color: rgba(139,123,255,0.4); background: linear-gradient(150deg, rgba(91,75,255,0.16), rgba(91,75,255,0.03)); }
+.card.speech { border-color: rgba(22,199,163,0.4); background: linear-gradient(150deg, rgba(22,199,163,0.13), rgba(22,199,163,0.02)); }
+.card.speech .wave { height: 64px; display: flex; align-items: center; gap: 4px; color: #16c7a3; margin-top: 18px; }
+.card.speech .wave i { flex: 1; border-radius: 3px; background: currentColor; }
+.card .corner { position: absolute; right: 24px; top: 22px; font-family: JBM; font-size: 11px; color: #5f5e78; letter-spacing: 0.1em; }
+.card .playbtn { position: absolute; right: 26px; bottom: 24px; width: 50px; height: 50px; border-radius: 50%; background: #16c7a3; display: grid; place-items: center; }
+
+.flow { position: absolute; left: 180px; right: 180px; top: 752px; height: 108px; }
+.flow .line { position: absolute; left: 0; right: 0; height: 3px; border-radius: 3px; }
+.flow .a { top: 16px; background: linear-gradient(90deg, rgba(139,123,255,0.35), #8b7bff); }
+.flow .b { top: 84px; background: linear-gradient(90deg, #16c7a3, rgba(22,199,163,0.35)); }
+.flow .head { position: absolute; width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; }
+.flow .a .head { right: -2px; top: -8px; border-left: 14px solid #8b7bff; }
+.flow .b .head { left: -2px; top: -8px; border-right: 14px solid #16c7a3; }
+.flow .l1 { position: absolute; left: 0; top: -18px; font-family: JBM; font-size: 11px; letter-spacing: 0.16em; color: #8b7bff; }
+.flow .l2 { position: absolute; right: 0; bottom: -20px; font-family: JBM; font-size: 11px; letter-spacing: 0.16em; color: #16c7a3; text-align: right; }
+.flow .mid { position: absolute; left: 50%; top: 20px; transform: translateX(-50%); font-family: "BN Sans"; font-weight: 700; font-size: 21px; color: #d8d7e8; background: #08080f; padding: 5px 18px; }
+.flow .mid2 { position: absolute; left: 50%; top: 88px; transform: translateX(-50%); font-family: "BN Sans"; font-weight: 700; font-size: 21px; color: #d8d7e8; background: #08080f; padding: 5px 18px; }
+
+.chips { position: absolute; left: 0; right: 0; bottom: 86px; display: flex; justify-content: center; gap: 10px; }
+.chips .c { font-family: JBM; font-size: 11px; letter-spacing: 0.12em; color: #9c9bb2; border: 1px solid rgba(255,255,255,0.13); background: rgba(255,255,255,0.03); border-radius: 100px; padding: 9px 14px; }
+.chips .c b { color: #6ff0d3; font-weight: 500; }
+</style>
+<div id="root" data-composition-id="tas" data-width="1920" data-height="1080">
+  <div class="stage dark">
+    <div class="grid"></div>
+    <div class="glow g-violet" style="width:900px;height:900px;left:-360px;top:-380px"></div>
+    <div class="glow g-mint" style="width:800px;height:800px;right:-340px;bottom:-380px"></div>
+    <div class="swipe" id="swipe"></div>
+
+    <div class="head">
+      <div class="kicker" id="kicker"><span class="dot"></span>SPEAKEE SKILL</div>
+      <h2 class="h2" id="head">লেখা <span>⇄</span> কথা।</h2>
+      <div class="sub" id="sub">এক স্ক্রিপ্ট — টেক্সট আর স্পিচ, দুই দিকেই।</div>
+    </div>
+
+    <div class="badge" id="badge">
+      <div class="m">TAS<i>.</i></div>
+      <div class="d"></div>
+      <div class="t">Text &amp; Speech<small>ONE SKILL · BOTH DIRECTIONS</small></div>
+      <div class="mit">MIT</div>
+    </div>
+
+    <div class="cards" id="cards">
+      <div class="card text" id="ctext">
+        <div class="corner">INPUT</div>
+        <div class="lab">TEXT</div>
+        <div class="big bn">লেখা</div>
+        <div class="sample">“আজ আমরা কী শিখব?”<br><span class="dim">স্ক্রিপ্ট, JSON, Markdown…</span></div>
+      </div>
+
+      <div class="card speech" id="cspeech">
+        <div class="corner">OUTPUT</div>
+        <div class="lab">SPEECH</div>
+        <div class="big">Audio</div>
+        <div class="wave" data-wave></div>
+        <div class="playbtn"><svg width="15" height="17" viewBox="0 0 15 17"><path d="M1 1l13 7.5L1 16V1z" fill="#04201a"/></svg></div>
+      </div>
+    </div>
+
+    <div class="flow" id="flow">
+      <div class="line a"><span class="head"></span></div>
+      <div class="l1">TEXT → SPEECH · TTS</div>
+      <div class="mid">লেখা থেকে কথা</div>
+      <div class="line b"><span class="head"></span></div>
+      <div class="l2">SPEECH → TEXT · STT</div>
+      <div class="mid2">কথা থেকে লেখা</div>
+    </div>
+
+    <div class="chips" id="chips">
+      <span class="c"><b>৪২</b> LANGUAGES</span>
+      <span class="c"><b>MULTI-SPEAKER</b> DIALOGUE</span>
+      <span class="c"><b>SRT</b> + <b>WEBVTT</b></span>
+      <span class="c"><b>NO</b> LOCAL MODEL</span>
+      <span class="c"><b>PYTHON</b> STDLIB ONLY</span>
+    </div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const T = /*__TIMING__*/;
+
+document.querySelectorAll("[data-wave]").forEach(w => {
+  for (let i = 0; i < 54; i++) {
+    const b = document.createElement("i");
+    b.style.height = (8 + Math.abs(Math.sin(i * 1.33) * Math.cos(i * 0.47)) * 50) + "px";
+    w.appendChild(b);
+  }
+});
+
+tl.fromTo("#swipe", { yPercent: 0 }, { yPercent: -100, duration: 0.55, ease: "power3.inOut" }, 0);
+tl.fromTo("#kicker", { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.35 }, 0.15);
+tl.fromTo("#head", { opacity: 0, y: 24, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease: "expo.out" }, 0.25);
+tl.fromTo("#sub", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.55);
+tl.fromTo("#badge", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" }, 0.7);
+tl.fromTo("#ctext", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 0.9);
+tl.fromTo("#cspeech", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 0.9);
+tl.fromTo("#cspeech .wave i", { scaleY: 0.15 }, { scaleY: 1, duration: 0.4, stagger: 0.005, ease: "power2.out" }, 1.15);
+tl.fromTo(".chips .c", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.06 }, 1.35);
+
+// bidirectional flow
+const t2 = T.b["tas-2"];
+tl.fromTo("#flow .a", { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, t2 - 0.1);
+tl.fromTo("#flow .l1, #flow .mid", { opacity: 0 }, { opacity: 1, duration: 0.35 }, t2 + 0.2);
+tl.fromTo("#flow .b", { scaleX: 0, transformOrigin: "right center" }, { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, t2 + 0.35);
+tl.fromTo("#flow .l2, #flow .mid2", { opacity: 0 }, { opacity: 1, duration: 0.35 }, t2 + 0.65);
+tl.fromTo("#flow .head", { opacity: 0 }, { opacity: 1, duration: 0.01, stagger: 0.01 }, t2 + 0.75);
+tl.fromTo("#badge", { boxShadow: "0 0 0 rgba(91,75,255,0)" }, { boxShadow: "0 0 70px rgba(91,75,255,0.35)", duration: 0.7, yoyo: true, repeat: 1 }, t2 + 0.2);
+tl.to("#ctext, #cspeech", { borderColor: "rgba(255,255,255,0.3)", duration: 0.4, yoyo: true, repeat: 1 }, t2 + 0.3);
+
+window.__timelines["tas"] = tl;
+</script>
+</template>
