@@ -41,9 +41,6 @@ jobs:
           sudo apt-get install -y \
             ffmpeg \
             google-chrome-stable \
-            fonts-noto-serif-bengali \
-            fonts-noto-sans-bengali \
-            fonts-hind-siliguri \
             libnss3 \
             libatk1.0-0 \
             libatk-bridge2.0-0 \
@@ -56,6 +53,14 @@ jobs:
             libxrandr2 \
             libgbm1 \
             libasound2t64
+
+      - name: Install Bengali fonts locally
+        run: |
+          mkdir -p /usr/share/fonts/truetype/bengali
+          # Copy from project assets
+          cp assets/fonts/NotoSansBengali-*.ttf /usr/share/fonts/truetype/bengali/ 2>/dev/null || true
+          cp assets/fonts/NotoSerifBengali-*.ttf /usr/share/fonts/truetype/bengali/ 2>/dev/null || true
+          fc-cache -fv
 
       - name: Install HyperFrames CLI
         run: |
