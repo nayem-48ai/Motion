@@ -64,7 +64,7 @@ jobs:
 
       - name: Install HyperFrames CLI
         run: |
-          npm ci
+          npm install
           npx hyperframes --version
 
       - name: Verify project structure
